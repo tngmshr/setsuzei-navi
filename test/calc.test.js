@@ -197,3 +197,11 @@ test('順番：会社の年金の項目',()=>{
   assert.equal(rec({pension:'dc',dcSelect:'yes'}).dcselect.label,'ready');
   assert.equal(rec({pension:'dc',dcSelect:'no'}).dcselect,undefined);
 });
+test('6つの係数と積立の試算',()=>{
+  const k=C.coefficients(0.03,10), near=(a,b)=>assert.ok(Math.abs(a-b)<1e-4,a+' vs '+b);
+  near(k.shuka,1.343916);near(k.genka,0.744094);near(k.nenkinShuka,11.463879);near(k.gensai,0.087231);near(k.shihonKaishu,0.117231);near(k.nenkinGenka,8.530203);
+  near(k.shihonKaishu-k.gensai,0.03);
+  const z=C.coefficients(0,10);assert.equal(z.shuka,1);assert.equal(z.nenkinShuka,10);assert.equal(z.nenkinGenka,10);near(z.shihonKaishu,0.1);
+  const a=C.accumulate(10000,0,20);assert.equal(a.length,21);assert.equal(a[20].principal,2400000);assert.equal(a[20].value,2400000);
+  const b=C.accumulate(10000,0.03,1);assert.ok(b[1].value>120000 && b[1].value<122000);
+});

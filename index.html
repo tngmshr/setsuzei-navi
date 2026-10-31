@@ -39,12 +39,28 @@
 .checklist li,.steps-list li{margin-bottom:6px}
 @media(max-width:400px){.edition{display:none}}
 .official{font-size:.86rem;margin-top:14px}.table-wrap{overflow-x:auto;margin-block:10px}.cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.84rem}.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:8px 5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.cmp thead th{color:var(--green)}.cmp tbody th{width:30%;font-weight:700;color:var(--muted)}.words dt{font-weight:700;color:var(--ink);font-size:.95rem;margin-top:12px}.words dd{font-weight:400;font-size:.9rem}.privacy{background:#e8f3ec;border:2px solid var(--green);border-radius:16px;padding:18px 18px 12px;margin-block:18px}.privacy h2{color:var(--green);font-size:1.25rem;margin-bottom:10px}.privacy ul{margin:0 0 10px;padding-left:1.2em}.privacy li{margin-bottom:8px;line-height:1.6}@media(max-width:420px){.wrap{padding-inline:16px}.card{padding:17px}.grid{gap:12px}h1{font-size:1.7rem}.money{font-size:1.6rem}.edition{font-size:.7rem}.brand{font-size:.83rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{background:radial-gradient(circle at 0 0,#dcefe5 0,transparent 420px),radial-gradient(circle at 100% 260px,#f7ead2 0,transparent 360px),radial-gradient(#e3e8e1 1px,transparent 1.3px) 0 0/22px 22px,var(--bg)}
+.top{background:#fffffff2}
+.asset-hero{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#e2f1e9,#fbf4e6);border:1px solid var(--line);border-radius:20px;padding:18px 18px 10px;margin-bottom:14px}.asset-hero>div{flex:1;min-width:0}.asset-hero h1{margin:0}.hero-art{width:42%;max-width:220px;height:auto;flex-shrink:0}
+.guide summary h2{display:flex;align-items:center}.ico{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--soft);font-size:1.05rem;margin-right:10px;flex-shrink:0}
+.figure{margin:10px 0 14px}.figure svg{width:100%;height:auto;display:block}.figure figcaption{font-size:.8rem;color:var(--muted);margin-top:4px}
+svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:10.5px}svg .t.w{fill:#fff;font-weight:700}svg .t.m{fill:var(--muted)}svg .ev circle{fill:#fff;stroke:#00826b;stroke-width:2}svg .ev.big circle{fill:#fbf1de;stroke:#b5761a}svg .ev text{font-size:14px}svg .ev text.t{font-size:10.5px}
+.cards2,.cards3{display:grid;gap:10px;margin:8px 0 12px}.cards2{grid-template-columns:repeat(2,minmax(0,1fr))}.cards3{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:560px){.cards2,.cards3{grid-template-columns:1fr}}
+.mini{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfcfa;min-width:0}.mini h4{margin:0 0 4px;font-size:.98rem;display:flex;gap:6px;align-items:center}.mini p{font-size:.87rem;margin:0 0 4px}.mi{font-size:1.1rem}
+.cf caption{caption-side:top;text-align:left;font-size:.8rem;color:var(--muted);padding-bottom:4px}.cf td:nth-child(n+3){text-align:right}.cf .plus{color:var(--green)}.cf .minus{color:#a24a1d;font-weight:700}.cf .hl td{background:#fbf1de}.cf small{display:block;font-size:.72rem}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:480px){.g3{grid-template-columns:1fr 1fr}.g3 .field:last-child{grid-column:1/-1}}
+.kpi{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 8px}.kpi span{font-size:.78rem;color:var(--muted);display:block}.kpi b{font-size:1.2rem;color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--muted);margin:6px 0 2px}.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+.chart{position:relative;margin:4px 0 8px}.chart svg{width:100%;height:auto;display:block;overflow:visible}.chart .ax{font-size:10px;fill:var(--muted)}.chart .lb{font-size:10.5px;fill:var(--ink);font-weight:700}.chart .hit{fill:transparent;cursor:crosshair}
+.tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.76rem;line-height:1.45;padding:4px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .12s;z-index:2}.tip.on{opacity:1}
+.assume{background:var(--warn);color:var(--amber);border-radius:10px;padding:8px 12px;font-size:.84rem;margin:6px 0 0}
+.coef{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media(max-width:560px){.coef{grid-template-columns:1fr}}.coef .mini b.v{float:right;color:var(--green);font-size:1rem}.coef .mini .ex{font-size:.84rem;color:var(--ink);background:var(--soft);border-radius:8px;padding:6px 8px;margin-top:6px}
 </style>
 <script src="params.js" defer></script>
 <script src="calc.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.2</span><span class="head-links"><a class="guide-link" href="#asset" data-guide="asset">💰 資産形成</a><a class="guide-link" href="#guide" data-guide="">📖 解説</a></span></div></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.4</span><span class="head-links"><a class="guide-link" href="#asset" data-guide="asset">💰 資産形成</a><a class="guide-link" href="#guide" data-guide="">📖 解説</a></span></div></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
 <div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
@@ -216,12 +232,16 @@
 <p class="footnote">一般的な制度の説明です。個別の商品や金融機関、配分はおすすめしません。最新の条件は公式ページで確認してください。</p>
 </section>
 <section class="screen" id="assetScreen" hidden aria-labelledby="assetTitle">
-<p class="eyebrow">将来のお金を、置き場所から。</p><h1 id="assetTitle" tabindex="-1">資産形成</h1>
+<div class="asset-hero"><div><p class="eyebrow">将来のお金を、置き場所から。</p><h1 id="assetTitle" tabindex="-1">資産形成</h1></div>
+<svg class="hero-art" viewBox="0 0 220 120" aria-hidden="true"><circle cx="186" cy="26" r="16" fill="#f3d58a"/><path d="M0 104h220" stroke="#b9cbbf" stroke-width="2"/>
+<g fill="#00826b"><rect x="22" y="86" width="26" height="18" rx="4" opacity=".35"/><rect x="58" y="74" width="26" height="30" rx="4" opacity=".5"/><rect x="94" y="60" width="26" height="44" rx="4" opacity=".7"/><rect x="130" y="42" width="26" height="62" rx="4"/></g>
+<path d="M176 104V70" stroke="#185b4b" stroke-width="3" stroke-linecap="round"/><path d="M176 82c-14 0-20-10-20-18 12 0 20 6 20 18zM176 74c0-12 8-20 22-20 0 10-8 20-22 20z" fill="#3aa17f"/>
+<path d="M30 70l34-14 36 -10 38-20" fill="none" stroke="#b5761a" stroke-width="2" stroke-dasharray="4 4"/><path d="M132 22l8 3-6 6" fill="none" stroke="#b5761a" stroke-width="2"/></svg></div>
 <p class="lead">会社の年金（企業型DC・DB）、iDeCo、公的年金、受け取り方まで、会社員の資産形成を順番にまとめました。数字は<span data-p="year" data-f="raw"></span>年の制度（確認日 <span data-p="checked" data-f="date"></span>）です。<a class="term" href="#asset" data-guide="asset-words">むずかしい言葉は「用語のやさしい解説」</a>で言いかえています。</p>
 <nav class="card toc" aria-label="資産形成の目次"><h2>目次</h2><ul>
-<li><a href="#asset" data-guide="asset-map">全体像とお金の置き場所</a></li><li><a href="#asset" data-guide="asset-dc">企業型DC（会社の年金）</a></li><li><a href="#asset" data-guide="asset-db">DB・退職金</a></li><li><a href="#asset" data-guide="asset-ideco">iDeCoとの併用と改正</a></li><li><a href="#asset" data-guide="asset-invest">運用の基礎</a></li><li><a href="#asset" data-guide="asset-pension">公的年金</a></li><li><a href="#asset" data-guide="asset-receive">受け取り方と税金</a></li><li><a href="#asset" data-guide="asset-change">転職・退職のとき</a></li><li><a href="#asset" data-guide="asset-check">会社の制度で確認すること</a></li><li><a href="#asset" data-guide="asset-words">用語のやさしい解説</a></li></ul></nav>
+<li><a href="#asset" data-guide="asset-map">全体像とお金の置き場所</a></li><li><a href="#asset" data-guide="asset-life">ライフプランと三大支出</a></li><li><a href="#asset" data-guide="asset-dc">企業型DC（会社の年金）</a></li><li><a href="#asset" data-guide="asset-db">DB・退職金</a></li><li><a href="#asset" data-guide="asset-ideco">iDeCoとの併用と改正</a></li><li><a href="#asset" data-guide="asset-invest">運用の基礎</a></li><li><a href="#asset" data-guide="asset-calc">6つの係数で試算</a></li><li><a href="#asset" data-guide="asset-pension">公的年金</a></li><li><a href="#asset" data-guide="asset-receive">受け取り方と税金</a></li><li><a href="#asset" data-guide="asset-change">転職・退職のとき</a></li><li><a href="#asset" data-guide="asset-safety">万一への備えと公的保障</a></li><li><a href="#asset" data-guide="asset-check">会社の制度で確認すること</a></li><li><a href="#asset" data-guide="asset-words">用語のやさしい解説</a></li></ul></nav>
 
-<details class="card guide" id="asset-map"><summary><h2>全体像とお金の置き場所</h2></summary><div>
+<details class="card guide" id="asset-map"><summary><h2><span class="ico" aria-hidden="true">🧭</span>全体像とお金の置き場所</h2></summary><div>
 <h3>一言でいうと</h3><p>お金は「いつ使うか」で置き場所を分けます。すぐ使うお金は現金、いつでも使える将来のお金はNISA、老後まで使わないお金は<a class="term" href="#asset" data-guide="asset-w-dc">DC</a>やiDeCoが一般的な目安です。</p>
 <h3>時間軸で分ける</h3>
 <div class="table-wrap"><table class="asset-table"><thead><tr><th>使う時期</th><th>一般的な置き場所</th><th>理由</th></tr></thead><tbody>
@@ -230,7 +250,13 @@
 <tr><td>時期は決めていない将来</td><td>NISA</td><td>利益に税金がかからず、いつでも売って引き出せる。</td></tr>
 <tr><td>老後（原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>以降）</td><td>企業型DC・iDeCo</td><td>掛金が所得から差し引かれ税金が減るが、原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>まで引き出せない。</td></tr>
 </tbody></table></div>
-<h3>会社員の年金は「階段」</h3><ul>
+<h3>会社員の年金は「階段」</h3><figure class="figure"><svg viewBox="0 0 340 176" role="img" aria-labelledby="stairsT"><title id="stairsT">会社員の年金の階段：1段目が国民年金、2段目が厚生年金、3段目が会社の年金、その上に自分で選ぶiDeCo・NISA・預金</title>
+<rect x="20" y="132" width="300" height="34" rx="6" fill="#dcebe3"/><text x="170" y="154" text-anchor="middle" class="t">1段目　国民年金（基礎年金）　全員</text>
+<rect x="44" y="94" width="252" height="34" rx="6" fill="#a9d3c3"/><text x="170" y="116" text-anchor="middle" class="t">2段目　厚生年金　会社員・公務員</text>
+<rect x="68" y="56" width="204" height="34" rx="6" fill="#00826b"/><text x="170" y="78" text-anchor="middle" class="t w">3段目　会社の年金（DC・DB）</text>
+<rect x="92" y="10" width="156" height="40" rx="6" fill="#fff" stroke="#b5761a" stroke-width="2" stroke-dasharray="5 4"/><text x="170" y="28" text-anchor="middle" class="t">自分で選ぶ</text><text x="170" y="43" text-anchor="middle" class="t s">iDeCo・NISA・預金</text>
+<text x="330" y="150" text-anchor="end" class="t s m">公的年金</text></svg>
+<figcaption>下の2段は給与から保険料が引かれる公的年金。3段目は会社によって中身が違います。</figcaption></figure><ul>
 <li>1段目：国民年金（基礎年金）。2段目：厚生年金。ここまでが<a class="term" href="#asset" data-guide="asset-pension">公的年金</a>で、給与から保険料が引かれています。</li>
 <li>3段目：会社の年金（企業型DC・DB）。会社によってあるかどうか、中身が違います。</li>
 <li>その上に、自分で選ぶ iDeCo・NISA・預金があります。</li></ul>
@@ -239,7 +265,37 @@
 <p class="actions"><button type="button" class="btn" data-guide="reserve">生活防衛資金の解説</button> <button type="button" class="btn" data-guide="compare">NISAとiDeCoの違い</button></p>
 </div></details>
 
-<details class="card guide" id="asset-dc"><summary><h2>企業型DC（会社の年金）</h2></summary><div>
+<details class="card guide" id="asset-life"><summary><h2><span class="ico" aria-hidden="true">🗺️</span>ライフプランと三大支出</h2></summary><div>
+<h3>一言でいうと</h3><p>FP（ファイナンシャル・プランナー）は、まず「これからの人生で、いつ・何に・いくら使うか」を書き出します。これを<a class="term" href="#asset" data-guide="asset-w-lifeplan">ライフプラン</a>と呼び、資産形成の目標と置き場所はここから決まります。</p>
+<figure class="figure"><svg viewBox="0 0 340 120" role="img" aria-labelledby="lifeT"><title id="lifeT">ライフイベントの例：就職、結婚、住まい、子どもの教育、老後</title>
+<path d="M14 64H326" stroke="#b9cbbf" stroke-width="3" stroke-linecap="round"/>
+<g class="ev"><circle cx="34" cy="64" r="15"/><text x="34" y="69" text-anchor="middle">💼</text><text x="34" y="98" text-anchor="middle" class="t s">就職</text></g>
+<g class="ev"><circle cx="98" cy="64" r="15"/><text x="98" y="69" text-anchor="middle">💍</text><text x="98" y="98" text-anchor="middle" class="t s">結婚</text></g>
+<g class="ev big"><circle cx="162" cy="64" r="19"/><text x="162" y="70" text-anchor="middle">🏠</text><text x="162" y="104" text-anchor="middle" class="t s">住まい</text></g>
+<g class="ev big"><circle cx="234" cy="64" r="19"/><text x="234" y="70" text-anchor="middle">🎓</text><text x="234" y="104" text-anchor="middle" class="t s">教育</text></g>
+<g class="ev big"><circle cx="304" cy="64" r="19"/><text x="304" y="70" text-anchor="middle">🌅</text><text x="304" y="104" text-anchor="middle" class="t s">老後</text></g>
+<text x="234" y="24" text-anchor="middle" class="t s m">大きな丸＝三大支出</text><path d="M196 30l-24 12M234 30v10M272 30l22 12" stroke="#b5761a" stroke-width="1.5" fill="none"/></svg>
+<figcaption>出来事と時期は人それぞれ。自分の予定に置きかえて考えます。</figcaption></figure>
+<h3>人生の三大支出</h3>
+<div class="cards3"><div class="mini"><h4>🏠 住まい</h4><p>買うか借りるか、頭金・ローン・修繕まで。金額が大きく、時期を自分で決められます。</p></div>
+<div class="mini"><h4>🎓 教育</h4><p>使う時期が子の年齢でほぼ決まります。時期が近いお金は値動きの小さい置き場所に。</p></div>
+<div class="mini"><h4>🌅 老後</h4><p>いちばん先で期間も長い支出。公的年金と会社の年金を土台に、足りない分を準備します。</p></div></div>
+<h3>キャッシュフロー表をつくる</h3>
+<p>年ごとに「収入・支出・収支・貯蓄残高」を並べた表です。何年後にお金が足りなくなりそうかが見えます。</p>
+<div class="table-wrap"><table class="asset-table cf"><caption>例（架空の数字・単位は万円）</caption><thead><tr><th>年</th><th>年齢</th><th>手取り収入</th><th>支出</th><th>収支</th><th>貯蓄残高</th></tr></thead><tbody>
+<tr><td>1年目</td><td>35</td><td>450</td><td>400</td><td class="plus">+50</td><td>300</td></tr>
+<tr><td>2年目</td><td>36</td><td>455</td><td>405</td><td class="plus">+50</td><td>350</td></tr>
+<tr class="hl"><td>3年目</td><td>37</td><td>460</td><td>650<small>（住まいの頭金）</small></td><td class="minus">−190</td><td>160</td></tr>
+<tr><td>4年目</td><td>38</td><td>465</td><td>420</td><td class="plus">+45</td><td>205</td></tr>
+</tbody></table></div>
+<ul><li>収入は手取り（税金・社会保険料を引いた額）で書きます。昇給や物価の上がり方は「仮定」として決め、ときどき見直します。</li>
+<li>残高がマイナスになりそうな年があれば、時期をずらす・支出を見直す・前もって積み立てる、のどれかで手を打ちます。</li>
+<li>貯蓄残高が生活費の数か月分を下回らないかも見ます（<a href="#guide" data-guide="reserve">生活防衛資金</a>）。</li></ul>
+<h3>家計のバランスシート</h3><p>持っている資産（預金・投資・DCなど）と負債（ローンなど）を並べ、差し引きの「純資産」を年に1回確かめると、進み具合がわかります。</p>
+<p class="official">学べる公的な場所：<a data-src="jflec" target="_blank" rel="noopener noreferrer">金融経済教育推進機構（J-FLEC）</a>（金融庁所管。家計やお金の計画の相談・教材があります）</p>
+</div></details>
+
+<details class="card guide" id="asset-dc"><summary><h2><span class="ico" aria-hidden="true">🏢</span>企業型DC（会社の年金）</h2></summary><div>
 <h3>一言でいうと</h3><p>会社が毎月お金（<a class="term" href="#asset" data-guide="asset-w-jigyonushi">事業主掛金</a>）を出し、そのお金の運用先を自分で選ぶ年金です。将来もらえる額は運用の結果で変わります。</p>
 <h3>しくみ</h3><ul>
 <li>掛金の月の上限は、<span data-p="dc.effective" data-f="ym"></span>から<b data-p="dc.after" data-f="man"></b>（それまでは<span data-p="dc.before" data-f="man"></span>）。DBもある会社では、DBの分（<a class="term" href="#asset" data-guide="asset-w-tasedo">他制度掛金相当額</a>）を差し引いた範囲になります。</li>
@@ -261,7 +317,7 @@
 <p class="official">公式ページ：<a data-src="dcLimit" target="_blank" rel="noopener noreferrer">厚生労働省：企業型DCの拠出限度額の引き上げ</a>／<a data-src="dcReform" target="_blank" rel="noopener noreferrer">厚生労働省：確定拠出年金の制度改正</a>／<a data-src="dcSelect" target="_blank" rel="noopener noreferrer">厚生労働省：確定拠出年金の法令解釈（選択制の説明）</a></p>
 </div></details>
 
-<details class="card guide" id="asset-db"><summary><h2>DB・退職金</h2></summary><div>
+<details class="card guide" id="asset-db"><summary><h2><span class="ico" aria-hidden="true">🎁</span>DB・退職金</h2></summary><div>
 <h3>一言でいうと</h3><p><a class="term" href="#asset" data-guide="asset-w-db">DB</a>は、会社が将来の給付額を約束し、会社が運用する年金です。運用の結果で自分の受け取りは変わりません。</p>
 <h3>しくみ</h3><ul>
 <li>DBに掛金の上限はありません。ただしDBの分は「<a class="term" href="#asset" data-guide="asset-w-tasedo">他制度掛金相当額</a>」という額に換算され、DCやiDeCoの上限から差し引かれます。</li>
@@ -272,7 +328,7 @@
 <p class="official">公式ページ：<a data-src="idecoReform" target="_blank" rel="noopener noreferrer">厚生労働省：他制度掛金相当額とiDeCoの上限</a></p>
 </div></details>
 
-<details class="card guide" id="asset-ideco"><summary><h2>iDeCoとの併用と改正</h2></summary><div>
+<details class="card guide" id="asset-ideco"><summary><h2><span class="ico" aria-hidden="true">🧩</span>iDeCoとの併用と改正</h2></summary><div>
 <h3>一言でいうと</h3><p>会社の年金がある人もiDeCoに入れます。<span data-p="idecoAfter.effective" data-f="ym"></span>拠出分から、会社の年金とiDeCoは同じ上限<b data-p="idecoAfter.combined" data-f="man"></b>の中で分け合う形になります。</p>
 <h3>企業型DCがある人がiDeCoに入る条件</h3><ul>
 <li>会社のDCの掛金が、毎月の拠出で上限内であること。</li>
@@ -294,7 +350,7 @@
 <p class="actions"><button type="button" class="btn" data-guide="ideco">iDeCoの基本を見る</button></p>
 </div></details>
 
-<details class="card guide" id="asset-invest"><summary><h2>運用の基礎</h2></summary><div>
+<details class="card guide" id="asset-invest"><summary><h2><span class="ico" aria-hidden="true">🌱</span>運用の基礎</h2></summary><div>
 <h3>一言でいうと</h3><p>「長く・分けて・少しずつ」が、値動きと付き合う一般的な基本です。特定の商品や配分はおすすめしません。</p>
 <h3>基本の3つ</h3><ul>
 <li><b>長期</b>：時間をかけるほど、値動きの上下がならされやすいと考えられています。ただし必ず増えるわけではありません。</li>
@@ -313,7 +369,23 @@
 <p class="official">公式ページ：<a data-src="nisaAbout" target="_blank" rel="noopener noreferrer">金融庁：NISAの制度</a></p>
 </div></details>
 
-<details class="card guide" id="asset-pension"><summary><h2>公的年金</h2></summary><div>
+<details class="card guide" id="asset-calc"><summary><h2><span class="ico" aria-hidden="true">🧮</span>6つの係数で試算</h2></summary><div>
+<h3>一言でいうと</h3><p>FPが将来のお金を見積もるときに使う「6つの係数」を、仮の利回りで計算できます。利回りは自分で決める<b>仮定</b>で、将来の成果の予測や保証ではありません。</p>
+<div class="calc-box" id="accCalc"><h3>毎月の積立を試算</h3>
+<div class="grid g3"><div class="field"><label for="acMonthly">毎月の積立</label><div class="unit"><input id="acMonthly" type="number" min="0" max="100" step="0.1" inputmode="decimal" value="1"><span>万円</span></div></div>
+<div class="field"><label for="acYears">期間</label><div class="unit"><input id="acYears" type="number" min="1" max="50" step="1" inputmode="numeric" value="20"><span>年</span></div></div>
+<div class="field"><label for="acRate">仮定の利回り</label><div class="unit"><input id="acRate" type="number" min="0" max="10" step="0.5" inputmode="decimal" value="3"><span>%/年</span></div></div></div>
+<div class="kpi"><div><span>積み立てた元本</span><b id="acPrincipal">—</b></div><div><span>仮定での試算</span><b id="acValue">—</b></div><div><span>うち運用でふえた分</span><b id="acGain">—</b></div></div>
+<div class="legend"><span><i class="sw" style="background:#c9d6d0"></i>元本</span><span><i class="sw" style="background:#00826b"></i>運用でふえた分（仮定）</span></div>
+<div class="chart" id="accChart"></div>
+<p class="assume">⚠ 仮定の利回りで毎月複利の計算をした例です。予測ではなく、元本割れすることもあります。手数料・税金は含めていません。</p></div>
+<h3>6つの係数（いまの利回り・期間で計算）</h3>
+<div class="coef" id="coefList"></div>
+<p class="small">「利回り」を物価の上がり方と読みかえると、物価が上がったときにお金の価値がどれだけ目減りするか（現価係数）もわかります。おおよそ「72÷利回り（%）」年で2倍になる（物価なら価値が半分になる）という目安もあります。</p>
+<p class="official">公式ページ：<a data-src="tsumitateSim" target="_blank" rel="noopener noreferrer">金融庁：つみたてシミュレーター</a></p>
+</div></details>
+
+<details class="card guide" id="asset-pension"><summary><h2><span class="ico" aria-hidden="true">🏛️</span>公的年金</h2></summary><div>
 <h3>一言でいうと</h3><p>会社員は国民年金と厚生年金に入っていて、老後の収入の土台になります。受け取り始める年齢は原則<span data-p="pension.base" data-f="age"></span>で、早めたり遅らせたりできます。</p>
 <h3>自分の見込みを知る</h3><ul>
 <li><a class="term" href="#asset" data-guide="asset-w-teikibin">ねんきん定期便</a>：毎年、誕生月ごろに届きます。<span data-p="teikibin.sealedAges.0" data-f="age"></span>・<span data-p="teikibin.sealedAges.1" data-f="age"></span>・<span data-p="teikibin.sealedAges.2" data-f="age"></span>のときは、全期間の記録が入った封書です。</li>
@@ -325,11 +397,14 @@
 <tr><td>年金額</td><td>1か月早めるごとに<span data-p="pension.early.rate" data-f="pct"></span>減る（最大<span data-p="pension.early.max" data-f="pct"></span>）</td><td>1か月遅らせるごとに<span data-p="pension.defer.rate" data-f="pct"></span>増える（最大<span data-p="pension.defer.max" data-f="pct"></span>）</td></tr>
 <tr><td>注意</td><td>減った額は一生続き、取り消せません</td><td>待っている間は受け取れません</td></tr>
 </tbody></table></div>
+<h3>受け取り開始年齢と年金額の増減</h3>
+<div class="legend"><span><i class="sw" style="background:#b5761a"></i>繰上げで減る</span><span><i class="sw" style="background:#00826b"></i>繰下げで増える</span></div>
+<div class="chart" id="pensionChart"></div>
 <p class="small">繰上げの率は昭和37年4月2日以降生まれの人の場合です。どちらが得かは、何歳まで生きるか・ほかの収入で変わるため、一概には言えません。</p>
 <p class="official">公式ページ：<a data-src="kuriage" target="_blank" rel="noopener noreferrer">日本年金機構：繰上げ受給</a>／<a data-src="kurisage" target="_blank" rel="noopener noreferrer">日本年金機構：繰下げ受給</a>／<a data-src="teikibin" target="_blank" rel="noopener noreferrer">日本年金機構：ねんきん定期便</a></p>
 </div></details>
 
-<details class="card guide" id="asset-receive"><summary><h2>受け取り方と税金</h2></summary><div>
+<details class="card guide" id="asset-receive"><summary><h2><span class="ico" aria-hidden="true">📥</span>受け取り方と税金</h2></summary><div>
 <h3>一言でいうと</h3><p>DC・iDeCoは、まとめて受け取る（<a class="term" href="#asset" data-guide="asset-w-ichiji">一時金</a>）か、分けて受け取る（年金）か、その両方かを選べます。受け取り方で税金のかかり方が変わります。</p>
 <h3>受け取れる時期</h3><ul>
 <li><span data-p="dcReceive.start" data-f="age"></span>から<span data-p="dcReceive.end" data-f="age"></span>になるまでの間に受け取りを始めます。</li>
@@ -346,6 +421,9 @@
 <li>障害者になったことが直接の原因で退職した場合は、<span data-p="retirement.disability" data-f="man"></span>を足します。</li>
 <li>勤続<span data-p="retirement.shortYears" data-f="raw"></span>年以下の場合は、2分の1が使えない部分があります（役員等、または控除後<span data-p="retirement.shortCap" data-f="man"></span>を超える部分）。</li>
 <li>「退職所得の受給に関する申告書」を出していれば、原則として源泉徴収で税金の手続きが済みます。出していないと、受け取る額の<span data-p="retirement.noFormRate" data-f="pct"></span>が源泉徴収され、確定申告で精算します。</li></ul>
+<h3>勤続年数と退職所得控除</h3>
+<div class="chart" id="deductChart"></div>
+<p class="small">勤続<span data-p="retirement.longYears" data-f="raw"></span>年を超えると、1年あたりの控除が<span data-p="retirement.perYear" data-f="man"></span>から<span data-p="retirement.perYearLong" data-f="man"></span>にふえ、線の傾きが急になります。点は計算欄の年数です。</p>
 <div class="calc-box" id="retireCalc"><h3>退職所得控除の目安を計算</h3>
 <div class="grid"><div class="field"><label for="rcYears">勤続年数（DCは加入年数）</label><div class="unit"><input id="rcYears" type="number" min="0" max="60" step="0.1" inputmode="decimal" value="30"><span>年</span></div></div>
 <div class="field"><label for="rcAmount">受け取る額の見込み</label><div class="unit"><input id="rcAmount" type="number" min="0" max="100000" step="1" inputmode="numeric" value="2000"><span>万円</span></div></div></div>
@@ -360,7 +438,7 @@
 <p class="official">公式ページ：<a data-src="retirement" target="_blank" rel="noopener noreferrer">国税庁：退職金を受け取ったとき</a>／<a data-src="dcLumpAdjust" target="_blank" rel="noopener noreferrer">国税庁：老齢一時金の退職所得控除の調整</a>／<a data-src="idecoReceive" target="_blank" rel="noopener noreferrer">iDeCo公式：受け取り方</a></p>
 </div></details>
 
-<details class="card guide" id="asset-change"><summary><h2>転職・退職のとき</h2></summary><div>
+<details class="card guide" id="asset-change"><summary><h2><span class="ico" aria-hidden="true">🔁</span>転職・退職のとき</h2></summary><div>
 <h3>一言でいうと</h3><p>会社のDCの資産は、会社を辞めてから<b data-p="dcTransfer.months" data-f="raw"></b>か月以内に、次の行き先へ移す手続き（<a class="term" href="#asset" data-guide="asset-w-ikan">移換</a>）が必要です。</p>
 <h3>移せる先</h3><ul>
 <li>転職先の企業型DC</li><li>iDeCo（自分で金融機関を選んで申し込む）</li><li>転職先のDB（規約で受け入れている場合）</li><li>通算企業年金</li></ul>
@@ -372,7 +450,39 @@
 <p class="official">公式ページ：<a data-src="idecoRetire" target="_blank" rel="noopener noreferrer">iDeCo公式：転職・退職したとき</a></p>
 </div></details>
 
-<details class="card guide" id="asset-check"><summary><h2>会社の制度で確認すること</h2></summary><div>
+<details class="card guide" id="asset-safety"><summary><h2><span class="ico" aria-hidden="true">🛟</span>万一への備えと公的保障</h2></summary><div>
+<h3>一言でいうと</h3><p>資産形成は「増やす」だけでなく「守る」もセットです。会社員は、病気・けが・死亡・障害に対して公的な保障をすでに持っています。保険は、その上で足りない分だけを考えるのがFPの基本です。</p>
+<h3>会社員がすでに持っている保障</h3>
+<div class="cards2">
+<div class="mini"><h4><span class="mi">🏥</span>高額療養費</h4><p>1か月の医療費の自己負担に上限があり、超えた分が払い戻されます。上限は年齢と所得で決まります。</p><p class="small"><a data-src="kougaku" target="_blank" rel="noopener noreferrer">厚生労働省</a></p></div>
+<div class="mini"><h4><span class="mi">🛌</span>傷病手当金</h4><p>仕事以外の病気やけがで働けず、給与が受けられないときの生活の保障（会社員の健康保険）。</p><p class="small"><a data-src="shobyo" target="_blank" rel="noopener noreferrer">協会けんぽ（例）</a>／入っている健康保険で確認</p></div>
+<div class="mini"><h4><span class="mi">👪</span>遺族年金</h4><p>亡くなったとき、生計を維持されていた家族が受け取れます。遺族基礎年金は子のある配偶者または子が対象です。</p><p class="small"><a data-src="izoku" target="_blank" rel="noopener noreferrer">日本年金機構</a></p></div>
+<div class="mini"><h4><span class="mi">🩺</span>障害年金</h4><p>病気やけがで、法律で定める障害の状態になったときに受け取れます。保険料の納付の条件があります。</p><p class="small"><a data-src="shogai" target="_blank" rel="noopener noreferrer">日本年金機構</a></p></div></div>
+<h3>保険で準備する額の考え方</h3>
+<figure class="figure"><svg viewBox="0 0 340 150" role="img" aria-labelledby="needT"><title id="needT">必要な額から、公的保障・会社の保障・貯蓄を引いた残りを保険で考える</title>
+<text x="8" y="22" class="t s">必要な額</text><rect x="92" y="10" width="240" height="22" rx="5" fill="#e9e3d6"/><text x="212" y="26" text-anchor="middle" class="t s">生活費・教育費・住まいなど</text>
+<text x="8" y="66" class="t s">備えている額</text>
+<rect x="92" y="54" width="96" height="22" rx="5" fill="#00826b"/><text x="140" y="70" text-anchor="middle" class="t s w">公的保障</text>
+<rect x="190" y="54" width="52" height="22" rx="5" fill="#5fae94"/><text x="216" y="70" text-anchor="middle" class="t s w">会社</text>
+<rect x="244" y="54" width="40" height="22" rx="5" fill="#a9d3c3"/><text x="264" y="70" text-anchor="middle" class="t s">貯蓄</text>
+<rect x="286" y="54" width="46" height="22" rx="5" fill="#fff" stroke="#b5761a" stroke-width="2" stroke-dasharray="4 3"/><text x="309" y="70" text-anchor="middle" class="t s">不足</text>
+<path d="M309 82v22" stroke="#b5761a" stroke-width="2"/><path d="M303 98l6 8 6-8" fill="none" stroke="#b5761a" stroke-width="2"/>
+<text x="332" y="128" text-anchor="end" class="t">この「不足」を保険で考える</text></svg>
+<figcaption>考え方の図です（長さは例）。家族構成や働き方で、必要な額も公的保障も変わります。</figcaption></figure>
+<h3>リスクの大きさで備え方を分ける</h3>
+<figure class="figure"><svg viewBox="0 0 340 200" role="img" aria-labelledby="riskT"><title id="riskT">起こりやすさと損失の大きさで分けた4つの備え方</title>
+<text x="190" y="196" text-anchor="middle" class="t s m">起こりやすさ →</text><text x="12" y="100" text-anchor="middle" class="t s m" transform="rotate(-90 12 100)">損失の大きさ →</text>
+<rect x="30" y="8" width="148" height="84" rx="8" fill="#00826b"/><text x="104" y="44" text-anchor="middle" class="t w">保険で備える</text><text x="104" y="64" text-anchor="middle" class="t s w">まれ・損失が大きい</text>
+<rect x="184" y="8" width="148" height="84" rx="8" fill="#f3e6cf"/><text x="258" y="44" text-anchor="middle" class="t">避ける・減らす</text><text x="258" y="64" text-anchor="middle" class="t s">よくある・損失が大きい</text>
+<rect x="30" y="98" width="148" height="80" rx="8" fill="#dcebe3"/><text x="104" y="132" text-anchor="middle" class="t">貯蓄で備える</text><text x="104" y="152" text-anchor="middle" class="t s">まれ・損失が小さい</text>
+<rect x="184" y="98" width="148" height="80" rx="8" fill="#eef1ee"/><text x="258" y="132" text-anchor="middle" class="t">家計で対応</text><text x="258" y="152" text-anchor="middle" class="t s">よくある・損失が小さい</text></svg>
+<figcaption>小さな出費まで保険にすると、保険料の分だけ資産形成に回せるお金が減ります。</figcaption></figure>
+<ul><li>まずは<a href="#guide" data-guide="reserve">生活防衛資金</a>を現金で。急な出費で投資を売らずに済みます。</li>
+<li>保険の見直しは、結婚・出産・住宅購入など家族やお金の状況が変わったときに。</li>
+<li>住宅ローンの団体信用生命保険など、すでに入っている保障も数えます。</li></ul>
+</div></details>
+
+<details class="card guide" id="asset-check"><summary><h2><span class="ico" aria-hidden="true">✅</span>会社の制度で確認すること</h2></summary><div>
 <p>次の項目を、勤務先の資料・加入者専用サイト・人事の担当で確かめると、自分に合う組み合わせを決めやすくなります。</p>
 <ul class="checklist">
 <li>会社の年金は企業型DC・DB・退職一時金のどれがあるか</li>
@@ -387,8 +497,9 @@
 <p class="small">調べた額は<a href="#input">入力画面</a>の「勤務先の年金」に入れると、iDeCoの上限と順番に反映されます。</p>
 </div></details>
 
-<details class="card guide" id="asset-words"><summary><h2>用語のやさしい解説</h2></summary><div>
+<details class="card guide" id="asset-words"><summary><h2><span class="ico" aria-hidden="true">📘</span>用語のやさしい解説</h2></summary><div>
 <p class="small">本文の点線の言葉を押すと、ここに来ます。</p><dl class="words">
+<dt id="asset-w-lifeplan">ライフプラン</dt><dd>これからの人生の出来事と、そのためのお金の計画。年ごとの表にしたものがキャッシュフロー表です。</dd>
 <dt id="asset-w-dc">確定拠出年金（DC）</dt><dd>毎月の掛金が決まっていて、もらえる額は運用しだいの年金。会社が入る「企業型DC」と、自分で入る「iDeCo」があります。</dd>
 <dt id="asset-w-jigyonushi">事業主掛金</dt><dd>会社があなたのために出してくれるDCの掛金。給与とは別に会社が負担します。</dd>
 <dt id="asset-w-matching">マッチング拠出</dt><dd>会社の掛金に、自分も給与から上乗せすること。使っている間はiDeCoに入れません。</dd>
@@ -556,8 +667,70 @@ window.addEventListener('DOMContentLoaded', () => {
     text('rcTax',yen(Math.round(tax/1000)*1000)+(r.short?'（勤続'+P.retirement.shortYears+'年以下：これより多くなることがあります）':''));
   }
   ['rcYears','rcAmount','rcDisability'].forEach(id=>$(id).addEventListener('input',retireCalc));retireCalc();
+  // グラフ：ホバー（タップ）で値を出す。文字は本文の色、色は印だけに使う。
+  const NS='http://www.w3.org/2000/svg', man=v=>(Math.round(v/1000)/10).toLocaleString('ja-JP')+'万円';
+  function svgEl(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.append(e);return e;}
+  function chartBox(id,w,h,label){const box=$(id);box.textContent='';const svg=svgEl('svg',{viewBox:`0 0 ${w} ${h}`,role:'img','aria-label':label},box);const tip=document.createElement('div');tip.className='tip';box.append(tip);
+    const showTip=(t,x,y)=>{const r=svg.getBoundingClientRect(),k=r.width/w;tip.textContent=t;tip.style.left=Math.min(Math.max(x*k,60),r.width-60)+'px';tip.style.top=(y*k-6)+'px';tip.classList.add('on');};
+    box.onpointerleave=()=>tip.classList.remove('on');return {svg,showTip};}
+  function accCalc(){
+    const mo=Number($('acMonthly').value)*10000, yrs=Math.round(Number($('acYears').value)), rate=Number($('acRate').value)/100;
+    if(!(mo>=0)||!(yrs>=1&&yrs<=50)||!(rate>=0&&rate<=0.1)){['acPrincipal','acValue','acGain'].forEach(id=>text(id,'—'));$('accChart').textContent='';$('coefList').textContent='';return;}
+    const d=C.accumulate(mo,rate,yrs), last=d[d.length-1];
+    text('acPrincipal',man(last.principal));text('acValue','約'+man(last.value));text('acGain','約'+man(last.value-last.principal));
+    const W=340,H=190,L=44,R=8,T=12,B=24,max=Math.max(1,...d.map(p=>p.value)),x=i=>L+(W-L-R)*i/yrs,y=v=>T+(H-T-B)*(1-v/max);
+    const {svg,showTip}=chartBox('accChart',W,H,`毎月${man(mo)}を${yrs}年、仮定の利回り${rate*100}%で積み立てた試算。元本${man(last.principal)}、試算${man(last.value)}`);
+    for(let k=0;k<=4;k++){const v=max*k/4;svgEl('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#e3e8e3'},svg);svgEl('text',{x:L-6,y:y(v)+3,'text-anchor':'end',class:'ax'},svg).textContent=Math.round(v/10000).toLocaleString('ja-JP');}
+    svgEl('text',{x:L-6,y:T-2,'text-anchor':'end',class:'ax'},svg).textContent='万円';
+    const pts=(f)=>d.map((p,i)=>`${x(i)},${y(f(p))}`).join(' ');
+    svgEl('polygon',{points:`${x(0)},${y(0)} ${pts(p=>p.value)} ${x(yrs)},${y(0)}`,fill:'#00826b'},svg);
+    svgEl('polygon',{points:`${x(0)},${y(0)} ${pts(p=>p.principal)} ${x(yrs)},${y(0)}`,fill:'#c9d6d0',stroke:'#fff','stroke-width':2},svg);
+    svgEl('polyline',{points:pts(p=>p.value),fill:'none',stroke:'#00664f','stroke-width':2},svg);
+    const step=yrs<=10?1:yrs<=25?5:10;for(let i=0;i<=yrs;i+=step)svgEl('text',{x:x(i),y:H-8,'text-anchor':'middle',class:'ax'},svg).textContent=i+'年';
+    const cross=svgEl('line',{y1:T,y2:H-B,stroke:'#1c332e','stroke-width':1,opacity:0},svg),dot=svgEl('circle',{r:4,fill:'#00664f',stroke:'#fff','stroke-width':2,opacity:0},svg);
+    d.forEach((p,i)=>{const hit=svgEl('rect',{x:x(i)-(W-L-R)/yrs/2,y:T,width:(W-L-R)/yrs,height:H-T-B,class:'hit'},svg);
+      hit.addEventListener('pointerenter',()=>{cross.setAttribute('x1',x(i));cross.setAttribute('x2',x(i));cross.setAttribute('opacity',.35);dot.setAttribute('cx',x(i));dot.setAttribute('cy',y(p.value));dot.setAttribute('opacity',1);showTip(`${p.year}年目　元本 ${man(p.principal)}・試算 ${man(p.value)}`,x(i),y(p.value));});});
+    const k=C.coefficients(rate,yrs), yr=mo*12, base=1000000, r=rate*100;
+    const items=[['終価係数',k.shuka,'今のお金が、'+yrs+'年後にいくらになるか',`100万円 → 約${man(base*k.shuka)}`],
+      ['現価係数',k.genka,yrs+'年後の目標額のために、今いくら必要か',`${yrs}年後の100万円 ← 今 約${man(base*k.genka)}`],
+      ['年金終価係数',k.nenkinShuka,'毎年同じ額を積み立てると、'+yrs+'年後にいくらか',`年${man(yr)}ずつ → 約${man(yr*k.nenkinShuka)}`],
+      ['減債基金係数',k.gensai,yrs+'年後の目標額のために、毎年いくら積み立てるか',`100万円の目標 → 年 約${man(base*k.gensai)}`],
+      ['資本回収係数',k.shihonKaishu,'今のお金を'+yrs+'年で取り崩すと、毎年いくら受け取れるか（ローンの年返済額にも）',`100万円 → 年 約${man(base*k.shihonKaishu)}`],
+      ['年金現価係数',k.nenkinGenka,'毎年同じ額を'+yrs+'年受け取るには、今いくら必要か',`年100万円を受け取る → 今 約${man(base*k.nenkinGenka)}`]];
+    $('coefList').innerHTML=items.map(([n,v,w,e])=>`<div class="mini"><h4>${n}<b class="v">${v.toFixed(3)}</b></h4><p>${w}</p><p class="ex">${e}</p></div>`).join('');
+  }
+  ['acMonthly','acYears','acRate'].forEach(id=>$(id).addEventListener('input',accCalc));accCalc();
+  (function pensionChart(){
+    const p=P.pension,W=340,H=190,L=34,R=6,T=16,B=38,ages=[];for(let a=p.early.minAge;a<=p.defer.maxAge;a++)ages.push(a);
+    const val=a=>a<p.base?-Math.min((p.base-a)*12*p.early.rate,p.early.max):Math.min((a-p.base)*12*p.defer.rate,p.defer.max);
+    const lo=-p.early.max,hi=p.defer.max,y=v=>T+(H-T-B)*(hi-v)/(hi-lo),bw=(W-L-R)/ages.length;
+    const {svg,showTip}=chartBox('pensionChart',W,H,`受け取り開始年齢ごとの年金額の増減。${ages[0]}歳で${Math.round(val(ages[0])*1000)/10}%、${p.defer.maxAge}歳で+${Math.round(p.defer.max*1000)/10}%`);
+    [lo,0,0.4,hi].forEach(v=>{svgEl('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:v===0?'#8a9a92':'#e3e8e3'},svg);svgEl('text',{x:L-4,y:y(v)+3,'text-anchor':'end',class:'ax'},svg).textContent=(v>0?'+':'')+Math.round(v*100)+'%';});
+    ages.forEach((a,i)=>{const v=val(a),x0=L+i*bw+1,h=Math.abs(y(v)-y(0));
+      if(h>0)svgEl('rect',{x:x0,y:v>0?y(v):y(0),width:bw-2,height:h,rx:Math.min(3,h/2),fill:v<0?'#b5761a':'#00826b'},svg);
+      else svgEl('rect',{x:x0,y:y(0)-1.5,width:bw-2,height:3,fill:'#8a9a92'},svg);
+      if(a%5===0)svgEl('text',{x:x0+bw/2-1,y:H-6,'text-anchor':'middle',class:'ax'},svg).textContent=a+'歳';
+      if(a===ages[0]||a===p.defer.maxAge||a===70)svgEl('text',{x:x0+bw/2-1,y:v>0?y(v)-4:y(v)+12,'text-anchor':'middle',class:'lb'},svg).textContent=(v>0?'+':'')+Math.round(v*1000)/10+'%';
+      const hit=svgEl('rect',{x:L+i*bw,y:T,width:bw,height:H-T-B,class:'hit'},svg);
+      hit.addEventListener('pointerenter',()=>showTip(`${a}歳から：${v===0?'増減なし（原則）':(v>0?'+':'')+Math.round(v*1000)/10+'%'}`,L+i*bw+bw/2,v>0?y(v):y(0)));});
+  })();
+  function deductChart(){
+    const W=340,H=170,L=40,R=8,T=14,B=24,N=40,max=C.retirementDeduction(N),x=n=>L+(W-L-R)*n/N,y=v=>T+(H-T-B)*(1-v/max);
+    const {svg,showTip}=chartBox('deductChart',W,H,`勤続年数ごとの退職所得控除。${P.retirement.longYears}年で${man(C.retirementDeduction(P.retirement.longYears))}、${N}年で${man(max)}`);
+    for(let k=0;k<=4;k++){const v=max*k/4;svgEl('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'#e3e8e3'},svg);svgEl('text',{x:L-5,y:y(v)+3,'text-anchor':'end',class:'ax'},svg).textContent=Math.round(v/10000).toLocaleString('ja-JP');}
+    svgEl('text',{x:L-5,y:T-4,'text-anchor':'end',class:'ax'},svg).textContent='万円';
+    for(let n=0;n<=N;n+=10)svgEl('text',{x:x(n),y:H-8,'text-anchor':'middle',class:'ax'},svg).textContent=n+'年';
+    const pts=[];for(let n=1;n<=N;n++)pts.push(`${x(n)},${y(C.retirementDeduction(n))}`);
+    svgEl('polyline',{points:pts.join(' '),fill:'none',stroke:'#00826b','stroke-width':2,'stroke-linejoin':'round'},svg);
+    const ly=P.retirement.longYears;svgEl('line',{x1:x(ly),x2:x(ly),y1:T,y2:H-B,stroke:'#b5761a','stroke-dasharray':'3 3'},svg);
+    svgEl('text',{x:x(ly)-4,y:T+8,'text-anchor':'end',class:'ax'},svg).textContent=ly+'年から傾きが急に';
+    const yrs=Number($('rcYears').value);if(yrs>0&&yrs<=N){const n=Math.ceil(yrs),v=C.retirementDeduction(yrs);svgEl('circle',{cx:x(n),cy:y(v),r:5,fill:'#00664f',stroke:'#fff','stroke-width':2},svg);svgEl('text',{x:x(n)+(n>30?-8:8),y:y(v)+(n>30?14:4),'text-anchor':n>30?'end':'start',class:'lb'},svg).textContent=man(v);}
+    for(let n=1;n<=N;n++){const hit=svgEl('rect',{x:x(n)-(W-L-R)/N/2,y:T,width:(W-L-R)/N,height:H-T-B,class:'hit'},svg);hit.addEventListener('pointerenter',()=>showTip(`勤続${n}年：控除 ${man(C.retirementDeduction(n))}`,x(n),y(C.retirementDeduction(n))));}
+  }
+  $('rcYears').addEventListener('input',deductChart);deductChart();
+
   window.addEventListener('popstate',()=>show(Math.max(0,hashes.indexOf(location.hash)),false));
-  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト',dcLimit:'厚生労働省：企業型DCの拠出限度額',dcReform:'厚生労働省：確定拠出年金の制度改正',dcSelect:'厚生労働省：確定拠出年金の法令解釈',retirement:'国税庁：退職所得',dcLumpAdjust:'国税庁：老齢一時金の控除の調整',idecoReceive:'iDeCo公式：受け取り方',idecoRetire:'iDeCo公式：転職・退職したとき',kurisage:'日本年金機構：繰下げ受給',kuriage:'日本年金機構：繰上げ受給',teikibin:'日本年金機構：ねんきん定期便'};
+  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト',dcLimit:'厚生労働省：企業型DCの拠出限度額',dcReform:'厚生労働省：確定拠出年金の制度改正',dcSelect:'厚生労働省：確定拠出年金の法令解釈',retirement:'国税庁：退職所得',dcLumpAdjust:'国税庁：老齢一時金の控除の調整',idecoReceive:'iDeCo公式：受け取り方',idecoRetire:'iDeCo公式：転職・退職したとき',kurisage:'日本年金機構：繰下げ受給',kuriage:'日本年金機構：繰上げ受給',teikibin:'日本年金機構：ねんきん定期便',kougaku:'厚生労働省：高額療養費制度',shobyo:'協会けんぽ：傷病手当金',izoku:'日本年金機構：遺族年金',shogai:'日本年金機構：障害基礎年金',tsumitateSim:'金融庁：つみたてシミュレーター',jflec:'金融経済教育推進機構（J-FLEC）'};
   for(const [k,url] of Object.entries(P.sources)){const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.textContent=names[k]||k;a.target='_blank';a.rel='noopener noreferrer';li.append(a);$('sourceList').append(li);}
   const events=C.calendar();
   function download(items){const blob=new Blob([C.makeICS(items,new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''))],{type:'text/calendar;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='setsuzei-navi-2026.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),10000);}

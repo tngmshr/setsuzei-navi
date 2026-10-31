@@ -27,6 +27,19 @@
     const base = y <= r.longYears ? Math.max(r.minimum, r.perYear * y) : r.longBase + r.perYearLong * (y - r.longYears);
     return base + (disability ? r.disability : 0);
   }
+  // 6つの係数。rate は年利（小数）、years は年数。利回りは仮定の値で、予測ではない。
+  function coefficients(rate, years) {
+    const g = Math.pow(1 + rate, years);
+    const ann = rate === 0 ? years : (g - 1) / rate;
+    return { shuka:g, genka:1/g, nenkinShuka:ann, gensai:1/ann, shihonKaishu:rate === 0 ? 1/years : rate*g/(g-1), nenkinGenka:rate === 0 ? years : (1 - 1/g)/rate };
+  }
+  // 毎月の積立（月末）を月複利で計算し、1年ごとの元本と評価額を返す。仮定の試算。
+  function accumulate(monthly, rate, years) {
+    const m = Math.pow(1 + rate, 1/12) - 1, out = [{year:0, principal:0, value:0}];
+    let v = 0;
+    for (let i = 1; i <= years*12; i++) { v = v*(1 + m) + monthly; if (i % 12 === 0) out.push({year:i/12, principal:monthly*i, value:Math.round(v)}); }
+    return out;
+  }
   function retirementIncome(amount, years, disability = false, p = P) {
     const deduction = retirementDeduction(years, disability, p);
     return { deduction, income: Math.floor(Math.max(0, amount - deduction) * p.retirement.half / 1000) * 1000,
@@ -254,5 +267,5 @@
     const q = new URLSearchParams({action:'TEMPLATE',text:e.title,dates:`${e.start}/${e.end}`,details:e.description});
     return 'https://calendar.google.com/calendar/render?'+q;
   }
-  return {retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
+  return {coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

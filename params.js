@@ -34,7 +34,14 @@
     idecoRetire: 'https://www.ideco-koushiki.jp/retirement/',
     kurisage: 'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-02.html',
     kuriage: 'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-01.html',
-    teikibin: 'https://www.nenkin.go.jp/section/faq/nteikibin/teikibin/gaiyou/20140602-01.html'
+    teikibin: 'https://www.nenkin.go.jp/section/faq/nteikibin/teikibin/gaiyou/20140602-01.html',
+    // 以下は公的保障・学び先の案内（確認2026-10-31）。金額はアプリに入れず、リンクだけ示す。
+    kougaku: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/iryouhoken/juuyou/kougakuiryou/index.html',
+    shobyo: 'https://www.kyoukaikenpo.or.jp/faq/benefit/002/index.html',
+    izoku: 'https://www.nenkin.go.jp/service/jukyu/seido/izokunenkin/jukyu-yoken/20150401-03.html',
+    shogai: 'https://www.nenkin.go.jp/service/jukyu/seido/shougainenkin/jukyu-yoken/20150514.html',
+    tsumitateSim: 'https://www.fsa.go.jp/policy/nisa2/moneyplan_sim/index.html',
+    jflec: 'https://www.j-flec.go.jp/'
   };
   return {
     year: 2026, checked: '2026-10-31', sources,
