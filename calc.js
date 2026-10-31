@@ -267,5 +267,94 @@
     const q = new URLSearchParams({action:'TEMPLATE',text:e.title,dates:`${e.start}/${e.end}`,details:e.description});
     return 'https://calendar.google.com/calendar/render?'+q;
   }
-  return {coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
+
+  // 目標額から逆算した毎月の積立額（月末積立・月複利）。accumulate と同じ前提。
+  function requiredMonthly(target, rate, years) {
+    const m = Math.pow(1 + rate, 1/12) - 1, n = Math.round(years*12);
+    if (n <= 0) return null;
+    const fv = m === 0 ? n : (Math.pow(1 + m, n) - 1) / m;
+    return Math.ceil(target / fv);
+  }
+  // ねんきん定期便の65歳の見込み額から、受け取り開始年齢ごとの年額を出す。月単位の増減率は params の値。
+  function pensionByAge(annual65, p = P) {
+    const r = p.pension, out = [];
+    for (let a = r.early.minAge; a <= r.defer.maxAge; a++) {
+      const ch = a < r.base ? -Math.min((r.base - a)*12*r.early.rate, r.early.max) : Math.min((a - r.base)*12*r.defer.rate, r.defer.max);
+      out.push({ age:a, change:Math.round(ch*1000)/1000, annual:Math.round(annual65*(1 + ch)) });
+    }
+    return out;
+  }
+  // 必要保障額の簡易計算。金額はすべて利用者が入れた値で、制度値は使わない。
+  function protectionGap(v) {
+    const need = v.living*12*v.years + v.education + v.other;
+    const have = v.survivor*12*v.years + v.savings + v.cover;
+    return { need, have, gap:Math.max(0, need - have), surplus:Math.max(0, have - need) };
+  }
+  // 年ごとのキャッシュフロー表。収入・支出は手取りベース、上昇率と運用利回りは仮定。
+  function cashflow(v) {
+    const rows = []; let balance = v.savings;
+    for (let k = 0; k < v.years; k++) {
+      const age = v.age + k, working = age < v.retireAge;
+      const income = (working ? Math.round(v.income*Math.pow(1 + v.incomeGrowth, k)) : 0) + (age >= v.pensionAge ? v.pension : 0);
+      const events = (v.events || []).filter(e => e.age === age), extra = events.reduce((s, e) => s + e.amount, 0);
+      const expense = Math.round(v.expense*Math.pow(1 + v.expenseGrowth, k)) + extra;
+      balance = Math.round(balance*(1 + v.rate) + income - expense);
+      rows.push({ year:k + 1, age, income, expense, net:income - expense, balance, events:events.map(e => e.name) });
+    }
+    return rows;
+  }
+  // 老後資金の器（企業型DC・マッチング拠出・iDeCo・選択制DC・NISA）の一般的な優先順位。
+  // opts: lockable（60歳まで使わないと決めた毎月の額）, needBefore60（60歳前に使う予定）, idecoFee（iDeCoの毎月の手数料・利用者入力）, matchingCap（規約の上限・任意）。
+  // 個別の投資助言ではなく、商品・金融機関・配分は決めない。
+  function retirementPriority(input, rate, opts = {}, p = P) {
+    const hasDC = ['dc','both'].includes(input.pension), hasDB = ['db','both'].includes(input.pension);
+    const cut = rate === null ? null : rate*(1 + p.tax.surtax) + p.resident.rate, cutPct = cut === null ? '—' : Math.round(cut*1000)/10;
+    const ideco = idecoLimit(input, true, p), idecoMax = input.matching === 'yes' ? 0 : ideco.amount ?? ideco.upper ?? 0;
+    const company = (hasDC ? input.dc || 0 : 0) + (hasDB ? input.db || 0 : 0);
+    let matchMax = hasDC && input.dcMatching === 'yes' ? floor(Math.max(0, p.dc.after - company), 1000) : 0;
+    if (matchMax && opts.matchingCap > 0) matchMax = Math.min(matchMax, opts.matchingCap);
+    const lock = Math.max(0, opts.lockable || 0), low = input.reserve < p.rules.reserveMonths, years = Math.max(0, 60 - input.age);
+    const startAge = (p.dcReceive.ages.find(([y]) => years >= y) || p.dcReceive.ages[p.dcReceive.ages.length - 1])[1];
+    const taxLow = rate !== null && rate <= 0.05, fee = opts.idecoFee > 0 ? opts.idecoFee : null;
+    const saving = m => cut === null ? null : Math.round(m*12*cut);
+    const items = [], add = (id, label, title, reason, figures = []) => items.push({ id, label, labelText:LABELS[label], title, reason, figures });
+    const stage = (net) => low || (!lock && !input.budget) ? 'ready' : taxLow || (net !== null && net <= 0) ? 'later' : 'now';
+    if (hasDC) add('dcAuto','now','企業型DC：会社の掛金の運用先を決める','会社が出す掛金なので、自分の手取りは減りません。加入者専用サイトで運用先を選びます。選ばないと、規約で決めた商品で運用されます。',[{label:'会社の掛金', value:input.dc || 0, unit:'月'}]);
+    if (hasDB) add('db','ok','DB：自分で決めることはありません','会社が給付を決める年金です。その分、iDeCo・マッチング拠出の上限が小さくなります。');
+    if (low) add('reserve','now','先に生活防衛資金を貯める',`生活費の${p.rules.reserveMonths}か月分がたまるまでは、60歳まで引き出せないお金（DC・iDeCo）にしないのが一般的な順番です。`);
+    const taxText = taxLow ? `所得税率${rate*100}%の見込みで、税金が減るのは掛金の約${cutPct}%（住民税の分が中心）。60歳まで引き出せないことと比べると、NISAを先にするのが一般的です。`
+      : `掛金が全額所得から差し引かれ、掛金の約${cutPct}%分の税金が減る目安です。60歳まで使わないと決めたお金の範囲で使います。`;
+    const both = matchMax > 0 && idecoMax > 0, want = lock || Math.max(matchMax, idecoMax);
+    let base = 0;
+    if (both) {
+      const first = matchMax >= Math.min(want, idecoMax) ? 'match' : 'ideco', m = Math.min(want, first === 'match' ? matchMax : idecoMax);
+      const s = saving(m), net = first === 'ideco' && fee !== null && s !== null ? s - fee*12 : null; base = m;
+      add('choose', stage(net), 'マッチング拠出かiDeCo：'+(first === 'match' ? 'まずマッチング拠出' : 'まずiDeCo'),
+        'この2つは同時に使えません。'+(first === 'match'
+          ? '税金の効果は同じで、給与天引きのため手続きが少なく、口座の手数料を会社が負担していることが多いからです（規約で確認）。商品を自分で広く選びたい、転職が多いといった場合はiDeCoも候補です。'
+          : 'マッチング拠出の上限より多く掛けたいので、枠の大きいiDeCoを先にします。iDeCoは口座の手数料が自己負担です。')
+        +taxText+(net !== null ? `手数料（月${fee}円）を引いた差し引きは年${net.toLocaleString('ja-JP')}円の目安です。` : ''),
+        [{label:'マッチング拠出の上限', value:matchMax, unit:'月'},{label:'iDeCoの上限', value:idecoMax, unit:'月'}, ...(lock && s !== null ? [{label:'節税の目安', value:s, unit:'年'}] : [])]);
+    } else if (matchMax > 0 || idecoMax > 0) {
+      const id = matchMax > 0 ? 'match' : 'ideco', max = Math.max(matchMax, idecoMax), m = Math.min(want, max);
+      const s = saving(m), net = id === 'ideco' && fee !== null && s !== null ? s - fee*12 : null; base = m;
+      add(id, stage(net), id === 'match' ? 'マッチング拠出' : 'iDeCo（イデコ）', taxText
+        + (net !== null ? `手数料（月${fee}円）を引いた差し引きは年${net.toLocaleString('ja-JP')}円の目安です。` : id === 'ideco' ? 'iDeCoは口座の手数料が自己負担です。金融機関の手数料を入れると差し引きを出します。' : ''),
+        [{label:'上限', value:max, unit:'月'}, ...(lock && s !== null ? [{label:'節税の目安', value:s, unit:'年'}] : [])]);
+    } else if (input.matching === 'yes') add('match','ok','マッチング拠出（利用中）','iDeCoとは併用できません。掛金と運用先を年1回見直します。');
+    else add('ideco','na','iDeCo・マッチング拠出','今の入力では使える枠がありません（年齢・年金の受給・会社の掛金などの条件）。');
+    if (input.dcSelect === 'yes') add('dcselect','ready','選択制DC：給与で受け取るか掛金にするか','掛金にした分は給与でなくなるので、所得税・住民税に加えて社会保険料も下がることがあります。その代わり、将来の厚生年金や、傷病手当金・出産手当金・失業給付などの計算のもとも下がることがあります。会社の掛金として扱われるので、iDeCo・マッチング拠出の上限も小さくなります。会社の説明で影響を確かめてから選びます。');
+    add('nisa', low ? 'ready' : 'now', 'NISA：60歳前に使うかもしれないお金',
+      (opts.needBefore60 ? '住宅・教育など60歳前に使う予定があるので、いつでも引き出せるNISAを先に使うのが一般的です。' : 'いつでも引き出せ、利益に税金がかかりません。DC・iDeCoで使い切れない分や、使い道がまだ決まっていないお金の置き場所です。')
+      + '掛けるときの節税はありません。');
+    if (opts.needBefore60) {
+      const n = items.splice(items.findIndex(i => i.id === 'nisa'), 1)[0], at = items.findIndex(i => ['choose','match','ideco','dcselect'].includes(i.id));
+      items.splice(at < 0 ? items.length : at, 0, n);
+    }
+    const notes = [];
+    if (years < 10 && input.age < 60) notes.push(`60歳まであと${years}年。DC・iDeCoの加入期間が10年に満たないと、受け取り開始が遅くなります（この場合は${startAge}歳から）。`);
+    if (lock > Math.max(matchMax, idecoMax) && Math.max(matchMax, idecoMax) > 0) notes.push('60歳まで使わない額のうち、上限を超える分はNISAなどで積み立てます。');
+    return { items, matchMax, idecoMax, idecoStatus:ideco.status, saving:base ? saving(base) : 0, notes, startAge };
+  }
+  return {requiredMonthly, pensionByAge, protectionGap, cashflow, retirementPriority, coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

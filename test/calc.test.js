@@ -205,3 +205,26 @@ test('6つの係数と積立の試算',()=>{
   const a=C.accumulate(10000,0,20);assert.equal(a.length,21);assert.equal(a[20].principal,2400000);assert.equal(a[20].value,2400000);
   const b=C.accumulate(10000,0.03,1);assert.ok(b[1].value>120000 && b[1].value<122000);
 });
+test('逆算・年金の受け取り年齢・必要保障額・キャッシュフロー',()=>{
+  assert.equal(C.requiredMonthly(2400000,0,20),10000);
+  const a=C.accumulate(C.requiredMonthly(5000000,0.03,20),0.03,20);assert.ok(a[20].value>=5000000 && a[20].value<5001000);
+  const p=C.pensionByAge(1000000);assert.equal(p[0].age,60);assert.equal(p[0].annual,760000);assert.equal(p.find(r=>r.age===65).annual,1000000);assert.equal(p.at(-1).annual,1840000);
+  const g=C.protectionGap({living:200000,years:10,education:5000000,other:0,survivor:100000,savings:3000000,cover:0});assert.equal(g.need,29000000);assert.equal(g.gap,14000000);
+  const cf=C.cashflow({age:64,income:3000000,expense:2000000,savings:0,incomeGrowth:0,expenseGrowth:0,rate:0,years:2,retireAge:65,pensionAge:65,pension:1500000,events:[{age:64,amount:500000,name:'車'}]});
+  assert.deepEqual(cf.map(r=>[r.income,r.expense,r.balance]),[[3000000,2500000,500000],[1500000,2000000,0]]);
+});
+test('老後資金の器の優先順位',()=>{
+  const n=raw=>C.normalize(raw).input;
+  const dc=C.retirementPriority(n({salary:6000000,age:35,pension:'dc',dc:20000,dcMatching:'yes',reserve:6,budget:50000}),0.1,{lockable:20000});
+  assert.equal(dc.matchMax,42000);assert.deepEqual(dc.items.map(i=>i.id),['dcAuto','choose','nisa']);assert.match(dc.items[1].title,/まずマッチング拠出/);assert.equal(dc.saving,Math.round(20000*12*(0.1*1.021+0.1)));
+  const big=C.retirementPriority(n({salary:6000000,age:35,pension:'dc',dc:20000,dcMatching:'yes',reserve:6,budget:50000}),0.1,{lockable:30000,matchingCap:10000});
+  assert.match(big.items[1].title,/まずiDeCo/);
+  const low=C.retirementPriority(n({salary:3000000,age:52,pension:'none',reserve:6,budget:30000}),0.05,{lockable:10000});
+  assert.equal(low.items[0].label,'later');assert.equal(low.startAge,61);
+  const fee=C.retirementPriority(n({salary:3000000,age:35,pension:'none',reserve:6,budget:30000}),0.05,{lockable:5000,idecoFee:1000});
+  assert.equal(fee.items[0].label,'later');
+  const early=C.retirementPriority(n({salary:6000000,age:30,pension:'both',dc:30000,db:10000,reserve:1}),0.1,{needBefore60:true});
+  assert.equal(early.idecoMax,22000);assert.deepEqual(early.items.map(i=>i.id),['dcAuto','db','reserve','nisa','ideco']);assert.equal(early.items[4].label,'ready');
+  const using=C.retirementPriority(n({salary:6000000,age:40,pension:'dc',dc:10000,matching:'yes',reserve:6,budget:30000}),0.1,{});
+  assert.equal(using.items[1].label,'ok');
+});
