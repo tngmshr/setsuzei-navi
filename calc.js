@@ -121,6 +121,58 @@
     if (input.mortgage === 'yes') list.push({title:'住宅ローン控除を確認',reason:'初年度は原則確定申告。所得税・住民税の控除枠とふるさと納税の併用を確認します。'});
     return list;
   }
+  const LABELS = { now:'今すぐ始めよう', ready:'条件がそろったら', later:'急がなくてよい', na:'対象外', ok:'できています' };
+  const yenText = v => Math.round(v).toLocaleString('ja-JP') + '円';
+  // 「あなたの順番」。一般的な目安の順に、入力と結びつけた理由を付ける。個別の投資助言ではない。
+  function recommend(input, result, p = P) {
+    const r = p.rules, low = input.reserve < r.reserveMonths, rate = result.base.incomeTax.rate;
+    const item = (id, label, title, reason, figures = [], guide = id) => ({ id, label, labelText:LABELS[label], title, reason, figures, guide });
+    const list = [];
+    list.push(low ? item('reserve','now','生活防衛資金を貯める',`いまの備えは生活費の${input.reserve}か月分。${r.reserveMonths}か月分たまるまでは、積立より先に現金を貯めるのが一般的な順番です。`)
+      : item('reserve','ok','生活防衛資金',`生活費の${input.reserve}か月分あります。この分は投資に回さず、すぐ使える形で残します。`));
+    const docs = [];
+    if (input.spouse === 'dependent' || input.under16 + input.teen + input.student > 0) docs.push('家族の扶養の申告');
+    if (input.insurance === 'yes') docs.push('生命保険料の証明書');
+    if (input.mortgage === 'yes') docs.push('住宅ローン控除の書類（2年目以降）');
+    docs.push('iDeCoに入っていれば掛金の証明書');
+    list.push(item('nencho','now','年末調整で控除の漏れを防ぐ',`勤務先に書類を出すだけで使える控除から。あなたの場合：${docs.join('、')}。`));
+    const d = result.donation.baseline;
+    if (d === 0) list.push(item('furusato','na','ふるさと納税','所得税・住民税がほとんどかからない見込みのため、寄付しても控除の効果がありません。'));
+    else if (d === null) list.push(item('furusato','ready','ふるさと納税','上限が計算できない条件です。寄付の前に上限を確かめてください。'));
+    else list.push(item('furusato', low ? 'ready' : 'now', 'ふるさと納税（毎年並行して）',
+      low ? '寄付は先に払い、税金が減るのは翌年です。手元の現金に余裕ができてから始めます。'
+        : `投資のお金とは別枠で考えます。上限の範囲なら、自己負担は年間合計で${yenText(p.donation.ownCost)}が目安です。`,
+      [{ label:'寄付上限', value:d, unit:'年' }]));
+    if (low) list.push(item('nisa','ready','NISA（ニーサ）','生活防衛資金がたまってから。投資のお金は値下がりすることがあるためです。'));
+    else if (!input.budget) list.push(item('nisa','ready','NISA（ニーサ）','毎月の積立予算が0円です。余裕ができたら少額から始められます。'));
+    else list.push(item('nisa','now','NISA（ニーサ）','いつでも売って引き出せ、利益に税金がかかりません。資産形成はまずここから検討するのが一般的です。',
+      result.nisaMonthly === null ? [] : [{ label:'NISA等に回せる額', value:result.nisaMonthly, unit:'月' }]));
+    const before = result.before.amount, after = result.after.amount ?? result.after.upper;
+    const cut = Math.round((rate * (1 + p.tax.surtax) + p.resident.rate) * 1000) / 10;
+    if (before === 0 && after === 0) {
+      const why = input.matching === 'yes' ? '企業型DCのマッチング拠出を使っていると、iDeCoとは併用できません。'
+        : input.benefits === 'yes' ? '老齢基礎年金などを受け取っていると加入できません。'
+        : input.age >= p.idecoAfter.ageExclusive ? '年齢の条件で加入できません。'
+        : result.before.status === '加入要件を満たさない' ? '60歳以上の加入要件を満たさない入力です。'
+        : '会社の掛金が多く、上限が最低掛金を下回ります。';
+      list.push(item('ideco','na','iDeCo（イデコ）',why));
+    } else {
+      let label, reason;
+      if (low) { label = 'ready'; reason = '生活防衛資金がたまってから。原則60歳まで引き出せないお金になるためです。'; }
+      else if (!input.budget) { label = 'ready'; reason = '毎月の積立予算が0円です。NISAの次に、余裕ができたら検討します。'; }
+      else if (rate <= 0.05) { label = 'later'; reason = `所得税率が${rate * 100}%の見込みで、税金が減るのは掛金の約${cut}%（住民税の分が中心）。原則60歳まで引き出せないことと比べ、NISAを先にするのが一般的です。`; }
+      else { label = 'now'; reason = `所得税率${rate * 100}%の見込み。掛金が全額所得から差し引かれ、掛金の約${cut}%分の税金が減る目安です。原則60歳まで引き出せないので、老後まで使わないお金で。`; }
+      if (before === 0 && after > 0) reason += `今の条件では、${p.idecoAfter.effective.replace('-','年')}月拠出分からの新しい上限で加入できる見込みです。`;
+      if (input.age < p.idecoEligibility.firstWithdrawalAge && result.yearsTo60 < r.shortYears) reason += `60歳まであと${result.yearsTo60}年。加入期間が短いと受け取り開始が遅くなるので、受け取り時期を確認してください。`;
+      if (result.tentative) reason += '上限は、勤務先の企業年金を確かめると確定します（今は最大の場合）。';
+      const figures = result.monthly ? [{ label:'試算の掛金', value:result.monthly, unit:'月' }, { label:'節税の目安', value:result.simpleSaving, unit:'年' }] : [];
+      list.push(item('ideco',label,'iDeCo（イデコ）',reason,figures));
+    }
+    if (input.insurance === 'yes') list.push(item('insurance','now','生命保険料控除','年末調整で証明書を出すだけで使えます。控除のために新しく保険に入る必要はありません。',[],'nencho'));
+    if (input.medical === 'yes') list.push(item('medical','later','医療費控除','翌年2〜3月の確定申告で。確定申告すると、ふるさと納税のワンストップ特例は使えなくなるので寄付も一緒に申告します。',[],'nencho'));
+    if (input.mortgage === 'yes') list.push(item('mortgage','now','住宅ローン控除','初年度は確定申告、2年目以降は年末調整で。ふるさと納税の上限が変わることがあります。',[],'nencho'));
+    return list;
+  }
   function calculate(raw = {}, p = P) {
     const n = normalize(raw, p);
     if (raw.period !== undefined && !['before','after'].includes(raw.period)) n.errors.push('period');
@@ -142,10 +194,12 @@
     const withMortgage = i.mortgage === 'yes' && (i.mortgageAnnual === null || i.mortgageAnnual > 0) ? null : withIdecoLimit;
     const simpleSaving = monthly === null ? null : base.incomeTax.taxable === 0 && base.taxableResident === 0 ? 0 : Math.round(monthly * 12 * (base.incomeTax.rate * (1 + p.tax.surtax) + p.resident.rate));
     const differenceSaving = !withIdeco || base.resident === null || withIdeco.resident === null ? null : Math.round(base.incomeTax.total - withIdeco.incomeTax.total + base.resident - withIdeco.resident);
-    return {...n, valid:true, before, after, monthly, tentative, base, withIdeco,
+    const out = {...n, valid:true, before, after, monthly, tentative, base, withIdeco,
       donation:{baseline,withIdeco:withIdecoLimit,withMortgage}, simpleSaving, differenceSaving,
       nisaMonthly:i.reserve < 3 ? 0 : monthly === null ? null : Math.max(0,i.budget - monthly),
       yearsTo60:Math.max(0,60-i.age), priorities:priorities(i,base.incomeTax.rate)};
+    out.recommendations = recommend(i, out, p);
+    return out;
   }
   function calendar(year = P.year) {
     const date = (y,m,d) => `${y}${String(m).padStart(2,'0')}${String(d).padStart(2,'0')}`;
@@ -177,5 +231,5 @@
     const q = new URLSearchParams({action:'TEMPLATE',text:e.title,dates:`${e.start}/${e.end}`,details:e.description});
     return 'https://calendar.google.com/calendar/render?'+q;
   }
-  return {salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,calculate,calendar,makeICS,googleCalendarURL};
+  return {salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

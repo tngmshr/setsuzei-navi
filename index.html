@@ -25,18 +25,18 @@
 </script>
 <style>
 :root{--ink:#1c332e;--muted:#52665f;--green:#185b4b;--soft:#e4efe9;--line:#d8e0d8;--paper:#fff;--bg:#f5f5ef;--amber:#785219;--warn:#fff2d8;font-family:system-ui,-apple-system,"BIZ UDPGothic","Yu Gothic",sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.75}
-*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty{display:none}.privacy{background:#e8f3ec;border:2px solid var(--green);border-radius:16px;padding:18px 18px 12px;margin-block:18px}.privacy h2{color:var(--green);font-size:1.25rem;margin-bottom:10px}.privacy ul{margin:0 0 10px;padding-left:1.2em}.privacy li{margin-bottom:8px;line-height:1.6}@media(max-width:420px){.wrap{padding-inline:16px}.card{padding:17px}.grid{gap:12px}h1{font-size:1.7rem}.money{font-size:1.6rem}.edition{font-size:.7rem}.brand{font-size:.83rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty,#orderNotice:empty{display:none}.guide-link{font-size:.82rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}.order{list-style:none;margin:0;padding:0;counter-reset:ord}.order li{counter-increment:ord;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 16px 10px;margin-bottom:12px;min-width:0}.order .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.order .head:before{content:counter(ord);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}.order h2{font-size:1.08rem;margin:0;flex:1;min-width:8em}.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}.b-now{background:var(--green);color:#fff}.b-ready{background:var(--warn);color:var(--amber)}.b-later{background:#e6ebf2;color:#34495e}.b-na{background:#eceae6;color:#5f5a52}.b-ok{background:var(--soft);color:var(--green)}.order p{margin:0 0 8px;font-size:.93rem}.figs{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 6px;font-size:.88rem}.figs b{color:var(--green);font-size:1.05rem}.order .more{font-size:.88rem;font-weight:700;background:none;border:0;color:var(--green);padding:8px 0;text-decoration:underline;text-underline-offset:4px}.toc ul{margin:0;padding-left:1.2em;columns:2;column-gap:16px}.toc li{margin-bottom:6px;break-inside:avoid}.guide summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0}.guide summary::-webkit-details-marker{display:none}.guide summary:after{content:"＋";color:var(--green);font-weight:700;font-size:1.2rem}.guide[open] summary:after{content:"－"}.guide summary h2{margin:0;font-size:1.2rem}.guide h3{margin:16px 0 6px;color:var(--green);font-size:1rem}.guide ul{padding-left:1.2em;margin:0 0 8px}.guide li{margin-bottom:6px}.official{font-size:.86rem;margin-top:14px}.table-wrap{overflow-x:auto;margin-block:10px}.cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.84rem}.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:8px 5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.cmp thead th{color:var(--green)}.cmp tbody th{width:30%;font-weight:700;color:var(--muted)}.words dt{font-weight:700;color:var(--ink);font-size:.95rem;margin-top:12px}.words dd{font-weight:400;font-size:.9rem}.privacy{background:#e8f3ec;border:2px solid var(--green);border-radius:16px;padding:18px 18px 12px;margin-block:18px}.privacy h2{color:var(--green);font-size:1.25rem;margin-bottom:10px}.privacy ul{margin:0 0 10px;padding-left:1.2em}.privacy li{margin-bottom:8px;line-height:1.6}@media(max-width:420px){.wrap{padding-inline:16px}.card{padding:17px}.grid{gap:12px}h1{font-size:1.7rem}.money{font-size:1.6rem}.edition{font-size:.7rem}.brand{font-size:.83rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
 <script src="params.js" defer></script>
 <script src="calc.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v1</span></div></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.2</span><a class="guide-link" href="#guide" data-guide="">📖 解説</a></div></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
-<div class="steps" aria-label="手順"><span id="step0" class="active">1 条件を入力</span><span id="step1">2 やること・目安</span><span id="step2">3 年間の予定</span></div>
+<div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
 <section class="screen" id="inputScreen" aria-labelledby="inputTitle">
-<div class="hero"><span class="hero-mark" aria-hidden="true">↗</span><p class="eyebrow">今日から、ひとつずつ。</p><h1 id="inputTitle" tabindex="-1">税金と将来のお金。<br>まず何から始める？</h1><p class="lead">会社員のための、やること整理。<br>条件を入れて、順番と金額の目安を確認しましょう。</p></div>
+<div class="hero"><span class="hero-mark" aria-hidden="true">↗</span><p class="eyebrow">今日から、ひとつずつ。</p><h1 id="inputTitle" tabindex="-1">税金と将来のお金。<br>まず何から始める？</h1><p class="lead">会社員のための、やること整理。<br>条件を入れると、NISA・iDeCoなどを<b>どの順番で始めるとよいか</b>の目安が分かります。</p><p class="small">先に制度を知りたい人は <a href="#guide" data-guide="">NISA・iDeCoの解説を読む</a></p></div>
 <section class="privacy" aria-labelledby="privacyTitle"><h2 id="privacyTitle"><span aria-hidden="true">🔒</span> 個人情報は集めません</h2><ul><li><b>名前・メール・住所・勤務先は聞きません。</b>登録もログインもありません。</li><li><b>入力した年収などは、どこにも送信しません。</b>計算はすべてこのスマホの中で行います。</li><li><b>アクセス解析・広告は入れていません。</b>入力内容を見られる人はいません（作った人も見られません）。</li><li><b>入力はこの端末にだけ保存され、</b>画面下の「保存した入力を消去する」でいつでも消せます。</li></ul><p class="small">※ページの配信元（GitHub）には、一般的なWebサイトと同じく接続の記録が残ります。入力内容は含まれません。</p></section>
 <p class="note">すべて任意です。空欄は説明用の仮定を使い、結果画面に表示します。</p>
 <p class="footnote">対象外：自営業・公務員・年収の目安が2,000万円超・副業収入が大きい人。給与以外の所得、障害者・ひとり親等の控除は計算に含みません。</p>
@@ -44,7 +44,7 @@
 <div class="card"><fieldset><legend><span class="section-num">01 基本のこと</span>収入と家族</legend><div class="grid">
 <div class="field"><label for="salary">年収（額面・目安）</label><div class="unit"><input id="salary" name="salary" type="number" min="0" max="10000" step="0.1" placeholder="500" inputmode="decimal"><span>万円</span></div><span class="help">税金や保険料が引かれる前。賞与も含む。</span></div>
 <div class="field"><label for="age">年齢</label><div class="unit"><input id="age" name="age" type="number" min="18" max="100" step="1" placeholder="35" inputmode="numeric"><span>歳</span></div></div>
-<div class="field wide"><label for="spouse">配偶者</label><select id="spouse" name="spouse"><option value="">未入力（なしと仮定）</option value="none">なし</option><option value="dependent">扶養内</option><option value="dual">共働き</option></select><span class="help">扶養内は配偶者の所得の目安が年62万円以下・70歳未満と仮定。共働きの配偶者特別控除は計算に含みません。</span></div>
+<div class="field wide"><label for="spouse">配偶者</label><select id="spouse" name="spouse"><option value="">未入力（なしと仮定）</option><option value="none">なし</option><option value="dependent">扶養内</option><option value="dual">共働き</option></select><span class="help">扶養内は配偶者の所得の目安が年62万円以下・70歳未満と仮定。共働きの配偶者特別控除は計算に含みません。</span></div>
 <div class="field wide"><p><strong>扶養する子の人数</strong></p><p class="small">12月31日時点。本人が扶養控除を申告し、子の所得の目安が年62万円以下と仮定します。</p><div class="grid">
 <div><label for="under16">16歳未満</label><input id="under16" name="under16" type="number" min="0" max="20" step="1" placeholder="0" inputmode="numeric"></div>
 <div><label for="teen">16〜18歳</label><input id="teen" name="teen" type="number" min="0" max="20" step="1" placeholder="0" inputmode="numeric"></div>
@@ -72,11 +72,17 @@
 <p id="inputError" class="error" role="alert"></p>
 </form>
 </section>
+<section class="screen" id="orderScreen" hidden aria-labelledby="orderTitle">
+<p class="eyebrow">あなたの条件だと、この順番。</p><h1 id="orderTitle" tabindex="-1">あなたの順番</h1>
+<p class="lead">入力した条件から、一般的な目安としての順番を出しました。上から順に確認しましょう。</p>
+<p id="orderNotice" class="note warning"></p>
+<ol class="order" id="orderList"></ol>
+<p class="footnote">一般的な目安で、個別の投資助言ではありません。商品・金融機関・配分は決めていません。金額の根拠は次の「数字の目安」で確認できます。</p>
+</section>
 <section class="screen" id="resultScreen" hidden aria-labelledby="resultTitle">
-<p class="eyebrow">いまの自分に、できること。</p><h1 id="resultTitle" tabindex="-1">やることと、数字の目安</h1>
+<p class="eyebrow">いまの自分に、できること。</p><h1 id="resultTitle" tabindex="-1">数字の目安</h1>
 <p id="resultNotice" class="note warning"></p>
-<div class="card"><span class="section-num">01 優先順と理由</span><h2>ここから始めましょう</h2><ol class="rank" id="priorities"></ol></div>
-<div class="card"><span class="section-num">02 お金の目安</span><h2>iDeCoの上限と節税</h2><p class="small">iDeCo（イデコ）＝自分で積み立てる老後の年金。</p>
+<div class="card"><h2>iDeCoの上限と節税</h2><p class="small">iDeCo（イデコ）＝自分で積み立てる老後の年金。</p>
 <div class="compare"><div><span>2026年11月拠出分まで・月額上限</span><b id="beforeLimit"></b></div><div><span>2026年12月拠出分から・月額上限</span><b id="afterLimit"></b></div></div><p id="limitReason" class="help"></p>
 <p class="footnote">新上限は2027年1月引き落とし分から。加入条件・勤務先制度を確認してください。</p>
 <hr class="divider"><label for="period"><strong>比較に使う上限</strong></label><select id="period"><option value="before">改正前の上限で試す</option><option value="after">改正後の上限で試す</option></select>
@@ -95,18 +101,119 @@
 <div class="card"><details id="assumptions"><summary>使った仮定・計算式・出典を見る</summary><div><p class="small">制度確認日：2026年10月31日。2026年所得・2027年度住民税に固定した簡易モデルです。</p><dl id="assumptionList"></dl><hr class="divider"><p class="small">寄付上限の目安＝自己負担額＋調整控除後の住民税所得割×20%÷（90%−所得税率×1.021）。所得税率は所得税の課税所得から求める簡易計算です。</p><p class="small">iDeCoの簡易節税額の目安＝月額×12×（所得税率×1.021＋住民税率10%）。税率をまたぐ場合や税額控除がある場合、実際の節税額は異なります。</p><ul id="sourceList" class="source-list"></ul><p id="unverified" class="note warning"></p></div></details></div>
 </section>
 <section class="screen" id="calendarScreen" hidden aria-labelledby="calendarTitle"><p class="eyebrow">忘れず、ひとつずつ。</p><h1 id="calendarTitle" tabindex="-1">年間の手続きカレンダー</h1><p class="lead">2026年の年末から翌年の確認まで。日付は一般的な予定です。正式な期限を確認してください。</p><p class="note">カレンダーには制度名と予定日だけを入れます。年収などの入力値は含めません。Google カレンダーはリンク先で内容を確認して登録できます。</p><div class="card"><div class="actions"><button class="btn primary" id="downloadAll" type="button">全予定を .ics で保存</button></div><div id="calendarList"></div></div><p class="small">.ics は端末のカレンダーに読み込む予定ファイルです。すべて終日の予定。11月・12月上旬・6月の予定日は確認用の仮置きです。重複登録に注意してください。</p></section>
+<section class="screen" id="guideScreen" hidden aria-labelledby="guideTitle">
+<p class="eyebrow">制度を、やさしく。</p><h1 id="guideTitle" tabindex="-1">制度の解説</h1>
+<p class="lead">NISA・iDeCo・ふるさと納税などのしくみを、初めての人向けにまとめました。数字は<span data-p="year" data-f="raw"></span>年分の制度（確認日 <span data-p="checked" data-f="date"></span>）です。</p>
+<nav class="card toc" aria-label="解説の目次"><h2>目次</h2><ul>
+<li><a href="#guide" data-guide="nisa">NISA（ニーサ）</a></li><li><a href="#guide" data-guide="ideco">iDeCo（イデコ）</a></li><li><a href="#guide" data-guide="compare">NISAとiDeCoの違い</a></li><li><a href="#guide" data-guide="furusato">ふるさと納税</a></li><li><a href="#guide" data-guide="nencho">年末調整と控除</a></li><li><a href="#guide" data-guide="reserve">生活防衛資金</a></li><li><a href="#guide" data-guide="words">用語集</a></li></ul></nav>
+
+<details class="card guide" id="guide-nisa"><summary><h2>NISA（ニーサ）</h2></summary><div>
+<h3>一言でいうと</h3><p>投資で得た利益（値上がり益や配当）に、税金がかからない口座の制度です。</p>
+<h3>しくみ</h3><ul>
+<li>ふつうの口座では、上場株式などの利益に所得税<span data-p="capitalGains.incomeTax" data-f="pct"></span>（別に復興特別所得税）と住民税<span data-p="capitalGains.resident" data-f="pct"></span>がかかります。NISAの口座の中ではこれがかかりません。</li>
+<li>1年に入れられる上限は合計<b data-p="nisa.annual" data-f="man"></b>。内訳は「つみたて投資枠」<span data-p="nisa.tsumitate" data-f="man"></span>と「成長投資枠」<span data-p="nisa.growth" data-f="man"></span>です。</li>
+<li>一生で持てる上限は<b data-p="nisa.lifetime" data-f="man"></b>（買ったときの金額で数えます。うち成長投資枠は<span data-p="nisa.growthLifetime" data-f="man"></span>まで）。</li>
+<li>持っていられる期間に期限はありません。売ると、買ったときの金額の分だけ翌年以降に枠が戻ります。</li>
+<li>口座を開けるのは、その年の1月1日時点で<span data-p="nisa.minAge" data-f="age"></span>以上の人。口座は1つの金融機関で開きます。</li></ul>
+<h3>メリット</h3><ul><li>利益に税金がかからない。</li><li>いつでも売って引き出せる（お金になるまで数日かかります）。</li><li>少額から、自分のペースで始められる。</li></ul>
+<h3>注意点・デメリット</h3><ul><li>元本は保証されません。値下がりすることがあります。</li><li>NISAで出た損は、ほかの口座の利益と相殺できません。</li><li>お金を入れても、その年の税金は減りません（ここがiDeCoとの大きな違い）。</li></ul>
+<h3>向いている人・向かない人</h3><p><b>向いている：</b>生活防衛資金があり、数年以上使わないお金がある人。<br><b>向かない：</b>近いうちに使う予定のお金しかない人、値下がりに耐えられない人。</p>
+<h3>よくある誤解</h3><ul><li>「NISAという商品がある」→ NISAは口座の制度です。中で何を買うかは自分で選びます。</li><li>「NISAなら損しない」→ 税金がかからないだけで、値下がりの損は出ます。</li></ul>
+<p class="official">公式ページ：<a data-src="nisaAbout" target="_blank" rel="noopener noreferrer">金融庁：NISAの制度</a></p>
+<p class="actions"><button type="button" class="btn" data-guide="compare">iDeCoとの違いを見る</button></p>
+</div></details>
+
+<details class="card guide" id="guide-ideco"><summary><h2>iDeCo（イデコ）</h2></summary><div>
+<h3>一言でいうと</h3><p>自分で掛金を出して運用し、老後に受け取る年金です。掛金の全額が所得から差し引かれ、毎年の税金が減ります。</p>
+<h3>しくみ</h3><ul>
+<li>掛金は月<span data-p="idecoContribution.minimum" data-f="yen"></span>から、<span data-p="idecoContribution.unit" data-f="yen"></span>単位。</li>
+<li>上限は働き方と勤務先の企業年金で決まります。会社員で企業年金がない場合は月<b data-p="idecoBefore.none" data-f="yen"></b>、企業年金がある場合は月<span data-p="idecoBefore.company" data-f="yen"></span>まで（会社の掛金によってはもっと少なくなります）。</li>
+<li><span data-p="idecoAfter.effective" data-f="ym"></span>拠出分（<span data-p="idecoAfter.firstDebit" data-f="ym"></span>引き落とし）からは、上限が月<b data-p="idecoAfter.combined" data-f="yen"></b>から会社の掛金などを引いた額に変わります。</li>
+<li>入れたお金は原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>まで引き出せません。加入期間が短いと、受け取り開始が遅くなります。</li>
+<li>加入できるのは今は<span data-p="idecoBefore.ageExclusive" data-f="age"></span>未満、改正後は<span data-p="idecoAfter.ageExclusive" data-f="age"></span>未満まで（<span data-p="idecoEligibility.conditionalAge" data-f="age"></span>以上は条件あり）。</li></ul>
+<h3>メリット</h3><ul><li>掛金の全額が所得控除。所得税率が高いほど減る税金が大きくなります（このアプリの「数字の目安」で計算できます）。</li><li>運用で出た利益に税金がかからない。</li><li>受け取るときも、退職所得控除や公的年金等控除が使えます。</li></ul>
+<h3>注意点・デメリット</h3><ul><li>原則60歳まで引き出せません。掛金を止めることはできますが、お金は戻りません。</li><li>加入時と毎月の口座管理に手数料がかかります（金融機関により違います）。</li><li>受け取るときに税金がかかることがあります。</li><li>所得税・住民税がかからない人は、節税の効果がありません。</li><li>企業型DCのマッチング拠出を使っていると、併用できません。</li></ul>
+<h3>向いている人・向かない人</h3><p><b>向いている：</b>所得税率が高めで、老後まで使わないお金がある人。<br><b>向かない：</b>数年以内に使う予定のお金で積み立てたい人、所得税がほとんどかからない人。</p>
+<h3>よくある誤解</h3><ul><li>「元本確保型なら必ず得」→ 手数料で目減りすることがあります。</li><li>「会社のDCがあるから入れない」→ 会社の掛金によっては入れます。勤務先の制度を確認してください。</li></ul>
+<p class="official">公式ページ：<a data-src="idecoOfficial" target="_blank" rel="noopener noreferrer">iDeCo公式サイト</a> ／ <a data-src="ideco" target="_blank" rel="noopener noreferrer">厚生労働省：iDeCoの概要</a> ／ <a data-src="idecoReform" target="_blank" rel="noopener noreferrer">厚生労働省：拠出限度額の改正</a></p>
+</div></details>
+
+<details class="card guide" id="guide-compare"><summary><h2>NISAとiDeCoの違い</h2></summary><div>
+<p>どちらも「利益に税金がかからない」制度ですが、目的と引き出しやすさが違います。</p>
+<div class="table-wrap"><table class="cmp"><thead><tr><th scope="col"></th><th scope="col">NISA</th><th scope="col">iDeCo</th></tr></thead><tbody>
+<tr><th scope="row">目的</th><td>自由な資産づくり</td><td>老後の資金</td></tr>
+<tr><th scope="row">引き出し</th><td>いつでも</td><td>原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>から</td></tr>
+<tr><th scope="row">入れたときの税金</th><td>減らない</td><td>掛金の全額が所得控除</td></tr>
+<tr><th scope="row">運用の利益</th><td>非課税</td><td>非課税</td></tr>
+<tr><th scope="row">受け取るとき</th><td>税金なし</td><td>課税対象（控除あり）</td></tr>
+<tr><th scope="row">上限</th><td>年<span data-p="nisa.annual" data-f="man"></span></td><td>月<span data-p="idecoBefore.none" data-f="yen"></span>など（働き方で違う）</td></tr>
+<tr><th scope="row">手数料</th><td>金融機関による</td><td>加入時・毎月かかる</td></tr>
+</tbody></table></div>
+<p class="small">一般的には、引き出せるNISAを先に考え、老後まで使わないお金があり、所得税率が高めならiDeCoも、という順番がよく使われます。</p>
+</div></details>
+
+<details class="card guide" id="guide-furusato"><summary><h2>ふるさと納税</h2></summary><div>
+<h3>一言でいうと</h3><p>好きな自治体に寄付すると、自己負担<span data-p="donation.ownCost" data-f="yen"></span>を除いた額が、所得税と翌年の住民税から差し引かれる制度です。お礼の品がもらえることもあります。</p>
+<h3>しくみ</h3><ul><li>差し引かれる額には上限があり、年収や家族構成で変わります（このアプリで目安を計算できます）。</li><li>会社員で寄付先が<span data-p="donation.oneStopMax" data-f="raw"></span>団体以内なら、「ワンストップ特例」の申請で確定申告をしなくて済みます。</li><li>それ以外の場合は確定申告をします。</li></ul>
+<h3>メリット</h3><ul><li>上限の範囲なら、実質の負担は年<span data-p="donation.ownCost" data-f="yen"></span>の目安で、お礼の品を受け取れます。</li><li>寄付金の使い道を選べる自治体もあります。</li></ul>
+<h3>注意点・デメリット</h3><ul><li>先にお金を払い、税金が減るのは後（住民税は翌年）です。</li><li>上限を超えた分は自己負担になります。</li><li>iDeCo・住宅ローン控除・医療費控除があると、上限が下がることがあります。</li><li>ワンストップ特例を申請しても、確定申告をすると特例は無効になります。その場合は寄付も申告に含めます。</li></ul>
+<h3>向いている人・向かない人</h3><p><b>向いている：</b>所得税・住民税を払っている会社員。<br><b>向かない：</b>税金がほとんどかからない人、手元の現金に余裕がない人。</p>
+<h3>よくある誤解</h3><ul><li>「税金が安くなる」→ 税金の前払いに近く、税額自体はほぼ変わりません。お得なのはお礼の品の分です。</li><li>「寄付1回ごとに2,000円」→ 自己負担は年間の合計です。</li></ul>
+<p class="official">公式ページ：<a data-src="donation" target="_blank" rel="noopener noreferrer">国税庁：ふるさと納税の計算</a> ／ <a data-src="soumuDonation" target="_blank" rel="noopener noreferrer">総務省：ふるさと納税の控除</a></p>
+<p class="actions"><a class="btn" href="../furusato-navi/" target="_blank" rel="noopener noreferrer">寄付と申請の手順を見る</a></p>
+</div></details>
+
+<details class="card guide" id="guide-nencho"><summary><h2>年末調整と控除</h2></summary><div>
+<h3>一言でいうと</h3><p>会社が1年分の所得税を精算する手続きです。書類を出すと、使える控除が反映されます。</p>
+<h3>しくみ</h3><ul><li>「控除」は税金を計算する所得から差し引くこと（所得控除）。減る税金は、控除額×税率です。</li><li>住宅ローン控除のように、税金から直接引くもの（税額控除）もあります。</li><li>年末調整で出す主な書類：扶養の申告、生命保険料などの保険料控除、iDeCoの掛金の証明書（給与天引きでない場合）、住宅ローン控除（2年目以降）。</li><li>年末調整でできないもの：医療費控除、住宅ローン控除の初年度、ワンストップ特例を使わないふるさと納税。これらは翌年2〜3月の確定申告で。</li></ul>
+<h3>メリット</h3><ul><li>書類を出すだけで税金が正しく計算され、払いすぎが戻ります。</li></ul>
+<h3>注意点</h3><ul><li>証明書がないと控除できません。届いたら保管しておきます。</li><li>出し忘れても、あとから確定申告で取り戻せる場合があります。</li><li>控除のためだけに保険に入る必要はありません。</li></ul>
+<h3>向いている人</h3><p>会社員のほぼ全員が対象です。家族の状況が変わった年は特に確認しましょう。</p>
+<h3>よくある誤解</h3><ul><li>「会社が全部やってくれる」→ 自分で書類を出さないと反映されない控除があります。</li><li>「iDeCoは自動で控除される」→ 自分で払っている場合は証明書の提出が必要です。</li></ul>
+<p class="official">公式ページ：<a data-src="basic" target="_blank" rel="noopener noreferrer">国税庁：年末調整のしかた（控除の表）</a> ／ <a data-src="insurance" target="_blank" rel="noopener noreferrer">国税庁：生命保険料控除</a></p>
+</div></details>
+
+<details class="card guide" id="guide-reserve"><summary><h2>生活防衛資金</h2></summary><div>
+<h3>一言でいうと</h3><p>病気・失業・急な出費に備えて、すぐ引き出せる形で置いておくお金です。</p>
+<h3>しくみ</h3><ul><li>このアプリでは、生活費の<span data-p="rules.reserveMonths" data-f="raw"></span>か月分を目安にしています（制度の決まりではなく、一般的な家計の考え方です）。</li><li>普通預金など、値動きがなくすぐ使える場所に置きます。</li></ul>
+<h3>メリット</h3><ul><li>投資が値下がりしたときに、慌てて売らずに済みます。</li></ul>
+<h3>注意点</h3><ul><li>多すぎると、ほかに回せたお金が眠ったままになります。</li></ul>
+<h3>向いている人</h3><p>全員。収入が不安定な人や、家族を支えている人は多めにする考え方もあります。</p>
+<h3>よくある誤解</h3><ul><li>「NISAで持っていれば代わりになる」→ 必要なときに値下がりしていることがあり、お金になるまで日数もかかります。</li></ul>
+</div></details>
+
+<details class="card guide" id="guide-words"><summary><h2>用語集</h2></summary><div><dl class="words">
+<dt>所得控除</dt><dd>税金を計算する前に所得から差し引く額。減る税金は「控除額×税率」。</dd>
+<dt>税額控除</dt><dd>計算した税金から直接差し引く額。住宅ローン控除など。</dd>
+<dt>課税所得</dt><dd>収入から給与所得控除や各種の控除を引いた、税率をかける元の金額。</dd>
+<dt>所得税率</dt><dd>課税所得に応じて<span data-p="tax.brackets.0.1" data-f="pct"></span>〜<span data-p="tax.brackets.6.1" data-f="pct"></span>。高い所得の部分ほど高い税率です。</dd>
+<dt>住民税（所得割）</dt><dd>所得に対して一律<span data-p="resident.rate" data-f="pct"></span>かかる住民税。前年の所得で計算し、翌年6月から払います。</dd>
+<dt>給与所得控除</dt><dd>会社員の経費にあたる額として、給与から自動で差し引かれる額。</dd>
+<dt>企業型DC</dt><dd>会社が掛金を出し、社員が自分で運用する企業年金（企業型確定拠出年金）。</dd>
+<dt>DB</dt><dd>確定給付企業年金。会社が将来の給付額を決めて運用する企業年金。</dd>
+<dt>マッチング拠出</dt><dd>企業型DCに、自分も給与から掛金を上乗せすること。iDeCoとは併用できません。</dd>
+<dt>他制度掛金相当額</dt><dd>DBなどの掛金をDCの掛金に換算した額。iDeCoの上限の計算に使います。勤務先で確認できます。</dd>
+<dt>運営管理機関</dt><dd>iDeCoの口座を扱う金融機関。手数料や選べる商品が機関ごとに違います。</dd>
+<dt>投資信託</dt><dd>多くの人のお金をまとめて、専門家が株や債券などに分けて運用する商品。</dd>
+<dt>元本割れ</dt><dd>入れたお金より、今の価値が少なくなること。</dd>
+<dt>損益通算</dt><dd>ある口座の損と、別の口座の利益を相殺して税金を減らすこと。NISAの損ではできません。</dd>
+</dl></div></details>
+<p class="footnote">一般的な制度の説明です。個別の商品や金融機関、配分はおすすめしません。最新の条件は公式ページで確認してください。</p>
+</section>
 <p id="saveStatus" class="status" role="status"></p><footer><p>一般的な制度理解のための目安です。個別の税務・投資判断を代わりに行うものではありません。入力内容の外部送信・アクセス解析は行いません。</p><button type="button" class="reset" id="clearSaved">保存した入力を消去する</button><div id="clearConfirm" hidden><p>このアプリの保存入力だけを消し、未入力に戻します。</p><div class="actions"><button class="btn" id="cancelClear" type="button">やめる</button><button class="btn" id="confirmClear" type="button">入力を消去する</button></div></div></footer>
 </main>
-<nav class="bottom" aria-label="画面移動"><div class="wrap"><button class="btn" id="back" type="button" disabled>戻る</button><button class="btn primary" id="next" type="button">目安を見る →</button></div></nav>
+<nav class="bottom" aria-label="画面移動"><div class="wrap"><button class="btn" id="back" type="button" disabled>戻る</button><button class="btn primary" id="next" type="button">順番を見る →</button></div></nav>
 <noscript><p class="note warning">計算には JavaScript を有効にしてください。</p></noscript>
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
   const C = window.SetsuzeiCalc, P = window.SetsuzeiParams;
   const $ = id => document.getElementById(id), key = 'setsuzeiNavi.inputs.v1';
-  const screens = ['inputScreen','resultScreen','calendarScreen'];
+  const screens = ['inputScreen','orderScreen','resultScreen','calendarScreen','guideScreen'];
+  const hashes = ['#input','#order','#result','#calendar','#guide'], titles = ['inputTitle','orderTitle','resultTitle','calendarTitle','guideTitle'];
+  const nextText = ['順番を見る →','数字の目安へ →','年間の予定へ →','入力に戻る','元の画面に戻る'];
   const form = $('conditions'), fields = [...form.elements].filter(e => e.name);
-  let view = 0, latest, storageAvailable = true;
+  let view = 0, returnTo = 0, latest, storageAvailable = true;
   const text = (id,value) => {$(id).textContent = value;};
   const yen = value => value === null || value === undefined ? '計算できません' : `目安 ${Math.round(value).toLocaleString('ja-JP')}円`;
   const labels = {salary:'年収（額面）',age:'年齢',spouse:'配偶者',under16:'16歳未満の子',teen:'16〜18歳の子',student:'19〜22歳の子',pension:'企業年金',dc:'DC事業主掛金（月額）',db:'他制度掛金相当額（月額）',social:'社会保険料（年額）',mortgage:'住宅ローン控除',mortgageAnnual:'住宅ローン控除（年額）',reserve:'生活防衛資金',budget:'毎月の積立予算',idecoMonthly:'試すiDeCo掛金（月額）',matching:'マッチング拠出',benefits:'老齢年金等の受給',history:'60歳以上の加入条件',insurance:'生命保険料',medical:'医療費控除の確認'};
@@ -144,21 +251,27 @@ window.addEventListener('DOMContentLoaded', () => {
       const msg = result.unsupported ? '年収の目安が2,000万円を超える場合は対象外です。' : '入力を確認してください：'+result.errors.map(k=>labels[k]).join('、')+'。0以上の範囲内の数値を入力してください。';
       text('inputError',msg);
       for (const id of result.errors || []) $(id)?.setAttribute('aria-invalid','true');
-      if (view === 1) {
+      if (view === 1 || view === 2) {
+        text('orderNotice',msg+' 順番の表示を止めています。修正してください。');$('orderList').replaceChildren();
         text('resultNotice',msg+' 数値の表示を止めています。修正してください。');
         for(const id of ['beforeLimit','afterLimit','usedMonthly','saving','donationBase','donationIdeco','donationMortgage'])text(id,'入力を確認');
         text('savingDetail','');text('allocation','入力を修正してから目安を確認してください。');
       }
       return false;
     }
-    text('inputError',''); const i=result.input;
+    text('inputError',''); text('orderNotice',''); const i=result.input;
     const notice=[];
     if (i.reserve < 3) notice.push('生活防衛資金が3か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。');
     if (result.tentative) notice.push(`iDeCoの上限は「最大」の目安です（${reasons[result.before.status] || reasons[result.after.status] || '勤務先で確認すると確定します'}）。下の金額は、その最大の上限の範囲で仮に計算しています。`);
     if (result.donation.baseline===null) notice.push('公的な資料で確かめられていない制度の値があるため、寄付上限は計算できません。');
     if (i.insurance==='yes' || i.medical==='yes') notice.push('保険料控除・医療費控除は計算に未反映です。適用すると寄付上限が下がる場合があります。');
     text('resultNotice',notice.join(' '));
-    $('priorities').replaceChildren(...result.priorities.map(item=>{const li=document.createElement('li'),b=document.createElement('strong'),p=document.createElement('p');b.textContent=item.title;p.textContent=item.reason;li.append(b,p);return li;}));
+    $('orderList').replaceChildren(...result.recommendations.map(item=>{
+      const li=document.createElement('li'),head=document.createElement('div'),h=document.createElement('h2'),badge=document.createElement('span'),p=document.createElement('p');
+      head.className='head';h.textContent=item.title;badge.className='badge b-'+item.label;badge.textContent=item.labelText;head.append(h,badge);p.textContent=item.reason;li.append(head,p);
+      if(item.figures.length){const figs=document.createElement('p');figs.className='figs';for(const f of item.figures){const s=document.createElement('span'),b=document.createElement('b');s.append(f.label+' ');b.textContent=f.value===null||f.value===undefined?'計算できません':yen(f.value);s.append(b,'／'+f.unit);figs.append(s);}li.append(figs);}
+      const more=document.createElement('button');more.type='button';more.className='more';more.dataset.guide=item.guide;more.textContent='解説を読む';li.append(more);
+      return li;}));
     text('beforeLimit',limitText(result.before)); text('afterLimit',limitText(result.after));
     text('limitReason',result.before.amount===null||result.after.amount===null ? '「最大」は、会社の掛金が0円で加入条件を満たす場合の上限です。'+(reasons[result.before.status]||reasons[result.after.status]||'')+'。給与明細や社内の福利厚生の案内、人事・総務で確認できます。' : '');
     text('usedMonthly',yen(result.monthly)+'／月'+(result.tentative&&result.monthly!==null?'（仮）':''));text('saving',yen(result.simpleSaving)+'／年');
@@ -193,18 +306,29 @@ window.addEventListener('DOMContentLoaded', () => {
     return true;
   }
   function show(n, push=true){
-    if(n!==0 && !render()) { if(view!==0){n=0;} else { $('inputError').scrollIntoView({block:'center'});return;} }
-    view=n;screens.forEach((id,index)=>{$(id).hidden=index!==n;$('step'+index).classList.toggle('active',index===n);});
-    $('back').disabled=n===0;text('next',n===0?'目安を見る →':n===1?'年間の予定へ →':'入力に戻る');
-    if(push && location.hash!==['#input','#result','#calendar'][n])history.pushState({view:n},'', ['#input','#result','#calendar'][n]);
-    $(['inputTitle','resultTitle','calendarTitle'][n]).focus();window.scrollTo({top:0,behavior:'instant'});
+    if(n>=1 && n<=3 && !render()) { if(view!==0){n=0;} else { $('inputError').scrollIntoView({block:'center'});return;} }
+    if(n===4 && view!==4) returnTo=view;
+    view=n;screens.forEach((id,index)=>{$(id).hidden=index!==n;$('step'+index)?.classList.toggle('active',index===n);});
+    $('back').disabled=n===0;text('next',nextText[n]);
+    if(push && location.hash!==hashes[n])history.pushState({view:n},'',hashes[n]);
+    $(titles[n]).focus();window.scrollTo({top:0,behavior:'instant'});
   }
+  function openGuide(topic){
+    show(4, view!==4);
+    const d=topic && $('guide-'+topic);
+    if(d){d.open=true;d.scrollIntoView({block:'start'});}
+  }
+  document.addEventListener('click',e=>{const t=e.target.closest('[data-guide]');if(!t)return;e.preventDefault();openGuide(t.dataset.guide);});
+  const getP=path=>path.split('.').reduce((o,k)=>o==null?o:o[k],P);
+  const fmt={raw:v=>String(v),pct:v=>Math.round(v*1000)/10+'%',man:v=>(v/10000).toLocaleString('ja-JP')+'万円',yen:v=>v.toLocaleString('ja-JP')+'円',age:v=>v+'歳',ym:v=>v.replace(/^(\d+)-0?(\d+)$/,'$1年$2月'),date:v=>v.replace(/^(\d+)-0?(\d+)-0?(\d+)$/,'$1年$2月$3日')};
+  document.querySelectorAll('[data-p]').forEach(el=>{const v=getP(el.dataset.p);el.textContent=v==null?'—':(fmt[el.dataset.f]||fmt.raw)(v);});
+  document.querySelectorAll('a[data-src]').forEach(a=>{const u=P.sources[a.dataset.src];if(u)a.href=u;else a.removeAttribute('href');});
   form.addEventListener('input',()=>{persist();text('inputError','');});
   form.addEventListener('submit',e=>{e.preventDefault();show(1);});
-  $('next').addEventListener('click',()=>{persist();show((view+1)%3);});$('back').addEventListener('click',()=>show(Math.max(0,view-1)));
+  $('next').addEventListener('click',()=>{persist();show(view===4?returnTo:(view+1)%4);});$('back').addEventListener('click',()=>show(view===4?returnTo:Math.max(0,view-1)));
   ['idecoMonthly','period'].forEach(id=>$(id).addEventListener('input',()=>{persist();render();}));
-  window.addEventListener('popstate',()=>show(Math.max(0,['#input','#result','#calendar'].indexOf(location.hash)),false));
-  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度'};
+  window.addEventListener('popstate',()=>show(Math.max(0,hashes.indexOf(location.hash)),false));
+  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト'};
   for(const [k,url] of Object.entries(P.sources)){const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.textContent=names[k]||k;a.target='_blank';a.rel='noopener noreferrer';li.append(a);$('sourceList').append(li);}
   const events=C.calendar();
   function download(items){const blob=new Blob([C.makeICS(items,new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''))],{type:'text/calendar;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='setsuzei-navi-2026.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),10000);}
@@ -212,7 +336,7 @@ window.addEventListener('DOMContentLoaded', () => {
   for(const e of events){const div=document.createElement('div'),label=document.createElement('span'),h=document.createElement('h3'),p=document.createElement('p'),actions=document.createElement('div'),b=document.createElement('button'),a=document.createElement('a');div.className='calendar-item';label.className='pill';label.textContent=e.label;h.textContent=e.title;p.className='small';p.textContent=e.description;actions.className='actions';b.className='btn';b.type='button';b.textContent='.icsで保存';b.addEventListener('click',()=>download([e]));a.className='btn';a.href=C.googleCalendarURL(e);a.textContent='Googleカレンダー';a.target='_blank';a.rel='noopener noreferrer';actions.append(b,a);div.append(label,h,p,actions);$('calendarList').append(div);}
   $('clearSaved').addEventListener('click',()=>{$('clearConfirm').hidden=false;});$('cancelClear').addEventListener('click',()=>{$('clearConfirm').hidden=true;});
   $('confirmClear').addEventListener('click',()=>{try{localStorage.removeItem(key);}catch{storageAvailable=false;}form.reset();$('idecoMonthly').value='';$('period').value='before';$('clearConfirm').hidden=true;show(0);text('saveStatus',storageAvailable?'保存した入力を消去しました。':'保存領域へアクセスできません。画面の入力だけを初期化しました。');});
-  restore();show(Math.max(0,['#input','#result','#calendar'].indexOf(location.hash)),false);
+  restore();show(Math.max(0,hashes.indexOf(location.hash)),false);
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('./sw.js').catch(()=>text('saveStatus','オフライン用の準備ができませんでした。オンラインで利用できます。'));
 });
 </script>

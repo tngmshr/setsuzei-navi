@@ -144,3 +144,37 @@ test('企業年金や掛金が分からなくても、最大の上限で仮に�
  assert.equal(unknown.before.upper,23000);assert.equal(unknown.monthly,23000);
  const known=C.calculate({pension:'none'});assert.equal(known.tentative,false);
 });
+// v0.2「あなたの順番」。判定は一般的な目安で、SPEC.md v0.2 の条件どおりかを確かめる。
+const rec=(raw)=>Object.fromEntries(C.calculate(raw).recommendations.map(x=>[x.id,x]));
+test('順番：並びは 生活防衛資金→年末調整→ふるさと納税→NISA→iDeCo',()=>{
+  assert.deepEqual(C.calculate({}).recommendations.map(x=>x.id),['reserve','nencho','furusato','nisa','ideco']);
+  const all=C.calculate({insurance:'yes',medical:'yes',mortgage:'yes'}).recommendations.map(x=>x.id);
+  assert.deepEqual(all.slice(5),['insurance','medical','mortgage']);
+  for(const x of C.calculate({}).recommendations){assert.equal(x.labelText,C.LABELS[x.label]);assert.ok(x.reason.length>10);}
+});
+test('順番：生活防衛資金が3か月分未満なら NISA・iDeCo は条件がそろったら',()=>{
+  const r=rec({reserve:2});
+  assert.equal(r.reserve.label,'now');assert.match(r.reserve.reason,/2か月分/);
+  assert.equal(r.nisa.label,'ready');assert.equal(r.ideco.label,'ready');assert.equal(r.furusato.label,'ready');
+  assert.equal(rec({reserve:3}).reserve.label,'ok');
+});
+test('順番：所得税率5%は iDeCo 急がなくてよい、20%は今すぐ',()=>{
+  // 年収500万円単身・社保15%：所得356万−社保75万−基礎控除104万＝課税177万 → 5%（国税庁No2260）。
+  const r=rec({salary:5000000});assert.equal(r.ideco.label,'later');assert.match(r.ideco.reason,/15\.1%/);
+  // 年収800万円：所得610万−社保120万−基礎控除67万＝423万 → 20%。節税率 20%×1.021＋10%＝30.4%。
+  const h=rec({salary:8000000});assert.equal(h.ideco.label,'now');assert.match(h.ideco.reason,/30\.4%/);
+  assert.equal(h.nisa.label,'now');assert.equal(h.ideco.figures.length,2);
+});
+test('順番：iDeCo 対象外・60歳まで5年未満・上限が未確定',()=>{
+  assert.equal(rec({matching:'yes'}).ideco.label,'na');assert.match(rec({matching:'yes'}).ideco.reason,/マッチング/);
+  assert.equal(rec({benefits:'yes'}).ideco.label,'na');assert.equal(rec({age:70}).ideco.label,'na');
+  assert.match(rec({age:57,salary:8000000}).ideco.reason,/あと3年/);assert.doesNotMatch(rec({age:50}).ideco.reason,/あと/);
+  assert.match(rec({pension:'unknown',salary:8000000}).ideco.reason,/確定/);
+  assert.match(rec({age:66}).ideco.reason,/2026年12月拠出分から/);
+});
+test('順番：予算0円・税金がかからない人・該当控除',()=>{
+  const z=rec({budget:0});assert.equal(z.nisa.label,'ready');assert.equal(z.ideco.label,'ready');
+  assert.equal(rec({salary:1000000}).furusato.label,'na');
+  const f=rec({spouse:'dependent',insurance:'yes'});assert.match(f.nencho.reason,/扶養/);assert.match(f.nencho.reason,/生命保険料/);
+  assert.equal(f.insurance.guide,'nencho');
+});

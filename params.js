@@ -21,7 +21,10 @@
     idecoReform: 'https://www.mhlw.go.jp/content/12500000/001726959.pdf',
     idecoAge: 'https://www.mhlw.go.jp/web_magazine/column/20261020.html',
     idecoUnit: 'https://www.ideco-koushiki.jp/start/',
-    nisa: 'https://www.fsa.go.jp/common/ronten/202401/02.pdf'
+    nisa: 'https://www.fsa.go.jp/common/ronten/202401/02.pdf',
+    nisaAbout: 'https://www.fsa.go.jp/policy/nisa2/about/nisa2024/index.html',
+    capitalGains: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm',
+    idecoOfficial: 'https://www.ideco-koushiki.jp/'
   };
   return {
     year: 2026, checked: '2026-10-31', sources,
@@ -53,7 +56,8 @@
       // 住宅ローン控除の住民税からの控除上限（所得税の課税総所得金額等×率、上限額）。併用時の寄付上限は画面で「確認中」のまま扱う。
       mortgage: { standard:{ rate:0.05, cap:97500 }, legacy:{ rate:0.07, cap:136500 } } },
     // 出典 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1155.htm 確認2026-10-31。総務省ページは本文取得不可、同式を国税庁で確認。
-    donation: { ownCost:2000, specialCap:0.20, incomeLimit:0.40 },
+    // ワンストップ特例は寄付先5団体以内（同ページ本文で確認 2026-10-31）。
+    donation: { ownCost:2000, specialCap:0.20, incomeLimit:0.40, oneStopMax:5 },
     // 出典 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1140.htm 確認2026-10-31。新一般生命保険料のみ。全区分合計上限は据置。
     insurance: { newGeneral:40000, newGeneralUnder23:60000, total:120000 },
     // 出典 https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/nenkin/kyoshutsu/ideco.html 確認2026-10-31。現行会社員第2号。
@@ -65,7 +69,12 @@
     // 出典 https://www.mhlw.go.jp/web_magazine/column/20261020.html 確認2026-10-31。60歳以上は加入歴等の条件あり、受給中・マッチング拠出は不可。
     idecoEligibility: { conditionalAge:60, firstWithdrawalAge:60 },
     // 出典 https://www.fsa.go.jp/common/ronten/202401/02.pdf p2 確認2026-10-31。成人向け年間合計、生涯取得価額。
-    nisa: { annual:3600000, lifetime:18000000 },
+    // 枠の内訳・年齢は https://www.fsa.go.jp/policy/nisa2/about/nisa2024/index.html 確認2026-10-31。
+    nisa: { annual:3600000, lifetime:18000000, tsumitate:1200000, growth:2400000, growthLifetime:12000000, minAge:18 },
+    // 出典 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm 確認2026-10-31。上場株式等の譲渡益（所得税15%＋住民税5%、別に復興特別所得税）。
+    capitalGains: { incomeTax:0.15, resident:0.05 },
+    // 以下はこのアプリの判定の目安（制度値ではない）。生活防衛資金の月数、60歳までの年数の注意ライン。
+    rules: { reserveMonths:3, shortYears:5 },
     // 以下は制度値ではなく、このアプリの説明用仮定。社会保険料15%は実額ではない。
     assumptions: { salary:5000000, age:35, spouse:'none', under16:0, teen:0, student:0,
       pension:'none', socialRate:0.15, mortgage:'no', reserve:3, budget:30000, idecoMonthly:10000,
