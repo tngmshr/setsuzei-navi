@@ -49,7 +49,7 @@ svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:1
 .mini{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfcfa;min-width:0}.mini h4{margin:0 0 4px;font-size:.98rem;display:flex;gap:6px;align-items:center}.mini p{font-size:.87rem;margin:0 0 4px}.mi{font-size:1.1rem}
 .cf caption{caption-side:top;text-align:left;font-size:.8rem;color:var(--muted);padding-bottom:4px}.cf td:nth-child(n+3){text-align:right}.cf .plus{color:var(--green)}.cf .minus{color:#a24a1d;font-weight:700}.cf .hl td{background:#fbf1de}.cf small{display:block;font-size:.72rem}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}@media(max-width:480px){.g3{grid-template-columns:1fr 1fr}.g3 .field:last-child{grid-column:1/-1}}
-.kpi{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 8px}.kpi span{font-size:.78rem;color:var(--muted);display:block}.kpi b{font-size:1.2rem;color:var(--ink)}
+.kpi{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 8px}.gain{border:2px solid var(--green)}.gain .kpi b{color:var(--green)}.gain-list{padding-left:1.2em;margin:6px 0;font-size:.9rem;line-height:1.7}.kpi span{font-size:.78rem;color:var(--muted);display:block}.kpi b{font-size:1.2rem;color:var(--ink)}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--muted);margin:6px 0 2px}.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
 .chart{position:relative;margin:4px 0 8px}.chart svg{width:100%;height:auto;display:block;overflow:visible}.chart .ax{font-size:10px;fill:var(--muted)}.chart .lb{font-size:10.5px;fill:var(--ink);font-weight:700}.chart .hit{fill:transparent;cursor:crosshair}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.76rem;line-height:1.45;padding:4px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .12s;z-index:2}.tip.on{opacity:1}
@@ -83,7 +83,7 @@ body{background:#fff}main{padding:0}.card{break-inside:avoid;border-color:#bbb}.
 <script src="tools.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.5</span></div><nav class="wrap tabs" aria-label="メニュー"><a href="#input" data-view="0" id="tab0"><i aria-hidden="true">✅</i>診断</a><a href="#tools" data-view="6" id="tab6"><i aria-hidden="true">🧮</i>ツール</a><a href="#guide" data-guide="" id="tab4"><i aria-hidden="true">📖</i>制度の解説</a><a href="#asset" data-guide="asset" id="tab5"><i aria-hidden="true">💰</i>資産形成</a></nav></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.5.1</span></div><nav class="wrap tabs" aria-label="メニュー"><a href="#input" data-view="0" id="tab0"><i aria-hidden="true">✅</i>診断</a><a href="#tools" data-view="6" id="tab6"><i aria-hidden="true">🧮</i>ツール</a><a href="#guide" data-guide="" id="tab4"><i aria-hidden="true">📖</i>制度の解説</a><a href="#asset" data-guide="asset" id="tab5"><i aria-hidden="true">💰</i>資産形成</a></nav></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
 <div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
@@ -138,6 +138,7 @@ body{background:#fff}main{padding:0}.card{break-inside:avoid;border-color:#bbb}.
 <section class="screen" id="resultScreen" hidden aria-labelledby="resultTitle">
 <p class="eyebrow">いまの自分に、できること。</p><h1 id="resultTitle" tabindex="-1">数字の目安</h1>
 <p id="resultNotice" class="note warning"></p>
+<div class="card gain" id="gainCard"><h2>得する金額のまとめ</h2><p class="small">iDeCo（またはマッチング拠出）で税金が減る額の目安です。下の「試すiDeCo掛金」を変えると、ここも変わります。</p><div class="kpi" id="gainKpi"></div><ul class="gain-list" id="gainList"></ul><p class="footnote">今の税率と掛金が続くとした単純計算です。受け取るときにも税金の対象になります（退職所得控除などが使えます）。金額は将来を約束するものではありません。</p></div>
 <div class="card"><h2>iDeCoの上限と節税</h2><p class="small">iDeCo（イデコ）＝自分で積み立てる老後の年金。</p>
 <div class="compare"><div><span>2026年11月拠出分まで・月額上限</span><b id="beforeLimit"></b></div><div><span>2026年12月拠出分から・月額上限</span><b id="afterLimit"></b></div></div><p id="limitReason" class="help"></p>
 <p class="footnote">新上限は2027年1月引き落とし分から。加入条件・勤務先制度を確認してください。</p>
@@ -706,6 +707,27 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   const reasons = {'企業年金を確認':'会社の企業年金の有無が分かると確定します','勤務先の掛金額を確認':'会社の掛金額が分かると確定します。会社の掛金が多いほど下がります','加入条件を確認':'マッチング拠出・年金受給の有無が分かると確定します','60歳以上の加入条件を確認':'60歳以上の加入条件が分かると確定します'};
   const limitText = r => r.amount !== null ? yen(r.amount)+'／月' : r.upper === null || r.upper === undefined ? '計算できません' : `最大 ${yen(r.upper)}／月`;
+  // 得する金額のまとめ。手数料は計算ツールで入れた値（setsuzeiNavi.tools.v1 の rpFee）があれば使う。
+  function renderGain(result,i){
+    const kp=(label,value)=>{const d=document.createElement('div'),sp=document.createElement('span'),b=document.createElement('b');sp.textContent=label;b.textContent=value;d.append(sp,b);return d;};
+    const li=(html)=>{const l=document.createElement('li');l.append(...html);return l;};
+    let fee=null;try{const t=JSON.parse(localStorage.getItem('setsuzeiNavi.tools.v1')||'null');const f=Number(t?.rpFee);if(t?.rpFee!==''&&f>0)fee=f;}catch{}
+    const y=result.simpleSaving, years=i.age<60?result.yearsTo60:0, items=[];
+    if(y===null){$('gainKpi').replaceChildren(kp('年間の節税額','計算できません'));}
+    else{
+      const k=[kp('年間の節税額（目安）',yen(y)+'／年')];
+      if(fee!==null)k.push(kp('手数料を引いた残り',yen(y-fee*12)+'／年'));
+      if(years>0&&y>0)k.push(kp(`60歳まで${years}年続けると`,yen((fee!==null?y-fee*12:y)*years)));
+      $('gainKpi').replaceChildren(...k);
+    }
+    if(result.monthly) items.push(li([`掛金 月${result.monthly.toLocaleString('ja-JP')}円（年${(result.monthly*12).toLocaleString('ja-JP')}円）が所得から差し引かれ、その分の所得税と住民税が減ります。`]));
+    if(y===0&&result.monthly) items.push(li(['今の入力では課税される所得がないため、節税額は0円です。']));
+    if(fee===null){const a=document.createElement('a');a.href='#tool-priority';a.dataset.toolLink='tool-priority';a.textContent='計算ツールで手数料を入れる';items.push(li(['iDeCoは口座の手数料が自己負担です（マッチング拠出は会社負担が多い）。',a,'と、差し引いた額も出ます。']));}
+    else items.push(li([`手数料は計算ツールで入れた 月${fee.toLocaleString('ja-JP')}円 を使っています。`]));
+    items.push(li(['NISA：増えた分に税金がかからない制度です。どれだけ得かは運用の結果で変わるため、金額は出していません。']));
+    items.push(li(['ふるさと納税：税金の前払いで、節税ではありません。自己負担2,000円で返礼品を受け取れる上限の目安は、下の「ふるさと納税の上限」にあります。']));
+    $('gainList').replaceChildren(...items);
+  }
   function render() {
     const result = C.calculate(read()); latest = result;
     fields.forEach(el=>el.removeAttribute('aria-invalid'));
@@ -718,6 +740,7 @@ window.addEventListener('DOMContentLoaded', () => {
         text('orderNotice',msg+' 順番の表示を止めています。修正してください。');$('orderList').replaceChildren();
         text('resultNotice',msg+' 数値の表示を止めています。修正してください。');
         for(const id of ['beforeLimit','afterLimit','usedMonthly','saving','donationBase','donationIdeco','donationMortgage'])text(id,'入力を確認');
+        $('gainKpi').replaceChildren();$('gainList').replaceChildren();
         text('savingDetail','');text('allocation','入力を修正してから目安を確認してください。');
       }
       return false;
@@ -738,6 +761,7 @@ window.addEventListener('DOMContentLoaded', () => {
     text('beforeLimit',limitText(result.before)); text('afterLimit',limitText(result.after));
     text('limitReason',result.before.amount===null||result.after.amount===null ? '「最大」は、会社の掛金が0円で加入条件を満たす場合の上限です。'+(reasons[result.before.status]||reasons[result.after.status]||'')+'。給与明細や社内の福利厚生の案内、人事・総務で確認できます。' : '');
     text('usedMonthly',yen(result.monthly)+'／月'+(result.tentative&&result.monthly!==null?'（仮）':''));text('saving',yen(result.simpleSaving)+'／年');
+    renderGain(result,i);
     text('savingDetail',`所得税率は${result.base.incomeTax.rate*100}%で固定した簡易式です。税率の変化と調整控除を反映した、税額控除前の税額差は${yen(result.differenceSaving)}／年。住宅ローン控除がある場合の実際の節税額は確認が必要です。`);
     text('lockNotice',`原則60歳まで引き出せません。${i.age<60 ? `60歳まであと${result.yearsTo60}年。` : '60歳以上の受取開始時期は加入期間により異なります。'} 加入が遅い場合は受取開始も遅くなります。${result.base.incomeTax.rate<=.05 ? '所得税率5%以下では節税効果が小さめです。' : ''} ${result.before.status}／改正後：${result.after.status}。`);
     text('donationBase',yen(result.donation.baseline));text('donationIdeco',yen(result.donation.withIdeco));
