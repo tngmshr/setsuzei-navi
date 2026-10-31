@@ -267,6 +267,11 @@ test('今年の寄付だけを合計し、上限までの残りと超過を求�
   assert.equal(C.furusatoProgress(log,2026,20000).remaining,0);
   assert.equal(JSON.stringify(log),before);
 });
+test('ふるさと納税ナビの保存形式（limit と items）をそのまま読める',()=>{
+  const saved={limit:60000,items:[{id:'a',city:'A町',amount:20000,date:'2026-03-01',one:false},{id:'b',city:'B市',amount:15000,date:'2025-12-01',one:true}]};
+  assert.deepEqual(C.furusatoProgress(saved,2026,50000),{count:1,total:20000,limit:50000,remaining:30000,exceeded:false});
+  assert.equal(C.furusatoProgress({limit:1},2026,0).count,0);
+});
 test('寄付記録の欠損・壊れた日付や金額・未確認の上限を扱う',()=>{
   for(const value of [null,{},'',undefined])assert.equal(C.furusatoProgress(value,2026,0).count,0);
   const log=[null,{}, {date:'2026-02-30',amount:100},{date:'2026-13-01',amount:100},{date:'2026-1-01',amount:100},{date:'2026-01-01',amount:'100'},{date:'2026-01-01',amount:-1},{date:'2026-01-01',amount:0},{date:'2026-01-01',amount:NaN},{date:'2026-01-01',amount:1.5}];

@@ -358,7 +358,8 @@
   }
   // 寄付記録は日付（YYYY-MM-DD）と円単位の金額の配列。壊れた行は集計しない。
   function furusatoProgress(log, year, limit) {
-    const rows = Array.isArray(log) ? log : [];
+    // ふるさと納税ナビは {limit, items:[…]} の形で保存する。配列だけでも受け付ける。
+    const rows = Array.isArray(log) ? log : Array.isArray(log?.items) ? log.items : [];
     const valid = rows.filter(r => {
       if (!r || typeof r.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(r.date) || !Number.isSafeInteger(r.amount) || r.amount <= 0) return false;
       const d = new Date(r.date + 'T00:00:00Z');
