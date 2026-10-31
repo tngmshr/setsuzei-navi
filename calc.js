@@ -21,6 +21,17 @@
     const base = Math.max(0, amount * row[1] - row[2]);
     return { taxable:amount, rate:row[1], base, total:Math.floor(base * (1 + p.tax.surtax)) };
   }
+  // 退職所得控除と退職所得の目安。勤続年数の1年未満の端数は切り上げる。
+  function retirementDeduction(years, disability = false, p = P) {
+    const r = p.retirement, y = Math.max(1, Math.ceil(years));
+    const base = y <= r.longYears ? Math.max(r.minimum, r.perYear * y) : r.longBase + r.perYearLong * (y - r.longYears);
+    return base + (disability ? r.disability : 0);
+  }
+  function retirementIncome(amount, years, disability = false, p = P) {
+    const deduction = retirementDeduction(years, disability, p);
+    return { deduction, income: Math.floor(Math.max(0, amount - deduction) * p.retirement.half / 1000) * 1000,
+      short: Math.ceil(years) <= p.retirement.shortYears };
+  }
   const numberFields = {
     salary:[0,100000000,false], age:[18,100,true], under16:[0,20,true], teen:[0,20,true], student:[0,20,true],
     dc:[0,200000,false], db:[0,200000,false], social:[0,100000000,false], mortgageAnnual:[0,10000000,false],
@@ -28,7 +39,8 @@
   };
   const choices = { spouse:['none','dependent','dual'], pension:['none','db','dc','both','unknown'],
     mortgage:['no','yes'], matching:['no','yes','unknown'], benefits:['no','yes','unknown'],
-    history:['yes','no','unknown'], insurance:['no','yes'], medical:['no','yes'] };
+    history:['yes','no','unknown'], insurance:['no','yes'], medical:['no','yes'],
+    dcMatching:['no','yes','unknown'], dcSelect:['no','yes','unknown'] };
   function normalize(raw = {}, p = P) {
     const input = {}, assumed = [], errors = [];
     for (const [key, bounds] of Object.entries(numberFields)) {
@@ -231,5 +243,5 @@
     const q = new URLSearchParams({action:'TEMPLATE',text:e.title,dates:`${e.start}/${e.end}`,details:e.description});
     return 'https://calendar.google.com/calendar/render?'+q;
   }
-  return {salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
+  return {retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

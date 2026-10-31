@@ -24,7 +24,17 @@
     nisa: 'https://www.fsa.go.jp/common/ronten/202401/02.pdf',
     nisaAbout: 'https://www.fsa.go.jp/policy/nisa2/about/nisa2024/index.html',
     capitalGains: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm',
-    idecoOfficial: 'https://www.ideco-koushiki.jp/'
+    idecoOfficial: 'https://www.ideco-koushiki.jp/',
+    dcLimit: 'https://www.mhlw.go.jp/content/12500000/001739467.pdf',
+    dcReform: 'https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/nenkin/nenkin/kyoshutsu/2025kaisei.html',
+    dcSelect: 'https://www.mhlw.go.jp/content/000677933.pdf',
+    retirement: 'https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm',
+    dcLumpAdjust: 'https://www.nta.go.jp/publication/pamph/shotoku/0025005-010.pdf',
+    idecoReceive: 'https://www.ideco-koushiki.jp/guide/structure.html',
+    idecoRetire: 'https://www.ideco-koushiki.jp/retirement/',
+    kurisage: 'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-02.html',
+    kuriage: 'https://www.nenkin.go.jp/service/jukyu/seido/roureinenkin/kuriage-kurisage/20140421-01.html',
+    teikibin: 'https://www.nenkin.go.jp/section/faq/nteikibin/teikibin/gaiyou/20140602-01.html'
   };
   return {
     year: 2026, checked: '2026-10-31', sources,
@@ -73,12 +83,27 @@
     nisa: { annual:3600000, lifetime:18000000, tsumitate:1200000, growth:2400000, growthLifetime:12000000, minAge:18 },
     // 出典 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1463.htm 確認2026-10-31。上場株式等の譲渡益（所得税15%＋住民税5%、別に復興特別所得税）。
     capitalGains: { incomeTax:0.15, resident:0.05 },
+    // 出典 https://www.mhlw.go.jp/content/12500000/001739467.pdf 確認2026-10-31。企業型DCの月額上限（DB等の他制度掛金相当額を差し引く）。
+    // マッチング拠出＝上限−事業主の拠出額。事業主掛金を超えられない制限は2026-04に撤廃（2025kaisei.html 確認2026-10-31）。
+    dc: { before:55000, after:62000, effective:'2026-12', matchingRuleRemoved:'2026-04' },
+    // 出典 https://www.nta.go.jp/taxes/shiraberu/taxanswer/shotoku/1420.htm 確認2026-10-31。退職所得控除と1/2課税。
+    // 前年以前9年内の老齢一時金との重複排除は令和8年1月以後の老齢一時金から（0025005-010.pdf 確認2026-10-31）。
+    retirement: { perYear:400000, minimum:800000, longYears:20, longBase:8000000, perYearLong:700000,
+      disability:1000000, half:0.5, shortYears:5, shortCap:3000000, noFormRate:0.2042, dcLumpPriorYears:9 },
+    // 出典 https://www.ideco-koushiki.jp/guide/structure.html 確認2026-10-31。通算加入者等期間［年以上, 受け取り開始できる年齢］。
+    dcReceive: { start:60, end:75, ages:[[10,60],[8,61],[6,62],[4,63],[2,64],[0,65]], annuityMin:5, annuityMax:20, lateJoinYears:5 },
+    // 出典 https://www.ideco-koushiki.jp/retirement/ 確認2026-10-31。資格喪失から6か月以内に移換か脱退一時金の手続き。
+    dcTransfer: { months:6 },
+    // 出典 kurisage・kuriage（日本年金機構）確認2026-10-31。繰上げは昭和37年4月2日以降生まれの率。
+    pension: { base:65, defer:{ rate:0.007, maxAge:75, max:0.84 }, early:{ rate:0.004, minAge:60, max:0.24 } },
+    // 出典 https://www.nenkin.go.jp/section/faq/nteikibin/teikibin/gaiyou/20140602-01.html 確認2026-10-31。全期間の記録が届く年齢。
+    teikibin: { sealedAges:[35,45,59] },
     // 以下はこのアプリの判定の目安（制度値ではない）。生活防衛資金の月数、60歳までの年数の注意ライン。
     rules: { reserveMonths:3, shortYears:5 },
     // 以下は制度値ではなく、このアプリの説明用仮定。社会保険料15%は実額ではない。
     assumptions: { salary:5000000, age:35, spouse:'none', under16:0, teen:0, student:0,
       pension:'none', socialRate:0.15, mortgage:'no', reserve:3, budget:30000, idecoMonthly:10000,
-      matching:'no', benefits:'no', history:'unknown', insurance:'no', medical:'no' }
+      matching:'no', benefits:'no', history:'unknown', insurance:'no', medical:'no', dcMatching:'unknown', dcSelect:'unknown' }
   };
 });
 

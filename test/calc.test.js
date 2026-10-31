@@ -178,3 +178,13 @@ test('順番：予算0円・税金がかからない人・該当控除',()=>{
   const f=rec({spouse:'dependent',insurance:'yes'});assert.match(f.nencho.reason,/扶養/);assert.match(f.nencho.reason,/生命保険料/);
   assert.equal(f.insurance.guide,'nencho');
 });
+// 退職所得控除（国税庁 No.1420 確認2026-10-31）
+test('退職所得控除の目安',()=>{
+  assert.equal(C.retirementDeduction(1),800000);
+  assert.equal(C.retirementDeduction(10.2),4400000); // 端数切り上げ11年×40万
+  assert.equal(C.retirementDeduction(20),8000000);
+  assert.equal(C.retirementDeduction(30),15000000);
+  assert.equal(C.retirementDeduction(30,true),16000000);
+  const r=C.retirementIncome(20000000,30);assert.equal(r.income,2500000);assert.equal(r.short,false);
+  assert.equal(C.retirementIncome(1000000,3).short,true);
+});
