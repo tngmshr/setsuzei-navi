@@ -384,5 +384,30 @@
       return {key, previous:before, current:now, difference:before === null || now === null ? null : now - before};
     });
   }
-  return {furusatoProgress, historySummary, compareHistory, requiredMonthly, pensionByAge, protectionGap, cashflow, retirementPriority, coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
+  // 平均余命と、今の年齢の人のうち4人に1人がまだ生きている年齢（生命表の生存数から求める）。
+  function lifeSpan(sex, age, p = P) {
+    const t = p.life[sex], a = Math.floor(age);
+    if (!t || !(a >= 0 && a <= 100)) return null;
+    const quarter = t.l.findIndex((v, k) => k >= a && v <= t.l[a] / 4);
+    return { e:t.e[a], average:a + t.e[a], quarter:quarter < 0 ? null : quarter };
+  }
+  // 医療費控除とセルフメディケーション税制の比較。medical は補てん後の医療費（対象の市販薬を含む）、otc はそのうち対象の市販薬。rate は所得税率。
+  function medicalChoice(medical, otc, income, rate, p = P) {
+    const m = p.medical, s = p.selfMed, cut = Math.min(m.floor, Math.floor(Math.max(0, income) * m.rate));
+    const effect = d => Math.floor(d * rate * (1 + p.tax.surtax)) + Math.floor(d * p.resident.rate);
+    const normal = Math.min(m.cap, Math.max(0, medical - cut)), self = Math.min(s.cap, Math.max(0, otc - s.floor));
+    const a = { deduction:normal, saving:effect(normal) }, b = { deduction:self, saving:effect(self) };
+    return { normal:a, self:b, better:a.saving === b.saving ? (a.saving ? 'same' : 'none') : a.saving > b.saving ? 'normal' : 'self', cut };
+  }
+  // DC・iDeCo の一時金と退職金を、同じ年に受け取る場合と、調整がかからないほど間隔を空けた場合の税の目安。
+  function lumpSumPlan(v, p = P) {
+    const tax = r => C_tax(r.income, p);
+    const together = retirementIncome(v.dc + v.lump, Math.max(v.dcYears, v.workYears), false, p);
+    const dc = retirementIncome(v.dc, v.dcYears, false, p), lump = retirementIncome(v.lump, v.workYears, false, p);
+    const t = { deduction:together.deduction, income:together.income, tax:tax(together), short:together.short };
+    const a = { deduction:dc.deduction + lump.deduction, income:dc.income + lump.income, tax:tax(dc) + tax(lump), short:dc.short || lump.short };
+    return { together:t, apart:a, difference:t.tax - a.tax, dcFirstGap:p.retirement.dcLumpPriorYears + 1, lumpFirstGap:p.dcAfterLumpYears + 1 };
+  }
+  function C_tax(income, p) { return incomeTax(income, p).total + Math.floor(income * p.resident.rate); }
+  return {lifeSpan, medicalChoice, lumpSumPlan, furusatoProgress, historySummary, compareHistory, requiredMonthly, pensionByAge, protectionGap, cashflow, retirementPriority, coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

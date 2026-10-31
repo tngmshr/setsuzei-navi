@@ -7,6 +7,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const num = id => { const v = $(id).value; return v === '' ? null : Number(v); };
   const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
   const kpi = (id, list) => $(id).replaceChildren(...list.map(([label, value]) => { const d = el('div'); d.append(el('span', '', label), el('b', '', value)); return d; }));
+  const en = v => v.toLocaleString('ja-JP') + '円';
   const manYen = v => (Math.round(v/1000)/10).toLocaleString('ja-JP') + '万円';
   let events = [];
 
@@ -44,7 +45,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // キャッシュフロー表
   function eventRow(e, i) {
     const row = el('div', 'ev-row');
-    const age = Object.assign(el('input'), {type:'number', min:18, max:90, inputMode:'numeric', value:e.age, placeholder:'年齢'}), name = Object.assign(el('input'), {type:'text', maxLength:20, value:e.name, placeholder:'例 車の買い替え'});
+    const age = Object.assign(el('input'), {type:'number', min:18, max:100, inputMode:'numeric', value:e.age, placeholder:'年齢'}), name = Object.assign(el('input'), {type:'text', maxLength:20, value:e.name, placeholder:'例 車の買い替え'});
     const amount = Object.assign(el('input'), {type:'number', min:0, max:100000, inputMode:'numeric', value:e.amount, placeholder:'万円'}), kind = el('select'), del = el('button', 'btn ev-del', '削除');
     age.setAttribute('aria-label', '年齢'); name.setAttribute('aria-label', '内容'); amount.setAttribute('aria-label', '金額（万円）'); kind.setAttribute('aria-label', '出費か収入か');
     kind.append(Object.assign(el('option', '', '出費'), {value:'out'}), Object.assign(el('option', '', '収入'), {value:'in'})); kind.value = e.kind; del.type = 'button';
@@ -56,18 +57,18 @@ window.addEventListener('DOMContentLoaded', () => {
   function renderEvents() { $('cfEvents').replaceChildren(...events.map(eventRow)); $('cfAdd').disabled = events.length >= 12; }
   function cashflow() {
     const main = C.calculate(U.read()), age = num('cfAge') ?? (main.valid ? main.input.age : 40), m = id => (num(id) ?? 0)*10000;
-    const retireAge = num('cfRetire') ?? 65, pensionAge = num('cfPensionAge') ?? 65;
-    $('cfAge').placeholder = main.valid ? main.input.age + '（診断の値）' : '例 40';
-    if (!(age >= 18 && age <= 89) || !(retireAge >= 40) || !(pensionAge >= 60)) { kpi('cfKpi', [['入力を確認', '—']]); $('cfChart').textContent = ''; $('cfTable').tBodies[0].replaceChildren(); return; }
+    const end = Math.round(num('cfEnd') ?? 90), retireAge = num('cfRetire') ?? 65, pensionAge = num('cfPensionAge') ?? 65;
+    $('cfAge').placeholder = main.valid ? String(main.input.age) : '例 40';
+    if (!(age >= 18 && age < end && end <= 100) || !(retireAge >= 40) || !(pensionAge >= 60)) { kpi('cfKpi', [['入力を確認', '—']]); $('cfChart').textContent = ''; $('cfTable').tBodies[0].replaceChildren(); return; }
     const ev = events.map(e => ({age:Number(e.age), name:e.name || (e.kind === 'in' ? '収入' : '出費'), amount:(Number(e.amount) || 0)*10000*(e.kind === 'in' ? -1 : 1)})).filter(e => e.age >= age && e.amount);
     if (m('cfLump')) ev.push({age:retireAge, name:'退職金', amount:-m('cfLump')});
     const rows = C.cashflow({age, income:m('cfIncome'), expense:m('cfExpense'), retireExpense:num('cfRetireExpense') === null ? null : m('cfRetireExpense'), savings:m('cfSavings'),
-      incomeGrowth:(num('cfIncomeGrowth') ?? 0)/100, expenseGrowth:(num('cfExpenseGrowth') ?? 0)/100, rate:(num('cfRate') ?? 0)/100, years:91 - age, retireAge, pensionAge, pension:m('cfPension'), events:ev});
+      incomeGrowth:(num('cfIncomeGrowth') ?? 0)/100, expenseGrowth:(num('cfExpenseGrowth') ?? 0)/100, rate:(num('cfRate') ?? 0)/100, years:end + 1 - age, retireAge, pensionAge, pension:m('cfPension'), events:ev});
     const low = rows.reduce((a, b) => b.balance < a.balance ? b : a), neg = rows.find(r => r.balance < 0), last = rows[rows.length - 1];
-    kpi('cfKpi', [['90歳の貯蓄', manYen(last.balance)], ['いちばん少ない年', `${low.age}歳 ${manYen(low.balance)}`], ['マイナスになる年', neg ? neg.age + '歳から' : '90歳までなし']]);
+    kpi('cfKpi', [[`${end}歳の貯蓄`, manYen(last.balance)], ['いちばん少ない年', `${low.age}歳 ${manYen(low.balance)}`], ['マイナスになる年', neg ? neg.age + '歳から' : `${end}歳までなし`]]);
     const W = 340, H = 200, L = 40, R = 6, T = 14, B = 26, max = Math.max(1, ...rows.map(r => r.balance)), min = Math.min(0, ...rows.map(r => r.balance));
     const y = v => T + (H - T - B)*(max - v)/(max - min), bw = (W - L - R)/rows.length;
-    const {svg, showTip} = chartBox('cfChart', W, H, `${age}歳から90歳までの貯蓄の推移。90歳で${manYen(last.balance)}。${neg ? neg.age + '歳でマイナスになります。' : 'マイナスになる年はありません。'}`);
+    const {svg, showTip} = chartBox('cfChart', W, H, `${age}歳から${end}歳までの貯蓄の推移。${end}歳で${manYen(last.balance)}。${neg ? neg.age + '歳でマイナスになります。' : 'マイナスになる年はありません。'}`);
     for (let k = 0; k <= 4; k++) { const v = min + (max - min)*k/4; svgEl('line', {x1:L, x2:W - R, y1:y(v), y2:y(v), stroke:'#e3e8e3'}, svg); svgEl('text', {x:L - 4, y:y(v) + 3, 'text-anchor':'end', class:'ax'}, svg).textContent = Math.round(v/10000).toLocaleString('ja-JP'); }
     svgEl('text', {x:L - 4, y:T - 4, 'text-anchor':'end', class:'ax'}, svg).textContent = '万円';
     svgEl('line', {x1:L, x2:W - R, y1:y(0), y2:y(0), stroke:'#8a9a92'}, svg);
@@ -135,6 +136,42 @@ window.addEventListener('DOMContentLoaded', () => {
     if (g.gap > 0) { svgEl('rect', {x:L + x(g.have) + 2, y:62, width:Math.max(0, x(g.gap) - 2), height:26, rx:4, fill:'none', stroke:'#b5761a', 'stroke-width':2, 'stroke-dasharray':'4 3'}, svg); svgEl('text', {x:Math.min(L + x(g.have) + x(g.gap)/2, W - 40), y:104, 'text-anchor':'middle', class:'lb'}, svg).textContent = '不足 ' + manYen(g.gap); }
   }
 
+  // 平均余命：診断の年齢を使う。「答えない」は男女とも出す。
+  function life() {
+    const main = C.calculate(U.read()), age = num('lfAge') ?? (main.valid ? main.input.age : null), sex = $('lfSex').value;
+    $('lfAge').placeholder = main.valid ? String(main.input.age) : '例 40';
+    const list = (sex === 'none' ? ['male', 'female'] : [sex]).map(s => [s, C.lifeSpan(s, age ?? -1)]);
+    if (!(age >= 18 && age <= 100) || list.some(([, r]) => !r)) { kpi('lfKpi', [['入力を確認', '—']]); $('lfUse').hidden = true; return; }
+    const name = {male:'男性', female:'女性'}, pre = s => sex === 'none' ? name[s] + '：' : '';
+    kpi('lfKpi', list.flatMap(([s, r]) => [[`${pre(s)}平均余命（平均でおよそ${Math.floor(r.average)}歳まで）`, r.e.toFixed(1) + '年'], [pre(s) + '4人に1人がまだ生きている年齢', r.quarter === null ? '100歳以上' : r.quarter + '歳']]));
+    const end = Math.min(100, Math.max(...list.map(([, r]) => r.quarter ?? 100)));
+    $('lfUse').hidden = !(end > age); $('lfUse').dataset.end = end; $('lfUse').textContent = `キャッシュフロー表を${end}歳までにする`;
+  }
+  $('lfUse').addEventListener('click', () => { $('cfEnd').value = $('lfUse').dataset.end; save(); all(); text('lfNote', `キャッシュフロー表の終わりを${$('cfEnd').value}歳にしました。`); });
+  // 受け取りの税金：同じ年と、間隔を空けた場合。
+  function receive() {
+    const m = id => (num(id) ?? 0)*10000, dcYears = num('rvDcYears') ?? 0, workYears = num('rvWorkYears') ?? 0, dc = m('rvDc'), lump = m('rvLump');
+    if (!(dcYears > 0 && workYears > 0 && dc >= 0 && lump >= 0 && dc + lump > 0)) { kpi('rvKpi', [['入力を確認', '—']]); $('rvNote').replaceChildren(); return; }
+    const r = C.lumpSumPlan({dc, dcYears, lump, workYears}), k = v => yen(Math.round(v/1000)*1000);
+    kpi('rvKpi', [['同じ年に受け取ると（税の目安）', k(r.together.tax)], ['間隔を空けて受け取ると', k(r.apart.tax)], [r.difference > 0 ? '間隔を空けると減る額' : '差', k(Math.max(0, r.difference))]]);
+    const notes = [`iDeCo・DCを先に受け取るなら、退職金はその${r.dcFirstGap}年以上あと（退職金の前年以前${P.retirement.dcLumpPriorYears}年内だと調整されます）。`,
+      `退職金を先に受け取るなら、iDeCo・DCはその${r.lumpFirstGap}年以上あと（前年以前${P.dcAfterLumpYears}年内だと調整されます）。`,
+      '間隔が足りないと、加入期間と勤続期間が重なる分だけ、後から受け取る方の控除が減ります（この計算には入れていません）。'];
+    if (r.together.short || r.apart.short) notes.push(`年数が${P.retirement.shortYears}年以下のものがあり、実際の税金はこれより多くなることがあります。`);
+    $('rvNote').replaceChildren(...notes.map(t => el('li', '', t)));
+  }
+  // 医療費控除とセルフメディケーション：総所得金額等は給与所得だけで近似する。
+  function medical() {
+    const main = C.calculate(U.read());
+    if (!main.valid) { kpi('mdKpi', [['まず診断の入力をしてください', '—']]); text('mdNote', ''); return; }
+    const total = num('mdTotal') ?? 0, otc = num('mdOtc') ?? 0;
+    if (!(total >= 0 && otc >= 0)) { kpi('mdKpi', [['入力を確認', '—']]); return; }
+    const r = C.medicalChoice(total, otc, C.salaryIncome(main.input.salary), main.base.incomeTax.rate);
+    const label = {normal:'医療費控除', self:'セルフメディケーション税制', same:'どちらも同じ', none:'どちらも控除なし'};
+    kpi('mdKpi', [[`医療費控除（控除${en(r.normal.deduction)}）で減る税金`, yen(r.normal.saving)], [`セルフメディケーション（控除${en(r.self.deduction)}）で減る税金`, yen(r.self.saving)], ['得な方（目安）', label[r.better]]]);
+    text('mdNote', `医療費控除は、医療費から${en(r.cut)}（${en(P.medical.floor)}か所得の${P.medical.rate*100}%の低い方）を引いた額で、最高${en(P.medical.cap)}。セルフメディケーション税制は、対象の市販薬から${en(P.selfMed.floor)}を引いた額で、最高${en(P.selfMed.cap)}。減る税金は所得税率${main.base.incomeTax.rate*100}%と住民税${P.resident.rate*100}%で計算した目安です。` + (otc > total ? '市販薬の額は、医療費の合計にも含めて入れてください。' : ''));
+  }
+
   // 保存・印刷・見直し
   const status = t => text('dataStatus', t);
   $('exportData').addEventListener('click', () => {
@@ -169,7 +206,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   load(); renderEvents();
   $('cfAdd').addEventListener('click', () => { events.push({age:'', name:'', amount:'', kind:'out'}); renderEvents(); save(); $('cfEvents').lastElementChild.firstElementChild.focus(); });
-  const all = () => { priority(); cashflow(); goal(); pension(); protect(); U.renderHistory(); };
+  const all = () => { priority(); cashflow(); goal(); pension(); protect(); life(); receive(); medical(); U.renderHistory(); };
   for (const i of inputs) i.addEventListener('input', () => { save(); all(); });
   document.getElementById('conditions').addEventListener('input', () => { priority(); cashflow(); });
   U.onShow = n => { if (n === U.toolsIndex) all(); };

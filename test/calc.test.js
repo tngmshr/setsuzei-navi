@@ -2,6 +2,34 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const C=require('../calc.js'), P=require('../params.js');
+test('平均余命と4人に1人が生きている年齢',()=>{
+  const m=C.lifeSpan('male',65), f=C.lifeSpan('female',65);
+  assert.equal(m.e,19.68); assert.equal(f.e,24.52);
+  assert.ok(m.quarter>m.average && m.quarter<=100); assert.ok(f.quarter>m.quarter);
+  const t=P.life.male.l; assert.ok(t[m.quarter]<=t[65]/4 && t[m.quarter-1]>t[65]/4);
+  assert.equal(C.lifeSpan('none',65),null);
+});
+test('医療費控除とセルフメディケーションの比較',()=>{
+  // 総所得金額等300万円：医療費15万円→控除5万円。市販薬3万円→控除1.8万円。所得税10%。
+  const r=C.medicalChoice(150000,30000,3000000,0.10);
+  assert.equal(r.normal.deduction,50000); assert.equal(r.self.deduction,18000);
+  assert.equal(r.normal.saving,Math.floor(50000*0.1*1.021)+5000); assert.equal(r.better,'normal');
+  // 総所得金額等150万円：足切りは5%の7.5万円。
+  assert.equal(C.medicalChoice(80000,0,1500000,0.05).normal.deduction,5000);
+  // 医療費が少なく市販薬が多いとセルフメディケーション。上限は8.8万円と200万円。
+  assert.equal(C.medicalChoice(90000,60000,3000000,0.1).better,'self');
+  assert.equal(C.medicalChoice(0,200000,3000000,0.1).self.deduction,88000);
+  assert.equal(C.medicalChoice(5000000,0,3000000,0.1).normal.deduction,2000000);
+  assert.equal(C.medicalChoice(0,0,3000000,0.1).better,'none');
+});
+test('一時金と退職金：同じ年と間隔を空けた場合',()=>{
+  // DC 500万円（加入20年）、退職金 1,500万円（勤続30年）。
+  const r=C.lumpSumPlan({dc:5000000,dcYears:20,lump:15000000,workYears:30});
+  assert.equal(r.together.deduction,15000000); assert.equal(r.together.income,2500000);
+  assert.equal(r.apart.deduction,8000000+15000000); assert.equal(r.apart.income,0);
+  assert.equal(r.apart.tax,0); assert.ok(r.difference>0);
+  assert.equal(r.dcFirstGap,10); assert.equal(r.lumpFirstGap,20);
+});
 /* 期待値の手計算（2026-10-31確認）
  * 給与所得の表 https://www.nta.go.jp/publication/pamph/gensen/nencho2026/pdf/114.pdf
  * 基礎・扶養・税率 https://www.nta.go.jp/publication/pamph/gensen/nencho2026/pdf/115.pdf
