@@ -180,6 +180,17 @@
       const figures = result.monthly ? [{ label:'試算の掛金', value:result.monthly, unit:'月' }, { label:'節税の目安', value:result.simpleSaving, unit:'年' }] : [];
       list.push(item('ideco',label,'iDeCo（イデコ）',reason,figures));
     }
+    // 会社の年金（企業型DC・DB）。会社ごとに条件が違うため、確認先を示す。
+    if (input.pension === 'dc' || input.pension === 'both') {
+      let label = 'now', reason = '加入者専用サイトで、会社の掛金（事業主掛金）・運用先・iDeCoの拠出可能見込み額を確かめます。運用先を選ばないままだと、規約で決めた商品で運用されます。';
+      if (input.matching === 'yes') { label = 'ok'; reason = 'マッチング拠出を利用中です。この間はiDeCoと併用できません。掛金と運用先を年1回見直します。'; }
+      else if (input.dcMatching === 'yes') reason += 'マッチング拠出とiDeCoはどちらか一方です。上限・選べる商品・手数料を比べて選びます。';
+      reason += `${p.dc.effective.replace('-','年')}月から、会社の掛金とあわせた上限は月${yenText(p.dc.after)}になります。`;
+      list.push(item('dc',label,'企業型DC（会社の年金）を確認',reason,[],'asset-dc'));
+    } else if (input.pension === 'db') {
+      list.push(item('db','ready','DB（確定給付企業年金）を確認','会社が給付を決める年金です。iDeCoの上限は「他制度掛金相当額」で変わるので、勤務先に額を確かめます。',[],'asset-db'));
+    }
+    if (input.dcSelect === 'yes') list.push(item('dcselect','ready','選択制DCの影響を確認','給与の一部を掛金に回すしくみです。掛金に回した分は給与でなくなるため、社会保険・雇用保険の給付に影響することがあります。会社の説明で確かめてから選びます。',[],'asset-dc'));
     if (input.insurance === 'yes') list.push(item('insurance','now','生命保険料控除','年末調整で証明書を出すだけで使えます。控除のために新しく保険に入る必要はありません。',[],'nencho'));
     if (input.medical === 'yes') list.push(item('medical','later','医療費控除','翌年2〜3月の確定申告で。確定申告すると、ふるさと納税のワンストップ特例は使えなくなるので寄付も一緒に申告します。',[],'nencho'));
     if (input.mortgage === 'yes') list.push(item('mortgage','now','住宅ローン控除','初年度は確定申告、2年目以降は年末調整で。ふるさと納税の上限が変わることがあります。',[],'nencho'));

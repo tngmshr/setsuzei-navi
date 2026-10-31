@@ -25,13 +25,26 @@
 </script>
 <style>
 :root{--ink:#1c332e;--muted:#52665f;--green:#185b4b;--soft:#e4efe9;--line:#d8e0d8;--paper:#fff;--bg:#f5f5ef;--amber:#785219;--warn:#fff2d8;font-family:system-ui,-apple-system,"BIZ UDPGothic","Yu Gothic",sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.75}
-*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty,#orderNotice:empty{display:none}.guide-link{font-size:.82rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}.order{list-style:none;margin:0;padding:0;counter-reset:ord}.order li{counter-increment:ord;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 16px 10px;margin-bottom:12px;min-width:0}.order .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.order .head:before{content:counter(ord);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}.order h2{font-size:1.08rem;margin:0;flex:1;min-width:8em}.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}.b-now{background:var(--green);color:#fff}.b-ready{background:var(--warn);color:var(--amber)}.b-later{background:#e6ebf2;color:#34495e}.b-na{background:#eceae6;color:#5f5a52}.b-ok{background:var(--soft);color:var(--green)}.order p{margin:0 0 8px;font-size:.93rem}.figs{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 6px;font-size:.88rem}.figs b{color:var(--green);font-size:1.05rem}.order .more{font-size:.88rem;font-weight:700;background:none;border:0;color:var(--green);padding:8px 0;text-decoration:underline;text-underline-offset:4px}.toc ul{margin:0;padding-left:1.2em;columns:2;column-gap:16px}.toc li{margin-bottom:6px;break-inside:avoid}.guide summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0}.guide summary::-webkit-details-marker{display:none}.guide summary:after{content:"＋";color:var(--green);font-weight:700;font-size:1.2rem}.guide[open] summary:after{content:"－"}.guide summary h2{margin:0;font-size:1.2rem}.guide h3{margin:16px 0 6px;color:var(--green);font-size:1rem}.guide ul{padding-left:1.2em;margin:0 0 8px}.guide li{margin-bottom:6px}.official{font-size:.86rem;margin-top:14px}.table-wrap{overflow-x:auto;margin-block:10px}.cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.84rem}.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:8px 5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.cmp thead th{color:var(--green)}.cmp tbody th{width:30%;font-weight:700;color:var(--muted)}.words dt{font-weight:700;color:var(--ink);font-size:.95rem;margin-top:12px}.words dd{font-weight:400;font-size:.9rem}.privacy{background:#e8f3ec;border:2px solid var(--green);border-radius:16px;padding:18px 18px 12px;margin-block:18px}.privacy h2{color:var(--green);font-size:1.25rem;margin-bottom:10px}.privacy ul{margin:0 0 10px;padding-left:1.2em}.privacy li{margin-bottom:8px;line-height:1.6}@media(max-width:420px){.wrap{padding-inline:16px}.card{padding:17px}.grid{gap:12px}h1{font-size:1.7rem}.money{font-size:1.6rem}.edition{font-size:.7rem}.brand{font-size:.83rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty,#orderNotice:empty{display:none}.guide-link{font-size:.82rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}.order{list-style:none;margin:0;padding:0;counter-reset:ord}.order li{counter-increment:ord;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 16px 10px;margin-bottom:12px;min-width:0}.order .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.order .head:before{content:counter(ord);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}.order h2{font-size:1.08rem;margin:0;flex:1;min-width:8em}.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}.b-now{background:var(--green);color:#fff}.b-ready{background:var(--warn);color:var(--amber)}.b-later{background:#e6ebf2;color:#34495e}.b-na{background:#eceae6;color:#5f5a52}.b-ok{background:var(--soft);color:var(--green)}.order p{margin:0 0 8px;font-size:.93rem}.figs{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 6px;font-size:.88rem}.figs b{color:var(--green);font-size:1.05rem}.order .more{font-size:.88rem;font-weight:700;background:none;border:0;color:var(--green);padding:8px 0;text-decoration:underline;text-underline-offset:4px}.toc ul{margin:0;padding-left:1.2em;columns:2;column-gap:16px}.toc li{margin-bottom:6px;break-inside:avoid}.guide summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0}.guide summary::-webkit-details-marker{display:none}.guide summary:after{content:"＋";color:var(--green);font-weight:700;font-size:1.2rem}.guide[open] summary:after{content:"－"}.guide summary h2{margin:0;font-size:1.2rem}.guide h3{margin:16px 0 6px;color:var(--green);font-size:1rem}.guide ul{padding-left:1.2em;margin:0 0 8px}.guide li{margin-bottom:6px}.head-links{display:flex;gap:6px;flex-shrink:0}
+.term{text-decoration:underline dotted;text-underline-offset:3px;color:inherit;font-weight:600}
+.table-wrap{overflow-x:auto;margin:6px 0 10px}
+.asset-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:0}
+.asset-table th,.asset-table td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.asset-table th{background:var(--soft,transparent);font-weight:700}
+.calc-box{border:1px solid var(--line);border-radius:12px;padding:12px;margin:14px 0}
+.calc-box h3{margin-top:0}
+.calc-out{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:10px 0}
+.calc-out dt{font-size:.88rem}.calc-out dd{margin:0;font-weight:700;text-align:right}
+.check{display:flex;gap:8px;align-items:center;font-size:.9rem}
+.checklist li,.steps-list li{margin-bottom:6px}
+@media(max-width:400px){.edition{display:none}}
+.official{font-size:.86rem;margin-top:14px}.table-wrap{overflow-x:auto;margin-block:10px}.cmp{width:100%;border-collapse:collapse;table-layout:fixed;font-size:.84rem}.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:8px 5px;text-align:left;vertical-align:top;overflow-wrap:anywhere}.cmp thead th{color:var(--green)}.cmp tbody th{width:30%;font-weight:700;color:var(--muted)}.words dt{font-weight:700;color:var(--ink);font-size:.95rem;margin-top:12px}.words dd{font-weight:400;font-size:.9rem}.privacy{background:#e8f3ec;border:2px solid var(--green);border-radius:16px;padding:18px 18px 12px;margin-block:18px}.privacy h2{color:var(--green);font-size:1.25rem;margin-bottom:10px}.privacy ul{margin:0 0 10px;padding-left:1.2em}.privacy li{margin-bottom:8px;line-height:1.6}@media(max-width:420px){.wrap{padding-inline:16px}.card{padding:17px}.grid{gap:12px}h1{font-size:1.7rem}.money{font-size:1.6rem}.edition{font-size:.7rem}.brand{font-size:.83rem}}@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 </style>
 <script src="params.js" defer></script>
 <script src="calc.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.2</span><a class="guide-link" href="#guide" data-guide="">📖 解説</a></div></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.2</span><span class="head-links"><a class="guide-link" href="#asset" data-guide="asset">💰 資産形成</a><a class="guide-link" href="#guide" data-guide="">📖 解説</a></span></div></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
 <div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
@@ -55,6 +68,8 @@
 <div class="grid"><div class="field"><label for="dc">DC事業主掛金<br>（月額の目安）</label><div class="unit"><input id="dc" name="dc" type="number" min="0" max="200000" step="1" inputmode="numeric" placeholder="不明は空欄"><span>円</span></div></div><div class="field"><label for="db">他制度掛金相当額<br>（月額の目安）</label><div class="unit"><input id="db" name="db" type="number" min="0" max="200000" step="1" inputmode="numeric" placeholder="不明は空欄"><span>円</span></div></div></div>
 <span class="help">会社が負担する額とDB等の換算額。企業年金ありで空欄の場合は、上限を推測しません。</span>
 <details><summary>iDeCoの加入条件も確認する</summary><div><div class="field"><label for="matching">企業型DCでマッチング拠出を利用</label><select id="matching" name="matching"><option value="">未入力（なしと仮定）</option><option value="no">なし</option><option value="yes">あり</option><option value="unknown">分からない</option></select><span class="help">マッチング拠出＝企業型DCへ自分も掛金を追加すること。iDeCoとの併用はできません。</span></div>
+<div class="field"><label for="dcMatching">会社のDCにマッチング拠出の制度がある</label><select id="dcMatching" name="dcMatching"><option value="">未入力（分からないと仮定）</option><option value="no">ない</option><option value="yes">ある</option><option value="unknown">分からない</option></select><span class="help">制度があっても使っていなければiDeCoと比べて選べます。</span></div>
+<div class="field"><label for="dcSelect">選択制DC（給与の一部を掛金にするか選ぶ）</label><select id="dcSelect" name="dcSelect"><option value="">未入力（分からないと仮定）</option><option value="no">ちがう</option><option value="yes">選択制DC</option><option value="unknown">分からない</option></select></div>
 <div class="field"><label for="benefits">老齢基礎年金・iDeCoの老齢給付金を受給</label><select id="benefits" name="benefits"><option value="">未入力（なしと仮定）</option><option value="no">受給していない</option><option value="yes">受給している</option><option value="unknown">分からない</option></select></div>
 <div class="field"><label for="history">60歳以上：厚生年金加入、iDeCo加入歴・移換等の要件を確認済み</label><select id="history" name="history"><option value="">未確認</option><option value="yes">勤務先・運営管理機関で確認済み</option><option value="no">要件を満たさない</option><option value="unknown">分からない</option></select><span class="help">改正前は原則65歳未満の公的年金被保険者等。改正後の60歳以上も誰でも加入できるわけではありません。</span></div></div></details>
 </fieldset></div>
@@ -200,6 +215,208 @@
 </dl></div></details>
 <p class="footnote">一般的な制度の説明です。個別の商品や金融機関、配分はおすすめしません。最新の条件は公式ページで確認してください。</p>
 </section>
+<section class="screen" id="assetScreen" hidden aria-labelledby="assetTitle">
+<p class="eyebrow">将来のお金を、置き場所から。</p><h1 id="assetTitle" tabindex="-1">資産形成</h1>
+<p class="lead">会社の年金（企業型DC・DB）、iDeCo、公的年金、受け取り方まで、会社員の資産形成を順番にまとめました。数字は<span data-p="year" data-f="raw"></span>年の制度（確認日 <span data-p="checked" data-f="date"></span>）です。<a class="term" href="#asset" data-guide="asset-words">むずかしい言葉は「用語のやさしい解説」</a>で言いかえています。</p>
+<nav class="card toc" aria-label="資産形成の目次"><h2>目次</h2><ul>
+<li><a href="#asset" data-guide="asset-map">全体像とお金の置き場所</a></li><li><a href="#asset" data-guide="asset-dc">企業型DC（会社の年金）</a></li><li><a href="#asset" data-guide="asset-db">DB・退職金</a></li><li><a href="#asset" data-guide="asset-ideco">iDeCoとの併用と改正</a></li><li><a href="#asset" data-guide="asset-invest">運用の基礎</a></li><li><a href="#asset" data-guide="asset-pension">公的年金</a></li><li><a href="#asset" data-guide="asset-receive">受け取り方と税金</a></li><li><a href="#asset" data-guide="asset-change">転職・退職のとき</a></li><li><a href="#asset" data-guide="asset-check">会社の制度で確認すること</a></li><li><a href="#asset" data-guide="asset-words">用語のやさしい解説</a></li></ul></nav>
+
+<details class="card guide" id="asset-map"><summary><h2>全体像とお金の置き場所</h2></summary><div>
+<h3>一言でいうと</h3><p>お金は「いつ使うか」で置き場所を分けます。すぐ使うお金は現金、いつでも使える将来のお金はNISA、老後まで使わないお金は<a class="term" href="#asset" data-guide="asset-w-dc">DC</a>やiDeCoが一般的な目安です。</p>
+<h3>時間軸で分ける</h3>
+<div class="table-wrap"><table class="asset-table"><thead><tr><th>使う時期</th><th>一般的な置き場所</th><th>理由</th></tr></thead><tbody>
+<tr><td>いつでも（急な出費）</td><td>預金などの現金</td><td>生活防衛資金。値下がりせず、すぐ使える。</td></tr>
+<tr><td>数年以内（車・引っ越し・教育など）</td><td>預金など</td><td>使う時期に値下がりしていると困るため。</td></tr>
+<tr><td>時期は決めていない将来</td><td>NISA</td><td>利益に税金がかからず、いつでも売って引き出せる。</td></tr>
+<tr><td>老後（原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>以降）</td><td>企業型DC・iDeCo</td><td>掛金が所得から差し引かれ税金が減るが、原則<span data-p="idecoEligibility.firstWithdrawalAge" data-f="age"></span>まで引き出せない。</td></tr>
+</tbody></table></div>
+<h3>会社員の年金は「階段」</h3><ul>
+<li>1段目：国民年金（基礎年金）。2段目：厚生年金。ここまでが<a class="term" href="#asset" data-guide="asset-pension">公的年金</a>で、給与から保険料が引かれています。</li>
+<li>3段目：会社の年金（企業型DC・DB）。会社によってあるかどうか、中身が違います。</li>
+<li>その上に、自分で選ぶ iDeCo・NISA・預金があります。</li></ul>
+<h3>順番の考え方</h3><ol class="steps-list">
+<li>生活防衛資金を現金で確保する。</li><li>会社の年金で、自分がすでに入っている制度を確かめる（<a href="#asset" data-guide="asset-check">チェックリスト</a>）。</li><li>NISAとiDeCo（またはマッチング拠出）を、使う時期と税金の効果で選ぶ。</li><li>受け取り方と時期は50代から早めに確かめる。</li></ol>
+<p class="actions"><button type="button" class="btn" data-guide="reserve">生活防衛資金の解説</button> <button type="button" class="btn" data-guide="compare">NISAとiDeCoの違い</button></p>
+</div></details>
+
+<details class="card guide" id="asset-dc"><summary><h2>企業型DC（会社の年金）</h2></summary><div>
+<h3>一言でいうと</h3><p>会社が毎月お金（<a class="term" href="#asset" data-guide="asset-w-jigyonushi">事業主掛金</a>）を出し、そのお金の運用先を自分で選ぶ年金です。将来もらえる額は運用の結果で変わります。</p>
+<h3>しくみ</h3><ul>
+<li>掛金の月の上限は、<span data-p="dc.effective" data-f="ym"></span>から<b data-p="dc.after" data-f="man"></b>（それまでは<span data-p="dc.before" data-f="man"></span>）。DBもある会社では、DBの分（<a class="term" href="#asset" data-guide="asset-w-tasedo">他制度掛金相当額</a>）を差し引いた範囲になります。</li>
+<li>運用先は、会社が用意した商品の中から選びます（<a class="term" href="#asset" data-guide="asset-w-genpon">元本確保型</a>や<a class="term" href="#asset" data-guide="asset-w-toshin">投資信託</a>）。いつでも選び直せます。</li>
+<li>残高・掛金・運用先は<a class="term" href="#asset" data-guide="asset-w-site">加入者専用サイト</a>で確認・変更します。</li>
+<li>受け取りは原則<span data-p="dcReceive.start" data-f="age"></span>以降。転職しても資産は持ち運べます（<a href="#asset" data-guide="asset-change">転職・退職のとき</a>）。</li></ul>
+<h3>マッチング拠出（自分も上乗せ）</h3><ul>
+<li>会社の掛金に、自分の給与から掛金を上乗せするしくみです。会社のDCの規約に定めがある場合だけ使えます。</li>
+<li>自分の掛金は全額が所得控除になり、税金が減ります。</li>
+<li>上限は「月の上限<span data-p="dc.after" data-f="man"></span>−会社の拠出額」（<span data-p="dc.effective" data-f="ym"></span>から）。たとえば会社の掛金が月2.5万円なら、自分の分は3.7万円まで（厚生労働省の資料の例）。</li>
+<li>以前あった「自分の掛金は会社の掛金を超えられない」という制限は、<span data-p="dc.matchingRuleRemoved" data-f="ym"></span>になくなりました。</li>
+<li>マッチング拠出を使っている間は、iDeCoには入れません。どちらか一方を選びます。</li></ul>
+<h3>選択制DC</h3><ul>
+<li>給与の一部を「DCの掛金にするか、給与で受け取るか」を自分で選ぶしくみです（<a class="term" href="#asset" data-guide="asset-w-sentaku">選択制DC</a>）。</li>
+<li>掛金にした分は給与ではなくなるため、税金や社会保険料が下がることがある一方、社会保険・雇用保険の給付に影響することがあります。会社はこの影響を含めて説明することになっています。</li>
+<li>選ぶ前に、会社の説明資料で手取りと将来の給付への影響を確かめます。</li></ul>
+<h3>注意点・デメリット</h3><ul><li>原則<span data-p="dcReceive.start" data-f="age"></span>まで引き出せません。</li><li>投資信託を選べば値下がりすることがあります。元本確保型だけでは、物価の上昇に追いつかないことがあります。</li><li>運用先を一度も選ばないと、会社が決めた方法で運用されることがあります。中身を一度確かめます。</li></ul>
+<h3>よくある誤解</h3><ul><li>「会社が運用してくれる」→ 運用先を選ぶのは自分です（会社が運用するのはDB）。</li><li>「DCがあるからiDeCoには入れない」→ 条件を満たせば併用できます（<a href="#asset" data-guide="asset-ideco">次の章</a>）。</li></ul>
+<p class="official">公式ページ：<a data-src="dcLimit" target="_blank" rel="noopener noreferrer">厚生労働省：企業型DCの拠出限度額の引き上げ</a>／<a data-src="dcReform" target="_blank" rel="noopener noreferrer">厚生労働省：確定拠出年金の制度改正</a>／<a data-src="dcSelect" target="_blank" rel="noopener noreferrer">厚生労働省：確定拠出年金の法令解釈（選択制の説明）</a></p>
+</div></details>
+
+<details class="card guide" id="asset-db"><summary><h2>DB・退職金</h2></summary><div>
+<h3>一言でいうと</h3><p><a class="term" href="#asset" data-guide="asset-w-db">DB</a>は、会社が将来の給付額を約束し、会社が運用する年金です。運用の結果で自分の受け取りは変わりません。</p>
+<h3>しくみ</h3><ul>
+<li>DBに掛金の上限はありません。ただしDBの分は「<a class="term" href="#asset" data-guide="asset-w-tasedo">他制度掛金相当額</a>」という額に換算され、DCやiDeCoの上限から差し引かれます。</li>
+<li>他制度掛金相当額は会社ごとに違います。勤務先（人事・年金の担当）で確かめます。</li>
+<li>退職一時金（会社から直接もらう退職金）があるか、DB・DCのどれで払われるかも会社ごとに違います。</li>
+<li>退職金やDBの一時金は「退職所得」として、税金が軽くなるしくみがあります（<a href="#asset" data-guide="asset-receive">受け取り方と税金</a>）。</li></ul>
+<h3>確かめること</h3><ul><li>給付の見込み額と、受け取れる年齢・条件（勤続年数など）。</li><li>一時金と年金を選べるか。</li><li>途中で退職したときの扱い。</li></ul>
+<p class="official">公式ページ：<a data-src="idecoReform" target="_blank" rel="noopener noreferrer">厚生労働省：他制度掛金相当額とiDeCoの上限</a></p>
+</div></details>
+
+<details class="card guide" id="asset-ideco"><summary><h2>iDeCoとの併用と改正</h2></summary><div>
+<h3>一言でいうと</h3><p>会社の年金がある人もiDeCoに入れます。<span data-p="idecoAfter.effective" data-f="ym"></span>拠出分から、会社の年金とiDeCoは同じ上限<b data-p="idecoAfter.combined" data-f="man"></b>の中で分け合う形になります。</p>
+<h3>企業型DCがある人がiDeCoに入る条件</h3><ul>
+<li>会社のDCの掛金が、毎月の拠出で上限内であること。</li>
+<li>iDeCoの掛金が「<span data-p="idecoAfter.combined" data-f="man"></span>−会社の拠出額（DCの事業主掛金＋他制度掛金相当額）」以内であること。最低は月<span data-p="idecoContribution.minimum" data-f="yen"></span>です。</li>
+<li>マッチング拠出を使っていないこと。</li></ul>
+<h3>いくら入れられるか</h3><ul>
+<li>見込み額は企業型DCの<a class="term" href="#asset" data-guide="asset-w-site">加入者専用サイト</a>で確認できます。DBの分は勤務先に確かめます。</li>
+<li>このアプリの入力画面で会社の掛金を入れると、改正前と改正後の上限の目安を出します。</li>
+<li>会社の拠出額が多いと、iDeCoの上限が小さくなったり、入れなくなったりします。</li></ul>
+<h3>マッチング拠出とiDeCo、どちらにする？</h3>
+<div class="table-wrap"><table class="asset-table"><thead><tr><th>比べること</th><th>マッチング拠出</th><th>iDeCo</th></tr></thead><tbody>
+<tr><td>手続き</td><td>会社で申し込み、給与から天引き</td><td>自分で金融機関を選んで申し込む</td></tr>
+<tr><td>選べる商品</td><td>会社のDCの商品</td><td>選んだ金融機関の商品</td></tr>
+<tr><td>手数料</td><td>会社のDCの規約による（要確認）</td><td>口座の手数料がかかる</td></tr>
+<tr><td>税金</td><td colspan="2">どちらも掛金の全額が所得控除</td></tr>
+</tbody></table></div>
+<p class="small">どちらが良いかは、会社のDCの商品と手数料、入れたい額で変わります。一般的な比べ方の例です。</p>
+<p class="official">公式ページ：<a data-src="dcLimit" target="_blank" rel="noopener noreferrer">厚生労働省：企業型DCの加入者のiDeCo加入要件</a>／<a data-src="idecoReform" target="_blank" rel="noopener noreferrer">厚生労働省：2026年12月の拠出限度額</a></p>
+<p class="actions"><button type="button" class="btn" data-guide="ideco">iDeCoの基本を見る</button></p>
+</div></details>
+
+<details class="card guide" id="asset-invest"><summary><h2>運用の基礎</h2></summary><div>
+<h3>一言でいうと</h3><p>「長く・分けて・少しずつ」が、値動きと付き合う一般的な基本です。特定の商品や配分はおすすめしません。</p>
+<h3>基本の3つ</h3><ul>
+<li><b>長期</b>：時間をかけるほど、値動きの上下がならされやすいと考えられています。ただし必ず増えるわけではありません。</li>
+<li><b>分散</b>：株や債券、国内と海外など、値動きの違うものに分けて持つこと（<a class="term" href="#asset" data-guide="asset-w-bunsan">分散投資</a>）。</li>
+<li><b>積立</b>：毎月同じ額で買い続けること。高いときは少なく、安いときは多く買うことになり、買う時期に迷わずに済みます。</li></ul>
+<h3>商品の種類</h3><ul>
+<li><a class="term" href="#asset" data-guide="asset-w-genpon">元本確保型</a>（預金・保険）：満期まで持てば元本は減りにくい。ただし増え方は小さく、物価の上昇に追いつかないことがあります。</li>
+<li><a class="term" href="#asset" data-guide="asset-w-toshin">投資信託</a>：値上がりも値下がりもします。持っている間は<a class="term" href="#asset" data-guide="asset-w-shintaku">信託報酬</a>という手数料が毎日差し引かれます。</li></ul>
+<h3>コストを見る</h3><ul><li>信託報酬などのコストは、運用の結果に関係なく毎年かかります。同じような中身なら、コストの低さは大事な比べどころです。</li><li>iDeCoは口座の手数料もかかります。</li></ul>
+<h3>リスクと付き合う</h3><ul>
+<li>投資の「リスク」は危険という意味ではなく、値動きの幅のことです（<a class="term" href="#asset" data-guide="asset-w-risk">リスク</a>）。</li>
+<li>どのくらいの値下がりまで落ち着いていられるか（<a class="term" href="#asset" data-guide="asset-w-kyoyo">リスク許容度</a>）は、年齢・収入・貯金・性格で人それぞれです。</li>
+<li>年に1回ほど、配分が思ったより偏っていないか確かめます。下がったときに慌てて全部売るのが、よくある失敗です。</li>
+<li>受け取りが近づいたら、値動きの小さいものへ少しずつ移す考え方もあります。</li></ul>
+<h3>よくある誤解</h3><ul><li>「元本確保型なら安全で得」→ 減りにくい代わりに、ほとんど増えないことがあります。</li><li>「話題の商品を選べばいい」→ 過去の成績は将来を約束しません。</li></ul>
+<p class="official">公式ページ：<a data-src="nisaAbout" target="_blank" rel="noopener noreferrer">金融庁：NISAの制度</a></p>
+</div></details>
+
+<details class="card guide" id="asset-pension"><summary><h2>公的年金</h2></summary><div>
+<h3>一言でいうと</h3><p>会社員は国民年金と厚生年金に入っていて、老後の収入の土台になります。受け取り始める年齢は原則<span data-p="pension.base" data-f="age"></span>で、早めたり遅らせたりできます。</p>
+<h3>自分の見込みを知る</h3><ul>
+<li><a class="term" href="#asset" data-guide="asset-w-teikibin">ねんきん定期便</a>：毎年、誕生月ごろに届きます。<span data-p="teikibin.sealedAges.0" data-f="age"></span>・<span data-p="teikibin.sealedAges.1" data-f="age"></span>・<span data-p="teikibin.sealedAges.2" data-f="age"></span>のときは、全期間の記録が入った封書です。</li>
+<li>ねんきんネット（日本年金機構のサービス）なら、記録や見込み額をいつでも確かめられます。</li>
+<li>記録にもれがないか（転職した期間など）を見ておきます。</li></ul>
+<h3>繰上げ・繰下げ</h3>
+<div class="table-wrap"><table class="asset-table"><thead><tr><th></th><th>繰上げ（早くもらう）</th><th>繰下げ（遅くもらう）</th></tr></thead><tbody>
+<tr><td>いつ</td><td><span data-p="pension.early.minAge" data-f="age"></span>〜<span data-p="pension.base" data-f="age"></span>になるまで</td><td><span data-p="pension.base" data-f="age"></span>より後、<span data-p="pension.defer.maxAge" data-f="age"></span>まで</td></tr>
+<tr><td>年金額</td><td>1か月早めるごとに<span data-p="pension.early.rate" data-f="pct"></span>減る（最大<span data-p="pension.early.max" data-f="pct"></span>）</td><td>1か月遅らせるごとに<span data-p="pension.defer.rate" data-f="pct"></span>増える（最大<span data-p="pension.defer.max" data-f="pct"></span>）</td></tr>
+<tr><td>注意</td><td>減った額は一生続き、取り消せません</td><td>待っている間は受け取れません</td></tr>
+</tbody></table></div>
+<p class="small">繰上げの率は昭和37年4月2日以降生まれの人の場合です。どちらが得かは、何歳まで生きるか・ほかの収入で変わるため、一概には言えません。</p>
+<p class="official">公式ページ：<a data-src="kuriage" target="_blank" rel="noopener noreferrer">日本年金機構：繰上げ受給</a>／<a data-src="kurisage" target="_blank" rel="noopener noreferrer">日本年金機構：繰下げ受給</a>／<a data-src="teikibin" target="_blank" rel="noopener noreferrer">日本年金機構：ねんきん定期便</a></p>
+</div></details>
+
+<details class="card guide" id="asset-receive"><summary><h2>受け取り方と税金</h2></summary><div>
+<h3>一言でいうと</h3><p>DC・iDeCoは、まとめて受け取る（<a class="term" href="#asset" data-guide="asset-w-ichiji">一時金</a>）か、分けて受け取る（年金）か、その両方かを選べます。受け取り方で税金のかかり方が変わります。</p>
+<h3>受け取れる時期</h3><ul>
+<li><span data-p="dcReceive.start" data-f="age"></span>から<span data-p="dcReceive.end" data-f="age"></span>になるまでの間に受け取りを始めます。</li>
+<li><span data-p="dcReceive.start" data-f="age"></span>から受け取るには、<a class="term" href="#asset" data-guide="asset-w-tsusan">通算加入者等期間</a>が<span data-p="dcReceive.ages.0.0" data-f="raw"></span>年以上必要です。短いと開始が遅くなります。</li></ul>
+<div class="table-wrap"><table class="asset-table" id="receiveTable"><thead><tr><th>通算加入者等期間</th><th>受け取りを始められる年齢</th></tr></thead><tbody></tbody></table></div>
+<p class="small"><span data-p="dcReceive.start" data-f="age"></span>以上で初めて加入した人は、加入から<span data-p="dcReceive.lateJoinYears" data-f="raw"></span>年たってから受け取れます。</p>
+<h3>受け取り方</h3><ul>
+<li><b>一時金</b>：「退職所得」として扱われ、<a class="term" href="#asset" data-guide="asset-w-taishoku">退職所得控除</a>を使えます。</li>
+<li><b>年金</b>：<span data-p="dcReceive.annuityMin" data-f="raw"></span>年以上<span data-p="dcReceive.annuityMax" data-f="raw"></span>年以下の期間で分けて受け取ります（終身年金を扱う機関もあります）。公的年金と合わせて「雑所得」になり、<a class="term" href="#asset" data-guide="asset-w-koteki">公的年金等控除</a>を使えます。</li>
+<li><b>併用</b>：一部を一時金、残りを年金にする方法。扱っていない機関もあります。</li></ul>
+<h3>退職所得の計算</h3><ul>
+<li>退職所得＝（受け取る額−退職所得控除）×<span data-p="retirement.half" data-f="raw"></span>（2分の1）。</li>
+<li>退職所得控除は、勤続<span data-p="retirement.longYears" data-f="raw"></span>年以下なら<span data-p="retirement.perYear" data-f="man"></span>×年数（最低<span data-p="retirement.minimum" data-f="man"></span>）、<span data-p="retirement.longYears" data-f="raw"></span>年を超えるなら<span data-p="retirement.longBase" data-f="man"></span>＋<span data-p="retirement.perYearLong" data-f="man"></span>×（年数−<span data-p="retirement.longYears" data-f="raw"></span>）。1年未満の端数は1年に切り上げます。</li>
+<li>障害者になったことが直接の原因で退職した場合は、<span data-p="retirement.disability" data-f="man"></span>を足します。</li>
+<li>勤続<span data-p="retirement.shortYears" data-f="raw"></span>年以下の場合は、2分の1が使えない部分があります（役員等、または控除後<span data-p="retirement.shortCap" data-f="man"></span>を超える部分）。</li>
+<li>「退職所得の受給に関する申告書」を出していれば、原則として源泉徴収で税金の手続きが済みます。出していないと、受け取る額の<span data-p="retirement.noFormRate" data-f="pct"></span>が源泉徴収され、確定申告で精算します。</li></ul>
+<div class="calc-box" id="retireCalc"><h3>退職所得控除の目安を計算</h3>
+<div class="grid"><div class="field"><label for="rcYears">勤続年数（DCは加入年数）</label><div class="unit"><input id="rcYears" type="number" min="0" max="60" step="0.1" inputmode="decimal" value="30"><span>年</span></div></div>
+<div class="field"><label for="rcAmount">受け取る額の見込み</label><div class="unit"><input id="rcAmount" type="number" min="0" max="100000" step="1" inputmode="numeric" value="2000"><span>万円</span></div></div></div>
+<label class="check"><input id="rcDisability" type="checkbox"> 障害者になったことが直接の原因で退職</label>
+<dl class="calc-out"><dt>退職所得控除</dt><dd id="rcDeduction">—</dd><dt>退職所得（課税される額）</dt><dd id="rcIncome">—</dd><dt>税金の目安（所得税＋住民税）</dt><dd id="rcTax">—</dd></dl>
+<p class="small" id="rcNote">税金の目安＝所得税（復興特別所得税を含む）＋住民税<span data-p="resident.rate" data-f="pct"></span>の概算です。入力は保存されず、外部にも送りません。</p></div>
+<h3>受け取る順番と時期</h3><ul>
+<li>DCの一時金と会社の退職金を、別の年に受け取ると控除を2回使えるように見えますが、勤続期間の重なる部分は調整されます。</li>
+<li>令和8年1月1日以後に受け取るDCの一時金からは、退職金を受け取る年の前年以前<span data-p="retirement.dcLumpPriorYears" data-f="raw"></span>年内にDCの一時金を受け取っていると、この調整の対象になります。</li>
+<li>どの順番・間隔が有利かは、金額や勤続年数で変わります。受け取る数年前から、勤務先や税務署、運営管理機関に確認します。</li>
+<li>年金で受け取ると、公的年金と合わせた額で税金が決まります。</li></ul>
+<p class="official">公式ページ：<a data-src="retirement" target="_blank" rel="noopener noreferrer">国税庁：退職金を受け取ったとき</a>／<a data-src="dcLumpAdjust" target="_blank" rel="noopener noreferrer">国税庁：老齢一時金の退職所得控除の調整</a>／<a data-src="idecoReceive" target="_blank" rel="noopener noreferrer">iDeCo公式：受け取り方</a></p>
+</div></details>
+
+<details class="card guide" id="asset-change"><summary><h2>転職・退職のとき</h2></summary><div>
+<h3>一言でいうと</h3><p>会社のDCの資産は、会社を辞めてから<b data-p="dcTransfer.months" data-f="raw"></b>か月以内に、次の行き先へ移す手続き（<a class="term" href="#asset" data-guide="asset-w-ikan">移換</a>）が必要です。</p>
+<h3>移せる先</h3><ul>
+<li>転職先の企業型DC</li><li>iDeCo（自分で金融機関を選んで申し込む）</li><li>転職先のDB（規約で受け入れている場合）</li><li>通算企業年金</li></ul>
+<h3>手続きしないと</h3><ul>
+<li>期限を過ぎると、資産は国民年金基金連合会へ自動で移されます（<a class="term" href="#asset" data-guide="asset-w-jidou">自動移換</a>）。</li>
+<li>自動移換の間は運用されず、管理の手数料がかかります。</li>
+<li>その期間は<a class="term" href="#asset" data-guide="asset-w-tsusan">通算加入者等期間</a>に数えられないため、受け取りを始められる年齢が遅くなることがあります。</li></ul>
+<h3>確かめること</h3><ul><li>辞める前に、加入者専用サイトで残高と運用先を控える。</li><li>転職先にDCがあるか、マッチング拠出やiDeCoが使えるか。</li><li>会社の退職金・DBの扱い（途中退職でいくらになるか）。</li><li>条件を満たす人は<a class="term" href="#asset" data-guide="asset-w-dattai">脱退一時金</a>を請求できる場合があります。</li></ul>
+<p class="official">公式ページ：<a data-src="idecoRetire" target="_blank" rel="noopener noreferrer">iDeCo公式：転職・退職したとき</a></p>
+</div></details>
+
+<details class="card guide" id="asset-check"><summary><h2>会社の制度で確認すること</h2></summary><div>
+<p>次の項目を、勤務先の資料・加入者専用サイト・人事の担当で確かめると、自分に合う組み合わせを決めやすくなります。</p>
+<ul class="checklist">
+<li>会社の年金は企業型DC・DB・退職一時金のどれがあるか</li>
+<li>DCの事業主掛金（毎月いくら）</li>
+<li>DBの他制度掛金相当額（毎月いくら）</li>
+<li>iDeCoの拠出可能見込み額（加入者専用サイト）</li>
+<li>マッチング拠出の制度があるか、上限と変更できる月</li>
+<li>選択制DCかどうか、手取りと社会保険への影響の説明</li>
+<li>DCで選べる商品と、いま選んでいる運用先・コスト</li>
+<li>退職金・DBの見込み額と、一時金か年金かを選べるか</li>
+<li>ねんきん定期便の記録にもれがないか</li></ul>
+<p class="small">調べた額は<a href="#input">入力画面</a>の「勤務先の年金」に入れると、iDeCoの上限と順番に反映されます。</p>
+</div></details>
+
+<details class="card guide" id="asset-words"><summary><h2>用語のやさしい解説</h2></summary><div>
+<p class="small">本文の点線の言葉を押すと、ここに来ます。</p><dl class="words">
+<dt id="asset-w-dc">確定拠出年金（DC）</dt><dd>毎月の掛金が決まっていて、もらえる額は運用しだいの年金。会社が入る「企業型DC」と、自分で入る「iDeCo」があります。</dd>
+<dt id="asset-w-jigyonushi">事業主掛金</dt><dd>会社があなたのために出してくれるDCの掛金。給与とは別に会社が負担します。</dd>
+<dt id="asset-w-matching">マッチング拠出</dt><dd>会社の掛金に、自分も給与から上乗せすること。使っている間はiDeCoに入れません。</dd>
+<dt id="asset-w-sentaku">選択制DC</dt><dd>給与の一部を「DCに入れるか、給与でもらうか」自分で選ぶしくみ。DCに入れた分は給与でなくなります。</dd>
+<dt id="asset-w-db">DB（確定給付企業年金）</dt><dd>将来もらえる額を会社が約束する年金。運用は会社がします。</dd>
+<dt id="asset-w-tasedo">他制度掛金相当額</dt><dd>DBなどの掛金を、DCの掛金に置きかえた額。DCやiDeCoの上限から差し引かれます。勤務先で確かめます。</dd>
+<dt id="asset-w-gendo">拠出限度額</dt><dd>掛金として入れられる上限の額。</dd>
+<dt id="asset-w-site">加入者専用サイト</dt><dd>企業型DCの残高・掛金・運用先を見たり変えたりできるWebサイト。会社から案内があります。</dd>
+<dt id="asset-w-unkan">運営管理機関</dt><dd>DCやiDeCoの口座を扱う金融機関。選べる商品や手数料が違います。</dd>
+<dt id="asset-w-genpon">元本確保型</dt><dd>定期預金や保険など、入れたお金が減りにくい商品。その代わり増え方は小さめ。</dd>
+<dt id="asset-w-toshin">投資信託</dt><dd>多くの人のお金をまとめて、専門家が株や債券などに分けて運用する商品。値上がりも値下がりもします。</dd>
+<dt id="asset-w-shintaku">信託報酬</dt><dd>投資信託を持っている間ずっとかかる手数料。残高から少しずつ差し引かれます。</dd>
+<dt id="asset-w-bunsan">分散投資</dt><dd>値動きの違うものに分けて持つこと。全部が同時に下がる危険を小さくします。</dd>
+<dt id="asset-w-risk">リスク</dt><dd>投資では「値動きの幅」のこと。大きく上がるものは、大きく下がることもあります。</dd>
+<dt id="asset-w-kyoyo">リスク許容度</dt><dd>どのくらいの値下がりまで、生活や気持ちが耐えられるかの度合い。</dd>
+<dt id="asset-w-tsusan">通算加入者等期間</dt><dd>DCやiDeCoに入っていた期間の合計。長さで受け取りを始められる年齢が決まります。</dd>
+<dt id="asset-w-ichiji">一時金・年金</dt><dd>一時金はまとめて一度に受け取ること。年金は何年かに分けて受け取ること。</dd>
+<dt id="asset-w-taishoku">退職所得控除</dt><dd>退職金やDCの一時金から、税金の計算前に差し引ける額。勤続年数が長いほど大きくなります。</dd>
+<dt id="asset-w-koteki">公的年金等控除</dt><dd>年金で受け取る額から、税金の計算前に差し引ける額。年齢と金額で変わります。</dd>
+<dt id="asset-w-ikan">移換</dt><dd>DCの資産を、転職先のDCやiDeCoなど次の制度へ移すこと。</dd>
+<dt id="asset-w-jidou">自動移換</dt><dd>移換の手続きをしないまま期限が過ぎ、資産が自動で移されること。運用されず手数料がかかります。</dd>
+<dt id="asset-w-dattai">脱退一時金</dt><dd>条件を満たす人が、60歳前にDCの資産を受け取れる例外のしくみ。</dd>
+<dt id="asset-w-kuri">繰上げ・繰下げ受給</dt><dd>公的年金を受け取り始める年齢を早めたり（減る）遅らせたり（増える）すること。</dd>
+<dt id="asset-w-teikibin">ねんきん定期便</dt><dd>年金の記録や見込み額が書かれた、毎年届くお知らせ。</dd>
+<dt id="asset-w-kojo">所得控除</dt><dd>税金を計算する前に所得から差し引く額。DCやiDeCoの自分の掛金は全額が対象です。</dd>
+</dl><p class="actions"><button type="button" class="btn" data-guide="words">税金の用語集も見る</button></p></div></details>
+<p class="footnote">一般的な制度の説明です。個別の商品・金融機関・配分はおすすめしません。会社の制度は会社ごとに違うので、勤務先の資料と公式ページで確認してください。</p>
+</section>
 <p id="saveStatus" class="status" role="status"></p><footer><p>一般的な制度理解のための目安です。個別の税務・投資判断を代わりに行うものではありません。入力内容の外部送信・アクセス解析は行いません。</p><button type="button" class="reset" id="clearSaved">保存した入力を消去する</button><div id="clearConfirm" hidden><p>このアプリの保存入力だけを消し、未入力に戻します。</p><div class="actions"><button class="btn" id="cancelClear" type="button">やめる</button><button class="btn" id="confirmClear" type="button">入力を消去する</button></div></div></footer>
 </main>
 <nav class="bottom" aria-label="画面移動"><div class="wrap"><button class="btn" id="back" type="button" disabled>戻る</button><button class="btn primary" id="next" type="button">順番を見る →</button></div></nav>
@@ -209,14 +426,14 @@ window.addEventListener('DOMContentLoaded', () => {
   'use strict';
   const C = window.SetsuzeiCalc, P = window.SetsuzeiParams;
   const $ = id => document.getElementById(id), key = 'setsuzeiNavi.inputs.v1';
-  const screens = ['inputScreen','orderScreen','resultScreen','calendarScreen','guideScreen'];
-  const hashes = ['#input','#order','#result','#calendar','#guide'], titles = ['inputTitle','orderTitle','resultTitle','calendarTitle','guideTitle'];
-  const nextText = ['順番を見る →','数字の目安へ →','年間の予定へ →','入力に戻る','元の画面に戻る'];
+  const screens = ['inputScreen','orderScreen','resultScreen','calendarScreen','guideScreen','assetScreen'];
+  const hashes = ['#input','#order','#result','#calendar','#guide','#asset'], titles = ['inputTitle','orderTitle','resultTitle','calendarTitle','guideTitle','assetTitle'];
+  const nextText = ['順番を見る →','数字の目安へ →','年間の予定へ →','入力に戻る','元の画面に戻る','元の画面に戻る'];
   const form = $('conditions'), fields = [...form.elements].filter(e => e.name);
   let view = 0, returnTo = 0, latest, storageAvailable = true;
   const text = (id,value) => {$(id).textContent = value;};
   const yen = value => value === null || value === undefined ? '計算できません' : `目安 ${Math.round(value).toLocaleString('ja-JP')}円`;
-  const labels = {salary:'年収（額面）',age:'年齢',spouse:'配偶者',under16:'16歳未満の子',teen:'16〜18歳の子',student:'19〜22歳の子',pension:'企業年金',dc:'DC事業主掛金（月額）',db:'他制度掛金相当額（月額）',social:'社会保険料（年額）',mortgage:'住宅ローン控除',mortgageAnnual:'住宅ローン控除（年額）',reserve:'生活防衛資金',budget:'毎月の積立予算',idecoMonthly:'試すiDeCo掛金（月額）',matching:'マッチング拠出',benefits:'老齢年金等の受給',history:'60歳以上の加入条件',insurance:'生命保険料',medical:'医療費控除の確認'};
+  const labels = {salary:'年収（額面）',age:'年齢',spouse:'配偶者',under16:'16歳未満の子',teen:'16〜18歳の子',student:'19〜22歳の子',pension:'企業年金',dc:'DC事業主掛金（月額）',db:'他制度掛金相当額（月額）',social:'社会保険料（年額）',mortgage:'住宅ローン控除',mortgageAnnual:'住宅ローン控除（年額）',reserve:'生活防衛資金',budget:'毎月の積立予算',idecoMonthly:'試すiDeCo掛金（月額）',matching:'マッチング拠出',benefits:'老齢年金等の受給',history:'60歳以上の加入条件',dcMatching:'マッチング拠出の制度',dcSelect:'選択制DC',insurance:'生命保険料',medical:'医療費控除の確認'};
   const words = {none:'なし',dependent:'扶養内',dual:'共働き',db:'DBのみ',dc:'DCのみ',both:'DB＋DC',unknown:'不明',yes:'あり・確認する',no:'なし・確認しない'};
   function read() {
     const data = Object.fromEntries(fields.map(el => [el.name,el.value]));
@@ -307,16 +524,19 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   function show(n, push=true){
     if(n>=1 && n<=3 && !render()) { if(view!==0){n=0;} else { $('inputError').scrollIntoView({block:'center'});return;} }
-    if(n===4 && view!==4) returnTo=view;
+    if(n>=4 && view<4) returnTo=view;
     view=n;screens.forEach((id,index)=>{$(id).hidden=index!==n;$('step'+index)?.classList.toggle('active',index===n);});
     $('back').disabled=n===0;text('next',nextText[n]);
     if(push && location.hash!==hashes[n])history.pushState({view:n},'',hashes[n]);
     $(titles[n]).focus();window.scrollTo({top:0,behavior:'instant'});
   }
   function openGuide(topic){
-    show(4, view!==4);
-    const d=topic && $('guide-'+topic);
-    if(d){d.open=true;d.scrollIntoView({block:'start'});}
+    // asset で始まる話題は資産形成の画面、それ以外は解説の画面。用語へのリンクは閉じた章を開いてから移る。
+    const asset=topic && topic.startsWith('asset'), n=asset?5:4;
+    show(n, view!==n);
+    const el=topic && $(asset?topic:'guide-'+topic), d=el && el.closest('details');
+    if(d)d.open=true;
+    if(el)el.scrollIntoView({block:'start'});
   }
   document.addEventListener('click',e=>{const t=e.target.closest('[data-guide]');if(!t)return;e.preventDefault();openGuide(t.dataset.guide);});
   const getP=path=>path.split('.').reduce((o,k)=>o==null?o:o[k],P);
@@ -325,10 +545,19 @@ window.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[data-src]').forEach(a=>{const u=P.sources[a.dataset.src];if(u)a.href=u;else a.removeAttribute('href');});
   form.addEventListener('input',()=>{persist();text('inputError','');});
   form.addEventListener('submit',e=>{e.preventDefault();show(1);});
-  $('next').addEventListener('click',()=>{persist();show(view===4?returnTo:(view+1)%4);});$('back').addEventListener('click',()=>show(view===4?returnTo:Math.max(0,view-1)));
+  $('next').addEventListener('click',()=>{persist();show(view>=4?returnTo:(view+1)%4);});$('back').addEventListener('click',()=>show(view>=4?returnTo:Math.max(0,view-1)));
   ['idecoMonthly','period'].forEach(id=>$(id).addEventListener('input',()=>{persist();render();}));
+  $('receiveTable').tBodies[0].innerHTML=P.dcReceive.ages.map(([y,a])=>'<tr><td>'+(y?y+'年以上':'1か月以上')+'</td><td>'+a+'歳</td></tr>').join('');
+  function retireCalc(){
+    const years=Number($('rcYears').value), amount=Number($('rcAmount').value)*10000;
+    if(!(years>0) || !(amount>=0)){['rcDeduction','rcIncome','rcTax'].forEach(id=>text(id,'—'));return;}
+    const r=C.retirementIncome(amount,years,$('rcDisability').checked), tax=C.incomeTax(r.income).total+Math.floor(r.income*P.resident.rate);
+    text('rcDeduction',yen(r.deduction));text('rcIncome',yen(r.income));
+    text('rcTax',yen(Math.round(tax/1000)*1000)+(r.short?'（勤続'+P.retirement.shortYears+'年以下：これより多くなることがあります）':''));
+  }
+  ['rcYears','rcAmount','rcDisability'].forEach(id=>$(id).addEventListener('input',retireCalc));retireCalc();
   window.addEventListener('popstate',()=>show(Math.max(0,hashes.indexOf(location.hash)),false));
-  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト'};
+  const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト',dcLimit:'厚生労働省：企業型DCの拠出限度額',dcReform:'厚生労働省：確定拠出年金の制度改正',dcSelect:'厚生労働省：確定拠出年金の法令解釈',retirement:'国税庁：退職所得',dcLumpAdjust:'国税庁：老齢一時金の控除の調整',idecoReceive:'iDeCo公式：受け取り方',idecoRetire:'iDeCo公式：転職・退職したとき',kurisage:'日本年金機構：繰下げ受給',kuriage:'日本年金機構：繰上げ受給',teikibin:'日本年金機構：ねんきん定期便'};
   for(const [k,url] of Object.entries(P.sources)){const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.textContent=names[k]||k;a.target='_blank';a.rel='noopener noreferrer';li.append(a);$('sourceList').append(li);}
   const events=C.calendar();
   function download(items){const blob=new Blob([C.makeICS(items,new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}/,''))],{type:'text/calendar;charset=utf-8'});const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download='setsuzei-navi-2026.ics';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),10000);}

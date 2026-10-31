@@ -188,3 +188,12 @@ test('退職所得控除の目安',()=>{
   const r=C.retirementIncome(20000000,30);assert.equal(r.income,2500000);assert.equal(r.short,false);
   assert.equal(C.retirementIncome(1000000,3).short,true);
 });
+test('順番：会社の年金の項目',()=>{
+  assert.equal(rec({}).dc,undefined);
+  const dc=rec({pension:'dc',dc:10000});assert.equal(dc.dc.label,'now');assert.equal(dc.dc.guide,'asset-dc');assert.match(dc.dc.reason,/62,000円|6\.2万円/);
+  assert.equal(rec({pension:'both',dc:10000,db:5000,matching:'yes'}).dc.label,'ok');
+  assert.match(rec({pension:'dc',dc:10000,dcMatching:'yes'}).dc.reason,/どちらか一方/);
+  assert.equal(rec({pension:'db',db:5000}).db.label,'ready');
+  assert.equal(rec({pension:'dc',dcSelect:'yes'}).dcselect.label,'ready');
+  assert.equal(rec({pension:'dc',dcSelect:'no'}).dcselect,undefined);
+});
