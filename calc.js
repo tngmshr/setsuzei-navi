@@ -53,7 +53,15 @@
     if (input.mortgage === 'no') input.mortgageAnnual = 0;
     return { input, assumed, errors:[...new Set(errors)] };
   }
+  // 分からない項目があるときは amount を null にし、最も有利な場合（企業年金なし・会社掛金0円・加入要件を満たす）の上限を upper に入れる。
   function idecoLimit(input, after, p = P) {
+    const exact = idecoLimitExact(input, after, p);
+    if (exact.amount !== null) return exact;
+    const best = {...input, matching:input.matching === 'unknown' ? 'no' : input.matching, benefits:input.benefits === 'unknown' ? 'no' : input.benefits,
+      history:'yes', pension:input.pension === 'unknown' ? 'none' : input.pension, dc:input.dc ?? 0, db:input.db ?? 0};
+    return {...exact, upper:idecoLimitExact(best, after, p).amount};
+  }
+  function idecoLimitExact(input, after, p = P) {
     const policy = after ? p.idecoAfter : p.idecoBefore;
     if (input.age >= policy.ageExclusive || input.matching === 'yes' || input.benefits === 'yes') return { amount:0, status:'対象外' };
     if (input.matching === 'unknown' || input.benefits === 'unknown') return { amount:null, status:'加入条件を確認' };
@@ -122,7 +130,10 @@
     const before = idecoLimit(i, false, p), after = idecoLimit(i, true, p);
     const scenarioLimit = raw.period === 'after' ? after : before;
     const requested = floor(i.idecoMonthly, p.idecoContribution.unit);
-    let monthly = scenarioLimit.amount === null ? null : Math.min(scenarioLimit.amount, requested, floor(i.budget, p.idecoContribution.unit));
+    // 上限が確定しないときは、最も有利な場合の上限 upper で仮に計算し tentative で知らせる。
+    const tentative = scenarioLimit.amount === null;
+    const usableLimit = tentative ? scenarioLimit.upper : scenarioLimit.amount;
+    let monthly = usableLimit === null || usableLimit === undefined ? null : Math.min(usableLimit, requested, floor(i.budget, p.idecoContribution.unit));
     if (monthly !== null && monthly < p.idecoContribution.minimum) monthly = 0;
     if (i.reserve < 3) monthly = 0;
     const base = taxScenario(i, 0, p), withIdeco = monthly === null ? null : taxScenario(i, monthly, p);
@@ -131,7 +142,7 @@
     const withMortgage = i.mortgage === 'yes' && (i.mortgageAnnual === null || i.mortgageAnnual > 0) ? null : withIdecoLimit;
     const simpleSaving = monthly === null ? null : base.incomeTax.taxable === 0 && base.taxableResident === 0 ? 0 : Math.round(monthly * 12 * (base.incomeTax.rate * (1 + p.tax.surtax) + p.resident.rate));
     const differenceSaving = !withIdeco || base.resident === null || withIdeco.resident === null ? null : Math.round(base.incomeTax.total - withIdeco.incomeTax.total + base.resident - withIdeco.resident);
-    return {...n, valid:true, before, after, monthly, base, withIdeco,
+    return {...n, valid:true, before, after, monthly, tentative, base, withIdeco,
       donation:{baseline,withIdeco:withIdecoLimit,withMortgage}, simpleSaving, differenceSaving,
       nisaMonthly:i.reserve < 3 ? 0 : monthly === null ? null : Math.max(0,i.budget - monthly),
       yearsTo60:Math.max(0,60-i.age), priorities:priorities(i,base.incomeTax.rate)};

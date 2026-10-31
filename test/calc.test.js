@@ -134,3 +134,13 @@ test('予定文字列のエスケープ',()=>{
 test('所得税も住民税課税所得もゼロなら簡易節税額はゼロ',()=>{
  const r=C.calculate({salary:0,social:0});assert.equal(r.simpleSaving,0);
 });
+
+test('企業年金や掛金が分からなくても、最大の上限で仮に計算する',()=>{
+ // 会社掛金0円とみなした上限: 改正前 DB/DC あり 20,000円・なし 23,000円、改正後 62,000円（厚生労働省）。
+ const db=C.calculate({pension:'db',idecoMonthly:15000});
+ assert.equal(db.before.amount,null);assert.equal(db.before.upper,20000);assert.equal(db.after.upper,62000);
+ assert.equal(db.tentative,true);assert.equal(db.monthly,15000);
+ const unknown=C.calculate({pension:'unknown',idecoMonthly:30000,budget:30000});
+ assert.equal(unknown.before.upper,23000);assert.equal(unknown.monthly,23000);
+ const known=C.calculate({pension:'none'});assert.equal(known.tentative,false);
+});
