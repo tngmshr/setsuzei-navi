@@ -228,3 +228,42 @@ test('老後資金の器の優先順位',()=>{
   const using=C.retirementPriority(n({salary:6000000,age:40,pension:'dc',dc:10000,matching:'yes',reserve:6,budget:30000}),0.1,{});
   assert.equal(using.items[1].label,'ok');
 });
+
+test('今年の寄付だけを合計し、上限までの残りと超過を求める',()=>{
+  const log=[{date:'2026-01-01',amount:10000},{date:'2026-12-31',amount:20000},{date:'2025-12-31',amount:90000}];
+  const before=JSON.stringify(log);
+  assert.deepEqual(C.furusatoProgress(log,2026,50000),{count:2,total:30000,limit:50000,remaining:20000,exceeded:false});
+  assert.equal(C.furusatoProgress(log,2026,30000).remaining,0);
+  assert.equal(C.furusatoProgress(log,2026,30000).exceeded,false);
+  assert.equal(C.furusatoProgress(log,2026,20000).exceeded,true);
+  assert.equal(C.furusatoProgress(log,2026,20000).remaining,0);
+  assert.equal(JSON.stringify(log),before);
+});
+test('寄付記録の欠損・壊れた日付や金額・未確認の上限を扱う',()=>{
+  for(const value of [null,{},'',undefined])assert.equal(C.furusatoProgress(value,2026,0).count,0);
+  const log=[null,{}, {date:'2026-02-30',amount:100},{date:'2026-13-01',amount:100},{date:'2026-1-01',amount:100},{date:'2026-01-01',amount:'100'},{date:'2026-01-01',amount:-1},{date:'2026-01-01',amount:0},{date:'2026-01-01',amount:NaN},{date:'2026-01-01',amount:1.5}];
+  assert.equal(C.furusatoProgress(log,2026,50000).count,0);
+  const valid=[{date:'2024-02-29',amount:1000}];
+  assert.equal(C.furusatoProgress(valid,2024,null).remaining,null);
+  assert.equal(C.furusatoProgress(valid,2024,0).exceeded,true);
+  assert.equal(C.furusatoProgress(valid,2026,5000).total,0);
+});
+test('比較用の要約は既存の計算結果と貯蓄入力を使う',()=>{
+  const r=C.calculate({salary:5000000,age:40,reserve:6,budget:30000,idecoMonthly:10000});
+  const s=C.historySummary(r,{cfSavings:'300'},2026);
+  assert.equal(s.year,2026);assert.equal(s.salary,5000000);assert.equal(s.idecoMonthly,r.monthly);
+  assert.equal(s.saving,r.simpleSaving);assert.equal(s.donationLimit,r.donation.withIdeco);assert.equal(s.savings,3000000);
+  for(const cfSavings of ['',null,undefined,'不正',-1])assert.equal(C.historySummary(r,{cfSavings}).savings,null);
+  assert.equal(C.historySummary(r,{cfSavings:'0'}).savings,0);
+  assert.equal(C.historySummary(C.calculate({salary:-1})),null);
+});
+test('前回との比較は増減・ゼロ・記録なしを区別して元データを変えない',()=>{
+  const a={salary:5000000,idecoMonthly:10000,saving:30000,donationLimit:60000,savings:null};
+  const b={salary:5200000,idecoMonthly:0,saving:30000,donationLimit:55000,savings:1000000};
+  const old=JSON.stringify([a,b]), rows=C.compareHistory(a,b);
+  assert.deepEqual(rows.map(r=>r.difference),[200000,-10000,0,-5000,null]);
+  assert.ok(C.compareHistory(null,b).every(r=>r.previous===null&&r.difference===null));
+  assert.ok(C.compareHistory(a,null).every(r=>r.current===null&&r.difference===null));
+  assert.equal(C.compareHistory({salary:'5000000'},{salary:Infinity})[0].difference,null);
+  assert.equal(JSON.stringify([a,b]),old);
+});

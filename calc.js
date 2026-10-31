@@ -356,5 +356,33 @@
     if (lock > Math.max(matchMax, idecoMax) && Math.max(matchMax, idecoMax) > 0) notes.push('60歳まで使わない額のうち、上限を超える分はNISAなどで積み立てます。');
     return { items, matchMax, idecoMax, idecoStatus:ideco.status, saving:base ? saving(base) : 0, notes, startAge };
   }
-  return {requiredMonthly, pensionByAge, protectionGap, cashflow, retirementPriority, coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
+  // 寄付記録は日付（YYYY-MM-DD）と円単位の金額の配列。壊れた行は集計しない。
+  function furusatoProgress(log, year, limit) {
+    const rows = Array.isArray(log) ? log : [];
+    const valid = rows.filter(r => {
+      if (!r || typeof r.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(r.date) || !Number.isSafeInteger(r.amount) || r.amount <= 0) return false;
+      const d = new Date(r.date + 'T00:00:00Z');
+      return Number.isFinite(d.getTime()) && d.toISOString().slice(0,10) === r.date && Number(r.date.slice(0,4)) === year;
+    });
+    const total = valid.reduce((sum, r) => sum + r.amount, 0);
+    const cap = Number.isSafeInteger(limit) && limit >= 0 ? limit : null;
+    return {count:valid.length, total, limit:cap, remaining:cap === null ? null : Math.max(0, cap - total), exceeded:cap !== null && total > cap};
+  }
+  // 制度の値は再計算せず、計算済みの目安と既存の貯蓄入力だけを残す。
+  function historySummary(result, tools = {}, year = P.year) {
+    if (!result?.valid || !Number.isInteger(year)) return null;
+    const savings = tools?.cfSavings;
+    return {year, salary:result.input.salary, idecoMonthly:result.monthly, saving:result.simpleSaving,
+      donationLimit:result.donation.withIdeco,
+      savings:savings !== '' && savings !== null && savings !== undefined && Number.isFinite(Number(savings)) && Number(savings) >= 0 ? Number(savings)*10000 : null};
+  }
+  function compareHistory(previous, current) {
+    const keys = ['salary','idecoMonthly','saving','donationLimit','savings'];
+    const amount = v => typeof v === 'number' && Number.isFinite(v) && v >= 0 ? v : null;
+    return keys.map(key => {
+      const before = amount(previous?.[key]), now = amount(current?.[key]);
+      return {key, previous:before, current:now, difference:before === null || now === null ? null : now - before};
+    });
+  }
+  return {furusatoProgress, historySummary, compareHistory, requiredMonthly, pensionByAge, protectionGap, cashflow, retirementPriority, coefficients, accumulate, retirementDeduction, retirementIncome, salaryIncome,incomeTax,normalize,idecoLimit,taxScenario,donationLimit,priorities,recommend,LABELS,calculate,calendar,makeICS,googleCalendarURL};
 });

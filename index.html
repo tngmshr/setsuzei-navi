@@ -84,7 +84,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <script src="tools.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.5.2</span></div><nav class="wrap tabs" aria-label="メニュー"><a href="#input" data-view="0" id="tab0"><i aria-hidden="true">✅</i>診断</a><a href="#tools" data-view="6" id="tab6"><i aria-hidden="true">🧮</i>ツール</a><a href="#guide" data-guide="" id="tab4"><i aria-hidden="true">📖</i>制度の解説</a><a href="#asset" data-guide="asset" id="tab5"><i aria-hidden="true">💰</i>資産形成</a></nav></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.6</span></div><nav class="wrap tabs" aria-label="メニュー"><a href="#input" data-view="0" id="tab0"><i aria-hidden="true">✅</i>診断</a><a href="#tools" data-view="6" id="tab6"><i aria-hidden="true">🧮</i>ツール</a><a href="#guide" data-guide="" id="tab4"><i aria-hidden="true">📖</i>制度の解説</a><a href="#asset" data-guide="asset" id="tab5"><i aria-hidden="true">💰</i>資産形成</a></nav></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
 <div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
@@ -139,6 +139,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <section class="screen" id="resultScreen" hidden aria-labelledby="resultTitle">
 <p class="eyebrow">いまの自分に、できること。</p><h1 id="resultTitle" tabindex="-1">数字の目安</h1>
 <p id="resultNotice" class="note warning"></p>
+<section class="card" id="historyCard"><h2>前回との比較</h2><p id="historyNote" class="small"></p><div class="table-wrap"><table class="asset-table stack"><thead><tr><th scope="col">項目</th><th scope="col">前回</th><th scope="col">今回</th><th scope="col">差（今回−前回）</th></tr></thead><tbody id="historyRows"></tbody></table></div><p class="small">年収・掛金・節税額・上限・貯蓄はいずれも目安です。制度や試算条件の違いも差に含まれます。<a href="#tool-data" data-tool-link="tool-data">保存・見直しで前回の目安を残す</a></p></section>
 <div class="card gain" id="gainCard"><h2>得する金額のまとめ</h2><p class="small">iDeCo（またはマッチング拠出）で税金が減る額の目安です。下の「試すiDeCo掛金」を変えると、ここも変わります。</p><div class="kpi" id="gainKpi"></div><ul class="gain-list" id="gainList"></ul><p class="footnote">今の税率と掛金が続くとした単純計算です。受け取るときにも税金の対象になります（退職所得控除などが使えます）。金額は将来を約束するものではありません。</p></div>
 <div class="card"><h2>iDeCoの上限と節税</h2><p class="small">iDeCo（イデコ）＝自分で積み立てる老後の年金。</p>
 <div class="compare"><div><span>2026年11月拠出分まで・月額上限</span><b id="beforeLimit"></b></div><div><span>2026年12月拠出分から・月額上限</span><b id="afterLimit"></b></div></div><p id="limitReason" class="help"></p>
@@ -149,7 +150,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <p class="note warning" id="lockNotice"></p><p class="footnote">12か月同じ掛金を納付する比較例。2026年中に新上限で12か月払えるという意味ではありません。受取時も課税の対象です。退職所得控除等が使える場合があります。加入・運用手数料は含みません。</p>
 </div>
 <div class="card"><h2>ふるさと納税の上限</h2><p class="small">必要な手続きをした場合の寄付上限の目安。税金の前払いで、自己負担は年間合計の目安2,000円です。</p>
-<div class="compare"><div><span>iDeCo・住宅ローン控除を入れる前</span><b id="donationBase"></b></div><div><span>iDeCoの試算掛金を入れた後</span><b id="donationIdeco"></b></div><div><span>さらに住宅ローン控除を考慮</span><b id="donationMortgage"></b></div></div>
+<div class="compare"><div><span>iDeCo・住宅ローン控除を入れる前</span><b id="donationBase"></b></div><div><span>iDeCoの試算掛金を入れた後</span><b id="donationIdeco"></b></div><div><span>さらに住宅ローン控除を考慮</span><b id="donationMortgage"></b></div></div><div id="donationProgress" class="note"></div>
 <p class="footnote">iDeCoの掛金で課税所得が下がると、寄付上限も下がることがあります。住宅ローン控除との併用では実質負担が増える場合があります。住宅控除額を所得割から単純に引く計算はしません。</p>
 <p class="note warning">税率の境目・低所得での非課税判定・他の控除は簡略化しています。寄付額で税率をまたぐ場合もあるため、上限ぎりぎりの寄付の判断には使わず、自治体等で最終確認してください。</p>
 <div class="actions"><a class="btn" href="../furusato-navi/" target="_blank" rel="noopener noreferrer">寄付と申請の手順を見る</a></div>
@@ -659,7 +660,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <h2><span class="ico" aria-hidden="true">💾</span>保存・印刷・見直し</h2>
 <p>診断とツールの入力を、ファイルに書き出して別の端末で読み込めます。ファイルはこの端末に保存され、どこにも送りません。</p>
 <p class="actions"><button type="button" class="btn" id="exportData">入力をファイルに書き出す</button><label class="btn file-btn">ファイルから読み込む<input type="file" id="importData" accept="application/json,.json"></label></p>
-<p class="actions"><button type="button" class="btn" id="printPage">この画面を印刷・PDFにする</button><button type="button" class="btn" id="reviewIcs">年1回の見直しを予定に入れる</button></p>
+<p class="actions"><button type="button" class="btn" id="printPage">この画面を印刷・PDFにする</button><button type="button" class="btn" id="reviewStart">今回の目安を保存して見直しを始める</button><button type="button" class="btn" id="reviewIcs">年1回の見直しを予定に入れる</button></p>
 <p id="dataStatus" class="small" role="status"></p>
 <p class="small">見直しの予定は毎年同じ日に繰り返す終日の予定（.ics）です。年収・家族・会社の制度が変わったら、その都度入力し直してください。</p>
 </div>
@@ -713,7 +714,35 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   const reasons = {'企業年金を確認':'会社の企業年金の有無が分かると確定します','勤務先の掛金額を確認':'会社の掛金額が分かると確定します。会社の掛金が多いほど下がります','加入条件を確認':'マッチング拠出・年金受給の有無が分かると確定します','60歳以上の加入条件を確認':'60歳以上の加入条件が分かると確定します'};
   const limitText = r => r.amount !== null ? yen(r.amount)+'／月' : r.upper === null || r.upper === undefined ? '計算できません' : `最大 ${yen(r.upper)}／月`;
-  // 得する金額のまとめ。手数料は計算ツールで入れた値（setsuzeiNavi.tools.v1 の rpFee）があれば使う。
+  const historyKey = 'setsuzeiNavi.history.v1';
+  const stored = k => {try{return JSON.parse(localStorage.getItem(k) || 'null');}catch{return null;}};
+  const summary = () => C.historySummary(C.calculate(read()), stored('setsuzeiNavi.tools.v1'), P.year);
+  function saveHistory() {
+    const current = summary(); if (!current) return false;
+    const data = stored(historyKey), history = data && typeof data === 'object' && !Array.isArray(data) ? data : {};
+    history[current.year] = current;
+    try {localStorage.setItem(historyKey,JSON.stringify(history));renderHistory();return true;}catch{return false;}
+  }
+  function renderHistory() {
+    const current = summary(), history = stored(historyKey);
+    const previous = history && typeof history === 'object' && !Array.isArray(history) && current ? Object.values(history).filter(v => v && Number.isInteger(v.year) && v.year <= current.year).sort((a,b)=>b.year-a.year)[0] : null;
+    text('historyNote',previous ? `前回：${previous.year}年分 ／ 今回：${P.year}年分。同じ年の保存値とも比較できます。` : '前回の目安はまだありません。読み込み前、見直しの開始時、予定の保存時に、この端末に残せます。');
+    const names = {salary:'年収（額面・年額）',idecoMonthly:'iDeCo掛金（月額）',saving:'節税額の目安（年額）',donationLimit:'ふるさと納税の上限の目安',savings:'貯蓄（ツールの入力）'};
+    const headings = ['項目','前回','今回','差（今回−前回）'];
+    $('historyRows').replaceChildren(...C.compareHistory(previous,current).map(r=>{
+      const tr=document.createElement('tr');
+      const money=v=>v===null?'記録なし':Math.round(v).toLocaleString('ja-JP')+'円';
+      [names[r.key],money(r.previous),money(r.current),r.difference===null?'—':(r.difference>0?'+':'')+money(r.difference)].forEach((v,k)=>{const td=document.createElement(k?'td':'th');td.textContent=v;td.dataset.label=headings[k];if(!k)td.scope='row';tr.append(td);});return tr;
+    }));
+  }
+  function progressNodes(result) {
+    const p=C.furusatoProgress(stored('furusatoNavi.log'),new Date().getFullYear(),P.year===new Date().getFullYear()?result.donation.withIdeco:null);
+    const a=document.createElement('a');a.href='../furusato-navi/';a.textContent='ふるさと納税ナビ';
+    if(!p.count)return ['寄付した合計は寄付サイトの履歴で確かめ、上の上限の目安と比べてください。寄付の手順は',a,'で確認できます。'];
+    const money=v=>v===null?'計算できません':v.toLocaleString('ja-JP')+'円';
+    return [`今年の寄付 ${money(p.total)}／上限の目安 ${money(p.limit)}／残り ${money(p.remaining)}（目安）。`,...(p.exceeded?['上限の目安を超えています（超えた分は自己負担が増えます）。']:[]),a];
+  }
+  // 得する金額のまとめ。手数料は計算ツールで入れた値があれば使う。
   function renderGain(result,i){
     const kp=(label,value)=>{const d=document.createElement('div'),sp=document.createElement('span'),b=document.createElement('b');sp.textContent=label;b.textContent=value;d.append(sp,b);return d;};
     const li=(html)=>{const l=document.createElement('li');l.append(...html);return l;};
@@ -732,6 +761,7 @@ window.addEventListener('DOMContentLoaded', () => {
     else items.push(li([`手数料は計算ツールで入れた 月${fee.toLocaleString('ja-JP')}円 を使っています。`]));
     items.push(li(['NISA：増えた分に税金がかからない制度です。どれだけ得かは運用の結果で変わるため、金額は出していません。']));
     items.push(li(['ふるさと納税：税金の前払いで、節税ではありません。自己負担2,000円で返礼品を受け取れる上限の目安は、下の「ふるさと納税の上限」にあります。']));
+    items.push(li(progressNodes(result)));
     $('gainList').replaceChildren(...items);
   }
   function render() {
@@ -746,12 +776,16 @@ window.addEventListener('DOMContentLoaded', () => {
         text('orderNotice',msg+' 順番の表示を止めています。修正してください。');$('orderList').replaceChildren();
         text('resultNotice',msg+' 数値の表示を止めています。修正してください。');
         for(const id of ['beforeLimit','afterLimit','usedMonthly','saving','donationBase','donationIdeco','donationMortgage'])text(id,'入力を確認');
-        $('gainKpi').replaceChildren();$('gainList').replaceChildren();
+        $('gainKpi').replaceChildren();$('gainList').replaceChildren();$('donationProgress').replaceChildren();renderHistory();
         text('savingDetail','');text('allocation','入力を修正してから目安を確認してください。');
       }
       return false;
     }
     text('inputError',''); text('orderNotice',''); const i=result.input;
+    if (Number.isSafeInteger(result.donation.withIdeco) && Number.isSafeInteger(result.donation.baseline)) {
+      try {localStorage.setItem('setsuzeiNavi.share.v1',JSON.stringify({year:P.year,donationLimit:result.donation.withIdeco,donationLimitNoIdeco:result.donation.baseline,updatedAt:new Date().toISOString()}));}catch{}
+    }
+    $('donationProgress').replaceChildren(...progressNodes(result));renderHistory();
     const notice=[];
     if (i.reserve < 3) notice.push('生活防衛資金が3か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。');
     if (result.tentative) notice.push(`iDeCoの上限は「最大」の目安です（${reasons[result.before.status] || reasons[result.after.status] || '勤務先で確認すると確定します'}）。下の金額は、その最大の上限の範囲で仮に計算しています。`);
@@ -906,7 +940,9 @@ window.addEventListener('DOMContentLoaded', () => {
   for(const e of events){const div=document.createElement('div'),label=document.createElement('span'),h=document.createElement('h3'),p=document.createElement('p'),actions=document.createElement('div'),b=document.createElement('button'),a=document.createElement('a');div.className='calendar-item';label.className='pill';label.textContent=e.label;h.textContent=e.title;p.className='small';p.textContent=e.description;actions.className='actions';b.className='btn';b.type='button';b.textContent='.icsで保存';b.addEventListener('click',()=>download([e]));a.className='btn';a.href=C.googleCalendarURL(e);a.textContent='Googleカレンダー';a.target='_blank';a.rel='noopener noreferrer';actions.append(b,a);div.append(label,h,p,actions);$('calendarList').append(div);}
   $('clearSaved').addEventListener('click',()=>{$('clearConfirm').hidden=false;});$('cancelClear').addEventListener('click',()=>{$('clearConfirm').hidden=true;});
   $('confirmClear').addEventListener('click',()=>{try{localStorage.removeItem(key);}catch{storageAvailable=false;}form.reset();$('idecoMonthly').value='';$('period').value='before';$('clearConfirm').hidden=true;show(0);text('saveStatus',storageAvailable?'保存した入力を消去しました。':'保存領域へアクセスできません。画面の入力だけを初期化しました。');});
-  window.NaviUI={C,P,$,text,yen,man,svgEl,chartBox,read,key,toolsIndex:6,onShow:null};
+  window.NaviUI={C,P,$,text,yen,man,svgEl,chartBox,read,key,saveHistory,renderHistory,toolsIndex:6,onShow:null};
+  window.addEventListener('storage',e=>{if(['furusatoNavi.log',historyKey].includes(e.key))render();});
+  window.addEventListener('focus',()=>{if(view===2)render();});
   restore();show(Math.max(0,hashes.indexOf(location.hash)),false);
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('./sw.js').catch(()=>text('saveStatus','オフライン用の準備ができませんでした。オンラインで利用できます。'));
 });

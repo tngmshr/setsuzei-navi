@@ -149,6 +149,7 @@ window.addEventListener('DOMContentLoaded', () => {
       const d = JSON.parse(await f.text()), ok = v => v === null || (typeof v === 'object' && !Array.isArray(v));
       if (!d || d.app !== 'setsuzei-navi' || !ok(d.inputs) || !ok(d.tools)) throw Error();
       if (!confirm('今の入力を、ファイルの内容で置き換えます。よろしいですか？')) return;
+      U.saveHistory();
       if (d.inputs) localStorage.setItem(U.key, JSON.stringify(d.inputs)); if (d.tools) localStorage.setItem(key, JSON.stringify(d.tools));
       location.reload();
     } catch { status('このファイルは読み込めません。このアプリで書き出したファイルを選んでください。'); }
@@ -157,16 +158,18 @@ window.addEventListener('DOMContentLoaded', () => {
   let opened = [];
   window.addEventListener('beforeprint', () => { opened = [...document.querySelectorAll('.screen:not([hidden]) details:not([open])')]; opened.forEach(d => d.open = true); });
   window.addEventListener('afterprint', () => { opened.forEach(d => d.open = false); opened = []; });
+  $('reviewStart').addEventListener('click', () => { status(U.saveHistory() ? '今回の目安を前回の値として保存しました。入力を見直すと差が表示されます。' : '前回の値を保存できません。診断の入力と保存領域を確認してください。'); });
   $('reviewIcs').addEventListener('click', () => {
+    const saved = U.saveHistory();
     const d = new Date(); d.setFullYear(d.getFullYear() + 1); const ymd = x => x.toISOString().slice(0, 10).replace(/-/g, ''), e = new Date(d); e.setDate(e.getDate() + 1);
     const ics = C.makeICS([{id:'yearly-review', start:ymd(d), end:ymd(e), title:'節税・資産形成ナビ：年1回の見直し', description:'年収・家族・会社の制度の変化を入力し直す。iDeCo・DCの掛金と運用先、NISAの積立額、生活防衛資金、保険の保障額を確認する。'}], new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')).replace('END:VEVENT', 'RRULE:FREQ=YEARLY\r\nEND:VEVENT');
     const a = Object.assign(el('a'), {href:URL.createObjectURL(new Blob([ics], {type:'text/calendar;charset=utf-8'})), download:'setsuzei-navi-review.ics'}); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 10000);
-    status('毎年の見直しの予定（.ics）を保存しました。カレンダーで開くと登録できます。');
+    status('毎年の見直しの予定（.ics）を保存しました。カレンダーで開くと登録できます。' + (saved ? '今回の目安も比較用に保存しました。' : '比較用の目安は保存できませんでした。'));
   });
 
   load(); renderEvents();
   $('cfAdd').addEventListener('click', () => { events.push({age:'', name:'', amount:'', kind:'out'}); renderEvents(); save(); $('cfEvents').lastElementChild.firstElementChild.focus(); });
-  const all = () => { priority(); cashflow(); goal(); pension(); protect(); };
+  const all = () => { priority(); cashflow(); goal(); pension(); protect(); U.renderHistory(); };
   for (const i of inputs) i.addEventListener('input', () => { save(); all(); });
   document.getElementById('conditions').addEventListener('input', () => { priority(); cashflow(); });
   U.onShow = n => { if (n === U.toolsIndex) all(); };
