@@ -25,7 +25,7 @@
 </script>
 <style>
 :root{--ink:#1c332e;--muted:#52665f;--green:#185b4b;--soft:#e4efe9;--line:#d8e0d8;--paper:#fff;--bg:#f5f5ef;--amber:#785219;--warn:#fff2d8;font-family:system-ui,-apple-system,"BIZ UDPGothic","Yu Gothic",sans-serif;color:var(--ink);background:var(--bg);font-size:16px;line-height:1.75}
-*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty,#orderNotice:empty{display:none}.guide-link{font-size:.82rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}.order{list-style:none;margin:0;padding:0;counter-reset:ord}.order li{counter-increment:ord;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 16px 10px;margin-bottom:12px;min-width:0}.order .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.order .head:before{content:counter(ord);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}.order h2{font-size:1.08rem;margin:0;flex:1;min-width:8em}.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}.b-now{background:var(--green);color:#fff}.b-ready{background:var(--warn);color:var(--amber)}.b-later{background:#e6ebf2;color:#34495e}.b-na{background:#eceae6;color:#5f5a52}.b-ok{background:var(--soft);color:var(--green)}.order p{margin:0 0 8px;font-size:.93rem}.figs{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 6px;font-size:.88rem}.figs b{color:var(--green);font-size:1.05rem}.order .more{font-size:.88rem;font-weight:700;background:none;border:0;color:var(--green);padding:8px 0;text-decoration:underline;text-underline-offset:4px}.toc ul{margin:0;padding-left:1.2em;columns:2;column-gap:16px}.toc li{margin-bottom:6px;break-inside:avoid}.guide summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0}.guide summary::-webkit-details-marker{display:none}.guide summary:after{content:"＋";color:var(--green);font-weight:700;font-size:1.2rem}.guide[open] summary:after{content:"－"}.guide summary h2{margin:0;font-size:1.2rem}.guide h3{margin:16px 0 6px;color:var(--green);font-size:1rem}.guide ul{padding-left:1.2em;margin:0 0 8px}.guide li{margin-bottom:6px}.head-links{display:flex;gap:6px;flex-shrink:0}
+*{box-sizing:border-box}body{margin:0;min-height:100dvh;display:flex;flex-direction:column}a{color:var(--green);text-underline-offset:4px;overflow-wrap:anywhere}button,input,select{font:inherit}button,a,input,select,summary{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}:focus-visible{outline:3px solid #9b6611;outline-offset:3px}h1,h2,h3,p{margin:0 0 12px}h1{font-size:1.85rem;line-height:1.4;letter-spacing:.01em}h2{font-size:1.4rem;line-height:1.5}h3{font-size:1.12rem}small,.small{font-size:.86rem;color:var(--muted)}.wrap{width:min(100%,720px);margin:auto;padding-inline:20px;min-width:0}.top{border-bottom:1px solid var(--line);padding:15px 0;background:var(--paper)}.brand{font-weight:750;font-size:.95rem;display:flex;gap:9px;align-items:center}.brand img{width:30px;height:30px}.edition{margin-left:auto;font-size:.75rem;color:var(--muted)}main{flex:1;width:100%;padding-block:28px 42px}.eyebrow{font-size:.8rem;font-weight:750;color:var(--green);letter-spacing:.12em}.lead{color:var(--muted)}.hero{margin-bottom:24px}.hero-mark{float:right;color:var(--green);font-size:3rem;line-height:1.2;margin-left:12px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:20px;margin-block:16px}.note{background:var(--soft);border-radius:12px;padding:13px 15px;font-size:.9rem}.warning{background:var(--warn);color:var(--amber)}.steps{display:flex;gap:6px;margin:20px 0 28px}.steps[hidden]{display:none}.steps span{flex:1;padding:7px 2px;text-align:center;border-bottom:3px solid var(--line);font-size:.8rem}.steps .active{border-color:var(--green);font-weight:bold;color:var(--green)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.field{margin-bottom:18px;min-width:0}.field label{display:block;font-weight:700;font-size:.94rem;margin-bottom:6px}.help{font-size:.8rem;color:var(--muted);display:block;margin-top:5px}input,select{width:100%;min-width:0;max-width:100%;border:1px solid #a5b5ac;border-radius:9px;padding:11px 10px;background:#fff;color:var(--ink)}input::placeholder{color:#6b776f}input[aria-invalid=true]{border:2px solid #a93426}.unit{position:relative}.unit input{padding-right:50px}.unit span{position:absolute;right:12px;top:11px;font-size:.85rem;color:var(--muted);pointer-events:none}.wide{grid-column:1/-1}fieldset{padding:0;border:0;margin:0}legend{font-weight:750;font-size:1.12rem;margin-bottom:15px}.section-num{color:var(--green);font-weight:700;font-size:.8rem;display:block}.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:48px;padding:10px 15px;border-radius:11px;border:1px solid var(--line);background:var(--paper);color:var(--green);font-weight:700;text-decoration:none;line-height:1.5;white-space:normal;text-align:center}.primary{background:var(--green);color:white;border-color:var(--green)}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}.actions>*{flex:1;min-width:120px}.bottom{position:sticky;bottom:0;border-top:1px solid var(--line);background:#fafbf7f5;padding:12px 0 calc(12px + env(safe-area-inset-bottom));z-index:3}.bottom .wrap{display:flex;gap:10px}.bottom .btn{flex:1}.inapp{display:none}.line .inapp{display:block}.line main{padding-bottom:150px}.screen[hidden]{display:none}.rank{list-style:none;margin:0;padding:0;counter-reset:rank}.rank li{counter-increment:rank;position:relative;padding:18px 0 18px 41px;border-bottom:1px solid var(--line)}.rank li:before{content:counter(rank,decimal-leading-zero);position:absolute;left:0;top:19px;color:var(--green);font-size:.9rem;font-weight:bold}.rank li:last-child{border:0}.rank strong{display:block}.rank p{margin:5px 0 0;font-size:.9rem;color:var(--muted)}.money{display:block;font-size:1.8rem;font-weight:750;color:var(--green);line-height:1.4;margin-block:5px;overflow-wrap:anywhere}.money small{font-size:.85rem;font-weight:500}.compare{display:grid;grid-template-columns:1fr;gap:10px}.compare div{border-left:3px solid var(--line);padding-left:13px}.compare b{display:block;font-size:1.13rem}.pill{display:inline-block;border-radius:6px;background:var(--soft);padding:2px 9px;font-size:.78rem;font-weight:bold;color:var(--green)}summary{cursor:pointer;font-weight:700;padding:9px 0}details>div{padding-top:8px}dl{margin:0}dt{font-size:.85rem;color:var(--muted);margin-top:10px}dd{margin:0;font-weight:650;overflow-wrap:anywhere}.calendar-item{padding:16px 0;border-bottom:1px solid var(--line)}.calendar-item:last-child{border:0}.calendar-item .actions{margin-top:8px}.calendar-item .btn{font-size:.85rem}.source-list{padding-left:20px;font-size:.85rem}.source-list li{padding-bottom:8px}.status{font-size:.82rem;color:var(--muted);min-height:1.5em}.error{color:#9a2c21;font-weight:700}footer{font-size:.8rem;color:var(--muted);padding:20px 0 0}.divider{border:0;border-top:1px solid var(--line);margin-block:20px}.reset{font-weight:500;background:none;border:0;text-decoration:underline;color:var(--muted);padding:10px 0}.check{display:flex;gap:10px;align-items:center;margin-block:10px}.check input{width:20px;min-height:20px;flex-shrink:0}.footnote{font-size:.83rem;color:var(--muted);margin-top:10px}#resultNotice:empty,#orderNotice:empty{display:none}.guide-link{font-size:.82rem;font-weight:700;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:3px 10px;white-space:nowrap}.order{list-style:none;margin:0;padding:0;counter-reset:ord}.order li{counter-increment:ord;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:16px 16px 10px;margin-bottom:12px;min-width:0}.order .head{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin-bottom:6px}.order .head:before{content:counter(ord);display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;font-size:.85rem;flex-shrink:0}.order h2{font-size:1.08rem;margin:0;flex:1;min-width:8em}.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:.78rem;font-weight:700;white-space:nowrap}.b-now{background:var(--green);color:#fff}.b-ready{background:var(--warn);color:var(--amber)}.b-later{background:#e6ebf2;color:#34495e}.b-na{background:#eceae6;color:#5f5a52}.b-ok{background:var(--soft);color:var(--green)}.order p{margin:0 0 8px;font-size:.93rem}.figs{display:flex;flex-wrap:wrap;gap:4px 16px;margin:0 0 6px;font-size:.88rem}.figs b{color:var(--green);font-size:1.05rem}.order .more{font-size:.88rem;font-weight:700;background:none;border:0;color:var(--green);padding:8px 0;text-decoration:underline;text-underline-offset:4px}.toc ul{margin:0;padding-left:1.2em;columns:2;column-gap:16px}.toc li{margin-bottom:6px;break-inside:avoid}.guide summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0}.guide summary::-webkit-details-marker{display:none}.guide summary:after{content:"＋";color:var(--green);font-weight:700;font-size:1.2rem}.guide[open] summary:after{content:"－"}.guide summary h2{margin:0;font-size:1.2rem}.guide h3{margin:16px 0 6px;color:var(--green);font-size:1rem}.guide ul{padding-left:1.2em;margin:0 0 8px}.guide li{margin-bottom:6px}.head-links{display:flex;gap:6px;flex-shrink:0}
 .term{text-decoration:underline dotted;text-underline-offset:3px;color:inherit;font-weight:600}
 .table-wrap{overflow-x:auto;margin:6px 0 10px}
 .asset-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:0}
@@ -55,17 +55,41 @@ svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:1
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.76rem;line-height:1.45;padding:4px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .12s;z-index:2}.tip.on{opacity:1}
 .assume{background:var(--warn);color:var(--amber);border-radius:10px;padding:8px 12px;font-size:.84rem;margin:6px 0 0}
 .coef{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media(max-width:560px){.coef{grid-template-columns:1fr}}.coef .mini b.v{float:right;color:var(--green);font-size:1rem}.coef .mini .ex{font-size:.84rem;color:var(--ink);background:var(--soft);border-radius:8px;padding:6px 8px;margin-top:6px}
+.top{padding:12px 0 0}.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin-top:10px}.tabs a{display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 2px 8px;font-size:.8rem;font-weight:700;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;white-space:nowrap}.tabs a i{font-style:normal;font-size:1.15rem;line-height:1.2}.tabs a.on{color:var(--green);border-color:var(--green)}.tabs a:hover{color:var(--green)}
+.entry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:4px 0 22px}.entry-card{display:flex;flex-direction:column;gap:2px;padding:14px;border-radius:16px;border:1px solid var(--line);background:var(--paper);color:var(--ink);text-decoration:none;min-width:0;box-shadow:0 1px 0 #0000000a;transition:transform .12s,box-shadow .12s}.entry-card:hover{transform:translateY(-2px);box-shadow:0 6px 16px #1c332e1a}.entry-card b{font-size:1rem}.entry-card small{font-size:.78rem;color:var(--muted);line-height:1.5}.entry-art{display:grid;place-items:center;height:64px;border-radius:12px;font-size:1.8rem;margin-bottom:6px;overflow:hidden}.entry-art img,.hero-slot img{width:100%;height:100%;object-fit:contain}.e-start .entry-art{background:#dcefe5}.e-tools .entry-art{background:#fbf1de}.e-guide .entry-art{background:#e3ecf6}.e-asset .entry-art{background:#f1e8f3}.e-start{border:2px solid var(--green)}
+.hero-slot{display:grid;place-items:center;width:38%;max-width:200px;aspect-ratio:11/6;font-size:3rem;flex-shrink:0}
+.link-card{display:flex;gap:12px;align-items:center;background:#fbf1de;border:1px solid #ecd9b4;border-radius:16px;padding:14px;margin:4px 0 14px;color:var(--ink);text-decoration:none}.link-card>span:first-child{font-size:1.8rem}.link-card b{display:block;color:var(--amber)}.link-card small{display:block;color:var(--muted);font-size:.82rem}
+.tool-menu{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:12px 0 6px}@media(max-width:560px){.tool-menu{grid-template-columns:repeat(2,minmax(0,1fr))}}.tool-card{display:flex;flex-direction:column;gap:1px;padding:10px 12px;border:1px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);text-decoration:none;min-width:0}.tool-card b{font-size:.88rem;line-height:1.45}.tool-card small{font-size:.74rem;color:var(--muted);line-height:1.45}.tc-ico{font-size:1.3rem}
+.tool h2{display:flex;align-items:center;font-size:1.22rem}.tool{scroll-margin-top:12px}.tool .order{margin-top:10px}
+.cmp5{min-width:520px;table-layout:auto}.cmp5 tbody th{width:auto}
+.events{display:grid;gap:8px}.ev-row{display:grid;grid-template-columns:4.5em minmax(0,1fr) 5.5em 4.8em auto;gap:6px;align-items:center}.ev-row input,.ev-row select{padding:9px 6px}.ev-del{flex:0;min-height:40px;padding:6px 10px}@media(max-width:480px){.ev-row{grid-template-columns:4.5em minmax(0,1fr) 5.5em}.ev-row select{grid-column:1/3}}
+.file-btn{position:relative;overflow:hidden}.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.cf-more summary{cursor:pointer;font-weight:700;color:var(--green);padding:6px 0}
+#rpNotes{padding-left:1.2em;margin:0 0 10px}
+@media(prefers-color-scheme:dark){
+:root{--ink:#e3ece7;--muted:#a8b8b0;--green:#6cc7a8;--soft:#20332d;--line:#33443e;--paper:#18231f;--bg:#0f1714;--amber:#e3b46a;--warn:#3a2f1c;color-scheme:dark}
+body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radial-gradient(circle at 100% 260px,#2c2617 0,transparent 360px),var(--bg)}
+.top,.bottom{background:#18231ff2}.privacy{background:#173129}.mini{background:#1c2a25}input,select{background:#101a16;border-color:#4a5d55}.asset-hero{background:linear-gradient(135deg,#173129,#2c2617)}.b-now,.btn.primary,.order .head:before{color:#0f1714}.b-later{background:#26313f;color:#c4d2e3}.b-na{background:#2e2c28;color:#cfc9bf}.cf .hl td{background:#2c2617}.cf .minus{color:#f0a070}
+.e-start .entry-art{background:#173129}.e-tools .entry-art{background:#2c2617}.e-guide .entry-art{background:#1c2733}.e-asset .entry-art{background:#2a2030}.link-card{background:#2c2617;border-color:#4a3c22}
+.chart,.figure{--ink:#1c332e;--muted:#52665f;background:#fbfcfa;border-radius:12px;padding:8px 6px}.tip{background:#1c332e}
+}
+@media print{
+.top,.tabs,nav.bottom,.steps,.entry,.actions,.tool-menu,.privacy,.inapp,#saveStatus,footer .btn,.more,.link-card{display:none!important}
+body{background:#fff}main{padding:0}.card{break-inside:avoid;border-color:#bbb}.tool{break-inside:auto}a{color:inherit;text-decoration:none}
+}
 </style>
 <script src="params.js" defer></script>
 <script src="calc.js" defer></script>
+<script src="tools.js" defer></script>
 </head>
 <body>
-<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.4</span><span class="head-links"><a class="guide-link" href="#asset" data-guide="asset">💰 資産形成</a><a class="guide-link" href="#guide" data-guide="">📖 解説</a></span></div></header>
+<header class="top"><div class="wrap brand"><img src="icons/icon.svg" alt=""><span>節税・資産形成ナビ</span><span class="edition">2026年分 / v0.5</span></div><nav class="wrap tabs" aria-label="メニュー"><a href="#input" data-view="0" id="tab0"><i aria-hidden="true">✅</i>診断</a><a href="#tools" data-view="6" id="tab6"><i aria-hidden="true">🧮</i>ツール</a><a href="#guide" data-guide="" id="tab4"><i aria-hidden="true">📖</i>制度の解説</a><a href="#asset" data-guide="asset" id="tab5"><i aria-hidden="true">💰</i>資産形成</a></nav></header>
 <p class="inapp note warning">LINEの中では下が隠れることがあります。メニューから「ブラウザで開く」「Safariで開く」を選んでください。</p>
 <main class="wrap" id="main">
 <div class="steps" aria-label="手順"><span id="step0" class="active">1 入力</span><span id="step1">2 あなたの順番</span><span id="step2">3 数字の目安</span><span id="step3">4 年間の予定</span></div>
 <section class="screen" id="inputScreen" aria-labelledby="inputTitle">
-<div class="hero"><span class="hero-mark" aria-hidden="true">↗</span><p class="eyebrow">今日から、ひとつずつ。</p><h1 id="inputTitle" tabindex="-1">税金と将来のお金。<br>まず何から始める？</h1><p class="lead">会社員のための、やること整理。<br>条件を入れると、NISA・iDeCoなどを<b>どの順番で始めるとよいか</b>の目安が分かります。</p><p class="small">先に制度を知りたい人は <a href="#guide" data-guide="">NISA・iDeCoの解説を読む</a></p></div>
+<div class="hero"><span class="hero-mark" aria-hidden="true">↗</span><p class="eyebrow">今日から、ひとつずつ。</p><h1 id="inputTitle" tabindex="-1">税金と将来のお金。<br>まず何から始める？</h1><p class="lead">会社員のための、やること整理。<br>条件を入れると、NISA・iDeCoなどを<b>どの順番で始めるとよいか</b>の目安が分かります。</p></div>
+<nav class="entry" aria-label="目的から選ぶ"><a href="#conditions" class="entry-card e-start"><span class="entry-art" data-art="start" aria-hidden="true">✅</span><b>3分で診断</b><small>条件を入れると、始める順番と金額の目安</small></a><a href="#tools" data-view="6" class="entry-card e-tools"><span class="entry-art" data-art="tools" aria-hidden="true">🧮</span><b>計算ツール</b><small>DC・iDeCo・NISAの順番、家計の見通し</small></a><a href="#guide" data-guide="" class="entry-card e-guide"><span class="entry-art" data-art="guide" aria-hidden="true">📖</span><b>制度を学ぶ</b><small>NISA・iDeCo・ふるさと納税・年末調整</small></a><a href="#asset" data-guide="asset" class="entry-card e-asset"><span class="entry-art" data-art="asset" aria-hidden="true">💰</span><b>資産形成を学ぶ</b><small>会社の年金・運用の基礎・受け取り方</small></a></nav>
 <section class="privacy" aria-labelledby="privacyTitle"><h2 id="privacyTitle"><span aria-hidden="true">🔒</span> 個人情報は集めません</h2><ul><li><b>名前・メール・住所・勤務先は聞きません。</b>登録もログインもありません。</li><li><b>入力した年収などは、どこにも送信しません。</b>計算はすべてこのスマホの中で行います。</li><li><b>アクセス解析・広告は入れていません。</b>入力内容を見られる人はいません（作った人も見られません）。</li><li><b>入力はこの端末にだけ保存され、</b>画面下の「保存した入力を消去する」でいつでも消せます。</li></ul><p class="small">※ページの配信元（GitHub）には、一般的なWebサイトと同じく接続の記録が残ります。入力内容は含まれません。</p></section>
 <p class="note">すべて任意です。空欄は説明用の仮定を使い、結果画面に表示します。</p>
 <p class="footnote">対象外：自営業・公務員・年収の目安が2,000万円超・副業収入が大きい人。給与以外の所得、障害者・ひとり親等の控除は計算に含みません。</p>
@@ -108,6 +132,7 @@ svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:1
 <p class="lead">入力した条件から、一般的な目安としての順番を出しました。上から順に確認しましょう。</p>
 <p id="orderNotice" class="note warning"></p>
 <ol class="order" id="orderList"></ol>
+<a class="link-card" href="#tool-priority" data-tool-link="tool-priority"><span aria-hidden="true">🧭</span><span><b>DC・マッチング拠出・iDeCo・NISA、どれを先に？</b><small>同じ「老後のため」の置き場所を、60歳まで使わない額や手数料も入れて並べます</small></span></a>
 <p class="footnote">一般的な目安で、個別の投資助言ではありません。商品・金融機関・配分は決めていません。金額の根拠は次の「数字の目安」で確認できます。</p>
 </section>
 <section class="screen" id="resultScreen" hidden aria-labelledby="resultTitle">
@@ -528,6 +553,116 @@ svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:1
 </dl><p class="actions"><button type="button" class="btn" data-guide="words">税金の用語集も見る</button></p></div></details>
 <p class="footnote">一般的な制度の説明です。個別の商品・金融機関・配分はおすすめしません。会社の制度は会社ごとに違うので、勤務先の資料と公式ページで確認してください。</p>
 </section>
+<section class="screen" id="toolsScreen" hidden aria-labelledby="toolsTitle">
+<div class="asset-hero tools-hero"><div><p class="eyebrow">自分の数字で、試してみる。</p><h1 id="toolsTitle" tabindex="-1">計算ツール</h1></div><span class="hero-slot" data-art="tools" aria-hidden="true">🧮</span></div>
+<p class="lead">老後資金の置き場所の順番、家計の先の見通し、目標額からの逆算などを、自分の数字で計算できます。入力はこの端末にだけ保存し、外部へは送りません。</p>
+<nav class="tool-menu" aria-label="ツールの一覧">
+<a href="#tool-priority" class="tool-card"><span class="tc-ico" aria-hidden="true">🧭</span><b>老後資金の置き場所の順番</b><small>DC・マッチング・iDeCo・NISA</small></a>
+<a href="#tool-cashflow" class="tool-card"><span class="tc-ico" aria-hidden="true">📈</span><b>キャッシュフロー表</b><small>90歳までの貯蓄の見通し</small></a>
+<a href="#tool-goal" class="tool-card"><span class="tc-ico" aria-hidden="true">🎯</span><b>目標から逆算</b><small>毎月いくら積み立てる？</small></a>
+<a href="#tool-pension" class="tool-card"><span class="tc-ico" aria-hidden="true">📮</span><b>ねんきん定期便で試算</b><small>受け取り開始年齢ごとの額</small></a>
+<a href="#tool-protect" class="tool-card"><span class="tc-ico" aria-hidden="true">☂️</span><b>必要保障額</b><small>万一のときに足りない額</small></a>
+<a href="#tool-data" class="tool-card"><span class="tc-ico" aria-hidden="true">💾</span><b>保存・印刷・見直し</b><small>書き出し・PDF・年1回の予定</small></a>
+</nav>
+
+<div class="card tool" id="tool-priority">
+<h2><span class="ico" aria-hidden="true">🧭</span>老後資金の置き場所の順番</h2>
+<p>企業型DC・マッチング拠出・iDeCo・選択制DC・NISAは、どれも「将来のため」のお金の置き場所です。<b>同じ目的の制度が重なるとき、どれから使うか</b>を、診断の入力と次の条件から一般的な目安として並べます。</p>
+<div class="grid"><div class="field"><label for="rpLock">60歳まで使わないと決めた額（毎月）</label><div class="unit"><input id="rpLock" data-tool type="number" min="0" max="1000000" step="1000" inputmode="numeric" placeholder="例 20000"><span>円</span></div></div>
+<div class="field"><label for="rpFee">iDeCoの毎月の手数料（分かれば）</label><div class="unit"><input id="rpFee" data-tool type="number" min="0" max="10000" step="1" inputmode="numeric" placeholder="金融機関の案内で確認"><span>円</span></div></div>
+<div class="field"><label for="rpCap">マッチング拠出の規約上の上限（分かれば）</label><div class="unit"><input id="rpCap" data-tool type="number" min="0" max="100000" step="1000" inputmode="numeric" placeholder="空欄なら制度の上限"><span>円</span></div></div></div>
+<label class="check"><input id="rpBefore60" data-tool type="checkbox"> 住宅・教育など、60歳前に使う予定のお金がある</label>
+<p id="rpNotice" class="note warning" hidden></p>
+<ol class="order" id="rpList"></ol>
+<ul id="rpNotes" class="small"></ul>
+<h3>5つの置き場所の違い</h3>
+<div class="table-wrap"><table class="cmp cmp5"><thead><tr><th scope="col">項目</th><th scope="col">企業型DC（会社の掛金）</th><th scope="col">マッチング拠出</th><th scope="col">iDeCo</th><th scope="col">NISA</th></tr></thead><tbody>
+<tr><th scope="row">掛けるときの税</th><td>給与にならないので課税されない</td><td>全額が所得控除</td><td>全額が所得控除</td><td>節税なし</td></tr>
+<tr><th scope="row">引き出し</th><td>原則60歳から</td><td>原則60歳から</td><td>原則60歳から</td><td>いつでも</td></tr>
+<tr><th scope="row">口座の手数料</th><td>会社が負担することが多い</td><td>会社が負担することが多い（規約で確認）</td><td>自己負担</td><td>金融機関の案内で確認</td></tr>
+<tr><th scope="row">商品の選び方</th><td>会社が用意した一覧から</td><td>会社が用意した一覧から</td><td>選んだ金融機関の一覧から</td><td>選んだ金融機関の一覧から</td></tr>
+<tr><th scope="row">受け取るときの税</th><td colspan="3">一時金は退職所得控除、年金は公的年金等控除の対象</td><td>非課税</td></tr>
+</tbody></table></div>
+<p class="small">選択制DCは、給与の一部を掛金にするか給与で受け取るかを選ぶ仕組みです。掛金にした分は社会保険料も下がることがある一方、将来の厚生年金などの計算のもとも下がることがあります。マッチング拠出とiDeCoは同時に使えません。<a href="#asset" data-guide="asset-ideco">iDeCoとの併用の解説</a></p>
+</div>
+
+<div class="card tool" id="tool-cashflow">
+<h2><span class="ico" aria-hidden="true">📈</span>キャッシュフロー表</h2>
+<p>毎年の手取り収入と支出から、貯蓄がどう増減するかを90歳まで並べます。住宅・教育・車などの大きな出費も入れられます。<b>貯蓄がマイナスになる年</b>が、早めに手を打つ目印です。</p>
+<div class="grid g3"><div class="field"><label for="cfAge">今の年齢</label><div class="unit"><input id="cfAge" data-tool type="number" min="18" max="80" inputmode="numeric" placeholder="診断の値"><span>歳</span></div></div>
+<div class="field"><label for="cfIncome">手取り収入（年）</label><div class="unit"><input id="cfIncome" data-tool type="number" min="0" max="10000" inputmode="numeric" value="450"><span>万円</span></div></div>
+<div class="field"><label for="cfExpense">支出（年）</label><div class="unit"><input id="cfExpense" data-tool type="number" min="0" max="10000" inputmode="numeric" value="380"><span>万円</span></div></div>
+<div class="field"><label for="cfSavings">今の貯蓄</label><div class="unit"><input id="cfSavings" data-tool type="number" min="0" max="100000" inputmode="numeric" value="300"><span>万円</span></div></div>
+<div class="field"><label for="cfRetire">退職する年齢</label><div class="unit"><input id="cfRetire" data-tool type="number" min="40" max="80" inputmode="numeric" value="65"><span>歳</span></div></div>
+<div class="field"><label for="cfLump">退職金（手取り）</label><div class="unit"><input id="cfLump" data-tool type="number" min="0" max="100000" inputmode="numeric" value="0"><span>万円</span></div></div>
+<div class="field"><label for="cfPensionAge">年金を受け取り始める年齢</label><div class="unit"><input id="cfPensionAge" data-tool type="number" min="60" max="75" inputmode="numeric" value="65"><span>歳</span></div></div>
+<div class="field"><label for="cfPension">年金（手取り・年）</label><div class="unit"><input id="cfPension" data-tool type="number" min="0" max="1000" inputmode="numeric" value="180"><span>万円</span></div></div>
+<div class="field"><label for="cfRetireExpense">退職後の支出（年）</label><div class="unit"><input id="cfRetireExpense" data-tool type="number" min="0" max="10000" inputmode="numeric" value="280" placeholder="空欄なら同じ"><span>万円</span></div></div>
+<div class="field"><label for="cfIncomeGrowth">収入の上昇率</label><div class="unit"><input id="cfIncomeGrowth" data-tool type="number" min="-5" max="10" step="0.1" inputmode="decimal" value="0"><span>%</span></div></div>
+<div class="field"><label for="cfExpenseGrowth">支出の上昇率</label><div class="unit"><input id="cfExpenseGrowth" data-tool type="number" min="-5" max="10" step="0.1" inputmode="decimal" value="0"><span>%</span></div></div>
+<div class="field"><label for="cfRate">貯蓄の運用利回り（仮定）</label><div class="unit"><input id="cfRate" data-tool type="number" min="0" max="10" step="0.1" inputmode="decimal" value="1"><span>%</span></div></div></div>
+<h3>大きな出費・収入</h3>
+<div id="cfEvents" class="events"></div>
+<p class="actions"><button type="button" class="btn" id="cfAdd">＋ 出費・収入を追加</button></p>
+<p class="small">収入は「その年に入る分」を正の数で、出費は正の数のまま「出費」を選びます。物価・収入の上昇率と利回りは仮定で、将来を予測するものではありません。上昇率を0%にすると「今の物価のまま」で見られます（年金額も今の金額で入れます）。</p>
+<div class="kpi" id="cfKpi"></div>
+<div class="legend"><span><i class="sw" style="background:#00826b"></i>貯蓄がプラスの年</span><span><i class="sw" style="background:#b5761a"></i>マイナスの年</span></div>
+<div class="chart" id="cfChart"></div>
+<details class="cf-more"><summary>年ごとの表を見る</summary><div class="table-wrap"><table class="asset-table cf" id="cfTable"><caption>単位：万円。網掛けは出費・収入を入れた年、赤字は貯蓄がマイナスの年。</caption><thead><tr><th>年齢</th><th>出来事</th><th>収入</th><th>支出</th><th>収支</th><th>貯蓄</th></tr></thead><tbody></tbody></table></div></details>
+</div>
+
+<div class="card tool" id="tool-goal">
+<h2><span class="ico" aria-hidden="true">🎯</span>目標から逆算</h2>
+<p>「◯年後に◯万円」という目標から、毎月いくら積み立てればよいかを出します（減債基金係数の考え方）。</p>
+<div class="grid g3"><div class="field"><label for="glTarget">目標額</label><div class="unit"><input id="glTarget" data-tool type="number" min="1" max="100000" inputmode="numeric" value="500"><span>万円</span></div></div>
+<div class="field"><label for="glYears">期間</label><div class="unit"><input id="glYears" data-tool type="number" min="1" max="50" inputmode="numeric" value="20"><span>年</span></div></div>
+<div class="field"><label for="glRate">利回り（仮定）</label><div class="unit"><input id="glRate" data-tool type="number" min="0" max="10" step="0.1" inputmode="decimal" value="3"><span>%</span></div></div></div>
+<div class="kpi" id="glKpi"></div>
+<div class="table-wrap"><table class="asset-table" id="glTable"><caption class="small">利回りの仮定を変えたときの毎月の積立額</caption><thead><tr><th>利回り（仮定）</th><th>毎月の積立額</th><th>積み立てる元本の合計</th></tr></thead><tbody></tbody></table></div>
+<p class="small">毎月末に積み立て、月ごとに複利で増える前提の試算です。運用には元本割れの可能性があり、利回りは保証されません。</p>
+</div>
+
+<div class="card tool" id="tool-pension">
+<h2><span class="ico" aria-hidden="true">📮</span>ねんきん定期便で試算</h2>
+<p>毎年届く「ねんきん定期便」の<b>65歳から受け取る見込み額（年額）</b>を写すと、受け取り開始を早めたり遅らせたりしたときの年額が分かります。50歳未満の定期便は「これまでの加入実績」での額なので、実際はこれより増えるのが一般的です。</p>
+<div class="grid"><div class="field"><label for="pnAnnual">65歳からの見込み額（年額）</label><div class="unit"><input id="pnAnnual" data-tool type="number" min="0" max="1000" step="0.1" inputmode="decimal" value="180"><span>万円</span></div></div>
+<div class="field"><label for="pnCompare">比べる開始年齢</label><div class="unit"><input id="pnCompare" data-tool type="number" min="60" max="75" inputmode="numeric" value="70"><span>歳</span></div></div></div>
+<div class="kpi" id="pnKpi"></div>
+<div class="chart" id="pnChart"></div>
+<p class="small">繰上げは1か月ごとに<span data-p="pension.early.rate" data-f="pct"></span>減り、繰下げは1か月ごとに<span data-p="pension.defer.rate" data-f="pct"></span>増えます（昭和37年4月2日以後生まれ）。額面の単純計算で、税・社会保険料、加給年金、在職中の調整は含みません。<a href="#asset" data-guide="asset-pension">公的年金の解説</a>・<a data-src="kurisage" target="_blank" rel="noopener noreferrer">日本年金機構</a></p>
+</div>
+
+<div class="card tool" id="tool-protect">
+<h2><span class="ico" aria-hidden="true">☂️</span>必要保障額</h2>
+<p>万一のとき、残された家族に<b>必要なお金</b>と、遺族年金・貯蓄などで<b>用意できるお金</b>の差です。差がある分を、生命保険などで考える目安になります。</p>
+<div class="grid"><div class="field"><label for="pgLiving">家族の生活費（月）</label><div class="unit"><input id="pgLiving" data-tool type="number" min="0" max="500" step="0.1" inputmode="decimal" value="25"><span>万円</span></div></div>
+<div class="field"><label for="pgYears">必要な年数</label><div class="unit"><input id="pgYears" data-tool type="number" min="0" max="60" inputmode="numeric" value="20"><span>年</span></div></div>
+<div class="field"><label for="pgEducation">教育費</label><div class="unit"><input id="pgEducation" data-tool type="number" min="0" max="10000" inputmode="numeric" value="1000"><span>万円</span></div></div>
+<div class="field"><label for="pgOther">その他（葬儀・住まいなど）</label><div class="unit"><input id="pgOther" data-tool type="number" min="0" max="10000" inputmode="numeric" value="300"><span>万円</span></div></div>
+<div class="field"><label for="pgSurvivor">遺族年金など（月）</label><div class="unit"><input id="pgSurvivor" data-tool type="number" min="0" max="100" step="0.1" inputmode="decimal" value="10"><span>万円</span></div></div>
+<div class="field"><label for="pgSavings">貯蓄</label><div class="unit"><input id="pgSavings" data-tool type="number" min="0" max="100000" inputmode="numeric" value="500"><span>万円</span></div></div>
+<div class="field"><label for="pgCover">死亡退職金・加入済みの保険</label><div class="unit"><input id="pgCover" data-tool type="number" min="0" max="100000" inputmode="numeric" value="0"><span>万円</span></div></div></div>
+<div class="kpi" id="pgKpi"></div>
+<div class="chart" id="pgChart"></div>
+<p class="small">住宅ローンに団体信用生命保険が付いている場合、住居費はその分小さくなります。遺族年金の額は家族構成や加入記録で変わるので、日本年金機構の案内（<a data-src="izoku" target="_blank" rel="noopener noreferrer">遺族年金</a>）で確認してください。保険の商品はおすすめしません。</p>
+</div>
+
+<div class="card tool" id="tool-receive">
+<h2><span class="ico" aria-hidden="true">🎁</span>受け取り方（一時金と年金）</h2>
+<p>DC・iDeCo・退職金を一時金で受け取るときの税は、資産形成の画面の計算で試せます。年金で受け取る場合は公的年金等控除の対象になり、毎年の公的年金と合算して税金が決まります。</p>
+<p class="actions"><button type="button" class="btn" data-guide="asset-receive">受け取り方と退職所得控除の計算へ</button></p>
+</div>
+
+<div class="card tool" id="tool-data">
+<h2><span class="ico" aria-hidden="true">💾</span>保存・印刷・見直し</h2>
+<p>診断とツールの入力を、ファイルに書き出して別の端末で読み込めます。ファイルはこの端末に保存され、どこにも送りません。</p>
+<p class="actions"><button type="button" class="btn" id="exportData">入力をファイルに書き出す</button><label class="btn file-btn">ファイルから読み込む<input type="file" id="importData" accept="application/json,.json"></label></p>
+<p class="actions"><button type="button" class="btn" id="printPage">この画面を印刷・PDFにする</button><button type="button" class="btn" id="reviewIcs">年1回の見直しを予定に入れる</button></p>
+<p id="dataStatus" class="small" role="status"></p>
+<p class="small">見直しの予定は毎年同じ日に繰り返す終日の予定（.ics）です。年収・家族・会社の制度が変わったら、その都度入力し直してください。</p>
+</div>
+<p class="footnote">一般的な目安で、個別の投資助言ではありません。商品・金融機関・配分は決めていません。仮定の利回りは将来の成果を約束するものではありません。</p>
+</section>
 <p id="saveStatus" class="status" role="status"></p><footer><p>一般的な制度理解のための目安です。個別の税務・投資判断を代わりに行うものではありません。入力内容の外部送信・アクセス解析は行いません。</p><button type="button" class="reset" id="clearSaved">保存した入力を消去する</button><div id="clearConfirm" hidden><p>このアプリの保存入力だけを消し、未入力に戻します。</p><div class="actions"><button class="btn" id="cancelClear" type="button">やめる</button><button class="btn" id="confirmClear" type="button">入力を消去する</button></div></div></footer>
 </main>
 <nav class="bottom" aria-label="画面移動"><div class="wrap"><button class="btn" id="back" type="button" disabled>戻る</button><button class="btn primary" id="next" type="button">順番を見る →</button></div></nav>
@@ -537,9 +672,9 @@ window.addEventListener('DOMContentLoaded', () => {
   'use strict';
   const C = window.SetsuzeiCalc, P = window.SetsuzeiParams;
   const $ = id => document.getElementById(id), key = 'setsuzeiNavi.inputs.v1';
-  const screens = ['inputScreen','orderScreen','resultScreen','calendarScreen','guideScreen','assetScreen'];
-  const hashes = ['#input','#order','#result','#calendar','#guide','#asset'], titles = ['inputTitle','orderTitle','resultTitle','calendarTitle','guideTitle','assetTitle'];
-  const nextText = ['順番を見る →','数字の目安へ →','年間の予定へ →','入力に戻る','元の画面に戻る','元の画面に戻る'];
+  const screens = ['inputScreen','orderScreen','resultScreen','calendarScreen','guideScreen','assetScreen','toolsScreen'];
+  const hashes = ['#input','#order','#result','#calendar','#guide','#asset','#tools'], titles = ['inputTitle','orderTitle','resultTitle','calendarTitle','guideTitle','assetTitle','toolsTitle'];
+  const nextText = ['順番を見る →','数字の目安へ →','年間の予定へ →','入力に戻る','元の画面に戻る','元の画面に戻る','元の画面に戻る'];
   const form = $('conditions'), fields = [...form.elements].filter(e => e.name);
   let view = 0, returnTo = 0, latest, storageAvailable = true;
   const text = (id,value) => {$(id).textContent = value;};
@@ -638,6 +773,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if(n>=4 && view<4) returnTo=view;
     view=n;screens.forEach((id,index)=>{$(id).hidden=index!==n;$('step'+index)?.classList.toggle('active',index===n);});
     $('back').disabled=n===0;text('next',nextText[n]);
+    document.querySelector('.steps').hidden=n>=4;[0,4,5,6].forEach(t=>$('tab'+t).classList.toggle('on',t===(n<4?0:n)));$('tab'+(n<4?0:n)).setAttribute('aria-current','page');[0,4,5,6].filter(t=>t!==(n<4?0:n)).forEach(t=>$('tab'+t).removeAttribute('aria-current'));
+    window.NaviUI?.onShow?.(n);
     if(push && location.hash!==hashes[n])history.pushState({view:n},'',hashes[n]);
     $(titles[n]).focus();window.scrollTo({top:0,behavior:'instant'});
   }
@@ -649,7 +786,8 @@ window.addEventListener('DOMContentLoaded', () => {
     if(d)d.open=true;
     if(el)el.scrollIntoView({block:'start'});
   }
-  document.addEventListener('click',e=>{const t=e.target.closest('[data-guide]');if(!t)return;e.preventDefault();openGuide(t.dataset.guide);});
+  document.addEventListener('click',e=>{const v=e.target.closest('[data-view],[data-tool-link],a.entry-card[href="#conditions"]');if(v){e.preventDefault();if(v.dataset.view)show(Number(v.dataset.view),view!==Number(v.dataset.view));else if(v.dataset.toolLink){show(6);$(v.dataset.toolLink).scrollIntoView({block:'start'});}else form.scrollIntoView({block:'start'});return;}
+    const t=e.target.closest('[data-guide]');if(!t)return;e.preventDefault();openGuide(t.dataset.guide);});
   const getP=path=>path.split('.').reduce((o,k)=>o==null?o:o[k],P);
   const fmt={raw:v=>String(v),pct:v=>Math.round(v*1000)/10+'%',man:v=>(v/10000).toLocaleString('ja-JP')+'万円',yen:v=>v.toLocaleString('ja-JP')+'円',age:v=>v+'歳',ym:v=>v.replace(/^(\d+)-0?(\d+)$/,'$1年$2月'),date:v=>v.replace(/^(\d+)-0?(\d+)-0?(\d+)$/,'$1年$2月$3日')};
   document.querySelectorAll('[data-p]').forEach(el=>{const v=getP(el.dataset.p);el.textContent=v==null?'—':(fmt[el.dataset.f]||fmt.raw)(v);});
@@ -738,6 +876,7 @@ window.addEventListener('DOMContentLoaded', () => {
   for(const e of events){const div=document.createElement('div'),label=document.createElement('span'),h=document.createElement('h3'),p=document.createElement('p'),actions=document.createElement('div'),b=document.createElement('button'),a=document.createElement('a');div.className='calendar-item';label.className='pill';label.textContent=e.label;h.textContent=e.title;p.className='small';p.textContent=e.description;actions.className='actions';b.className='btn';b.type='button';b.textContent='.icsで保存';b.addEventListener('click',()=>download([e]));a.className='btn';a.href=C.googleCalendarURL(e);a.textContent='Googleカレンダー';a.target='_blank';a.rel='noopener noreferrer';actions.append(b,a);div.append(label,h,p,actions);$('calendarList').append(div);}
   $('clearSaved').addEventListener('click',()=>{$('clearConfirm').hidden=false;});$('cancelClear').addEventListener('click',()=>{$('clearConfirm').hidden=true;});
   $('confirmClear').addEventListener('click',()=>{try{localStorage.removeItem(key);}catch{storageAvailable=false;}form.reset();$('idecoMonthly').value='';$('period').value='before';$('clearConfirm').hidden=true;show(0);text('saveStatus',storageAvailable?'保存した入力を消去しました。':'保存領域へアクセスできません。画面の入力だけを初期化しました。');});
+  window.NaviUI={C,P,$,text,yen,man,svgEl,chartBox,read,key,toolsIndex:6,onShow:null};
   restore();show(Math.max(0,hashes.indexOf(location.hash)),false);
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('./sw.js').catch(()=>text('saveStatus','オフライン用の準備ができませんでした。オンラインで利用できます。'));
 });

@@ -290,14 +290,14 @@
     const have = v.survivor*12*v.years + v.savings + v.cover;
     return { need, have, gap:Math.max(0, need - have), surplus:Math.max(0, have - need) };
   }
-  // 年ごとのキャッシュフロー表。収入・支出は手取りベース、上昇率と運用利回りは仮定。
+  // 年ごとのキャッシュフロー表。収入・支出は手取りベース、上昇率と運用利回りは仮定。retireExpense は退職後の支出（任意）。
   function cashflow(v) {
     const rows = []; let balance = v.savings;
     for (let k = 0; k < v.years; k++) {
       const age = v.age + k, working = age < v.retireAge;
       const income = (working ? Math.round(v.income*Math.pow(1 + v.incomeGrowth, k)) : 0) + (age >= v.pensionAge ? v.pension : 0);
       const events = (v.events || []).filter(e => e.age === age), extra = events.reduce((s, e) => s + e.amount, 0);
-      const expense = Math.round(v.expense*Math.pow(1 + v.expenseGrowth, k)) + extra;
+      const expense = Math.round((!working && v.retireExpense != null ? v.retireExpense : v.expense)*Math.pow(1 + v.expenseGrowth, k)) + extra;
       balance = Math.round(balance*(1 + v.rate) + income - expense);
       rows.push({ year:k + 1, age, income, expense, net:income - expense, balance, events:events.map(e => e.name) });
     }
