@@ -769,11 +769,15 @@ window.addEventListener('DOMContentLoaded', () => {
     }));
   }
   function progressNodes(result) {
-    const p=C.furusatoProgress(L.readFurusatoLog(store),new Date().getFullYear(),P.year===new Date().getFullYear()?result.donation.withIdeco:null);
+    // 上限の目安は P.year 年分の計算なので、同じ年の寄付と比べる（年が明けた1〜3月に前年分を確かめる場合も同じ）。
+    const log=L.readFurusatoLog(store), p=C.furusatoProgress(log,P.year,result.donation.withIdeco);
+    // 制度の値を翌年版に更新した直後（1〜3月）は、前年分の寄付も合計だけ出す。前年分の上限は計算していないので比べない。
+    const py=L.previousYear(new Date(),P.year), prev=py===null?null:C.furusatoProgress(log,py,null);
     const a=document.createElement('a');a.href='../furusato-navi/';a.textContent='ふるさと納税ナビ';
-    if(!p.count)return ['寄付した合計は寄付サイトの履歴で確かめ、上の上限の目安と比べてください。寄付の手順は',a,'で確認できます。'];
     const money=v=>v===null?'計算できません':v.toLocaleString('ja-JP')+'円';
-    return [`今年の寄付 ${money(p.total)}／上限の目安 ${money(p.limit)}／残り ${money(p.remaining)}（目安）。`,...(p.exceeded?['上限の目安を超えています（超えた分は自己負担が増えます）。']:[]),a];
+    const before=prev&&prev.count?[`${py}年の寄付 ${money(prev.total)}（${P.year}年分の上限の目安とは比べていません）。`]:[];
+    if(!p.count)return [...before,'寄付した合計は寄付サイトの履歴で確かめ、上の上限の目安と比べてください。寄付の手順は',a,'で確認できます。'];
+    return [`${P.year}年の寄付 ${money(p.total)}／上限の目安 ${money(p.limit)}／残り ${money(p.remaining)}（目安）。`,...(p.exceeded?['上限の目安を超えています（超えた分は自己負担が増えます）。']:[]),...before,a];
   }
   // 得する金額のまとめ。手数料は計算ツールで入れた値があれば使う。
   function renderGain(result,i){
@@ -812,7 +816,7 @@ window.addEventListener('DOMContentLoaded', () => {
         $('gainKpi').replaceChildren();$('gainList').replaceChildren();$('donationProgress').replaceChildren();renderHistory();
         text('savingDetail','');text('allocation','入力を修正してから目安を確認してください。');
       }
-      L.clearShare(store);
+      // 入力の途中で不正になっただけなら、最後に計算できた目安はふるさと納税ナビに残す（消去は「保存した入力を消去する」と、上限が計算できない入力のとき）。
       return false;
     }
     text('inputError',''); text('orderNotice',''); const i=result.input;

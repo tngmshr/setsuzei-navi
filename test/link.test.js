@@ -91,3 +91,12 @@ test('連携に使うキー名はふるさと納税ナビと同じ',()=>{
   assert.equal(L.KEYS.log,'furusatoNavi.log');
   assert.equal(L.KEYS.share,'setsuzeiNavi.share.v1');
 });
+
+test('前年分を出す時期：制度の値が今年のもので1〜3月のときだけ',()=>{
+  assert.equal(L.previousYear(new Date(2027,0,15),2027),2026);
+  assert.equal(L.previousYear(new Date(2027,2,31,23,59),2027),2026);
+  assert.equal(L.previousYear(new Date(2027,3,1),2027),null);
+  assert.equal(L.previousYear(new Date(2027,0,15),2026),null);   // 制度の値がまだ前年版なら、その年の分をそのまま比べる
+  assert.equal(L.previousYear(new Date('不正'),2027),null);
+  assert.equal(L.previousYear(new Date(2027,0,15),'2027'),null);
+});

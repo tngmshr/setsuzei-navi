@@ -35,7 +35,7 @@
     const t = now instanceof Date ? now : new Date(now);
     return {year, donationLimit:d.withIdeco, donationLimitNoIdeco:d.baseline, updatedAt:Number.isFinite(t.getTime()) ? t.toISOString() : null};
   }
-  // 上限の目安が出せないときは、前の入力の古い値が相手側に残らないよう消す。
+  // 入力は正しいが上限の目安が出せないときは、前の入力の古い値が相手側に残らないよう消す。
   function writeShare(store, result, year, now) {
     const record = shareRecord(result, year, now);
     if (!record) return clearShare(store) ? 'removed' : 'failed';
@@ -44,5 +44,11 @@
   function clearShare(store) {
     try { store.removeItem(KEYS.share); return true; } catch { return false; }
   }
-  return {KEYS, storage, readJSON, normalizeLog, readFurusatoLog, shareRecord, writeShare, clearShare};
+  // 制度の値（year 年分）が今年のもので、今が1〜3月なら、前年分の寄付も確かめたい時期なので前年を返す。それ以外は null。
+  function previousYear(now, year) {
+    const t = now instanceof Date ? now : new Date(now);
+    if (!Number.isInteger(year) || !Number.isFinite(t.getTime())) return null;
+    return t.getFullYear() === year && t.getMonth() < 3 ? year - 1 : null;
+  }
+  return {KEYS, storage, previousYear, readJSON, normalizeLog, readFurusatoLog, shareRecord, writeShare, clearShare};
 });
