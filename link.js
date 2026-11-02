@@ -20,12 +20,17 @@
       return raw === null || raw === undefined || raw === '' ? null : JSON.parse(raw);
     } catch { return null; }
   }
-  // ふるさと納税ナビの保存形式は {limit:数値, items:[{id, city, amount, date:'YYYY-MM-DD', one}]}。
+  // ふるさと納税ナビの保存形式は {limits:{"2026":数値}, items:[{id, city, amount, date:'YYYY-MM-DD', one}], dropped?}。
+  // limits は年ごとの上限の目安（記録の欄に入れた額）。以前は年の区別のない limit:数値 だった（年が分からないので使わない）。
   // 以前の節税ナビが想定していた「配列だけ」の形も受け付ける。行の検証は calc.js の furusatoProgress が行う。
   function normalizeLog(value) {
     const items = Array.isArray(value) ? value : isObject(value) && Array.isArray(value.items) ? value.items : [];
-    const limit = isObject(value) && Number.isSafeInteger(value.limit) && value.limit > 0 ? value.limit : null;
-    return {limit, items};
+    const limits = {};
+    if (isObject(value) && isObject(value.limits)) for (const k of Object.keys(value.limits)) {
+      const v = value.limits[k];
+      if (/^\d{4}$/.test(k) && Number.isSafeInteger(v) && v > 0) limits[k] = v;
+    }
+    return {limits, items};
   }
   const readFurusatoLog = store => normalizeLog(readJSON(store, KEYS.log));
   // ふるさと納税ナビが受け取る形。相手側は year が今年で、donationLimit が0以上の整数のときだけ使う。
