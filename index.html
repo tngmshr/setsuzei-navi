@@ -81,6 +81,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <script>try{const m={dark:'all',auto:'(prefers-color-scheme:dark)'}[localStorage.getItem('setsuzeiNavi.theme')];if(m)document.getElementById('darkCss').media=m;}catch{}</script>
 <script src="params.js" defer></script>
 <script src="calc.js" defer></script>
+<script src="link.js" defer></script>
 <script src="tools.js" defer></script>
 </head>
 <body>
@@ -705,7 +706,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
-  const C = window.SetsuzeiCalc, P = window.SetsuzeiParams;
+  const C = window.SetsuzeiCalc, P = window.SetsuzeiParams, L = window.SetsuzeiLink, store = L.storage();
   const $ = id => document.getElementById(id), key = 'setsuzeiNavi.inputs.v1';
   // 画面の色。localStorage 'setsuzeiNavi.theme' に light / dark / auto を保存する。
   const themePick=$('themePick');try{themePick.value=localStorage.getItem('setsuzeiNavi.theme')||'light';}catch{}
@@ -768,7 +769,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }));
   }
   function progressNodes(result) {
-    const p=C.furusatoProgress(stored('furusatoNavi.log'),new Date().getFullYear(),P.year===new Date().getFullYear()?result.donation.withIdeco:null);
+    const p=C.furusatoProgress(L.readFurusatoLog(store),new Date().getFullYear(),P.year===new Date().getFullYear()?result.donation.withIdeco:null);
     const a=document.createElement('a');a.href='../furusato-navi/';a.textContent='ふるさと納税ナビ';
     if(!p.count)return ['寄付した合計は寄付サイトの履歴で確かめ、上の上限の目安と比べてください。寄付の手順は',a,'で確認できます。'];
     const money=v=>v===null?'計算できません':v.toLocaleString('ja-JP')+'円';
@@ -811,12 +812,11 @@ window.addEventListener('DOMContentLoaded', () => {
         $('gainKpi').replaceChildren();$('gainList').replaceChildren();$('donationProgress').replaceChildren();renderHistory();
         text('savingDetail','');text('allocation','入力を修正してから目安を確認してください。');
       }
+      L.clearShare(store);
       return false;
     }
     text('inputError',''); text('orderNotice',''); const i=result.input;
-    if (Number.isSafeInteger(result.donation.withIdeco) && Number.isSafeInteger(result.donation.baseline)) {
-      try {localStorage.setItem('setsuzeiNavi.share.v1',JSON.stringify({year:P.year,donationLimit:result.donation.withIdeco,donationLimitNoIdeco:result.donation.baseline,updatedAt:new Date().toISOString()}));}catch{}
-    }
+    L.writeShare(store,result,P.year,new Date());
     $('donationProgress').replaceChildren(...progressNodes(result));renderHistory();
     const notice=[];
     if (i.reserve < 3) notice.push('生活防衛資金が3か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。');
@@ -971,9 +971,9 @@ window.addEventListener('DOMContentLoaded', () => {
   $('downloadAll').addEventListener('click',()=>download(events));
   for(const e of events){const div=document.createElement('div'),label=document.createElement('span'),h=document.createElement('h3'),p=document.createElement('p'),actions=document.createElement('div'),b=document.createElement('button'),a=document.createElement('a');div.className='calendar-item';label.className='pill';label.textContent=e.label;h.textContent=e.title;p.className='small';p.textContent=e.description;actions.className='actions';b.className='btn';b.type='button';b.textContent='.icsで保存';b.addEventListener('click',()=>download([e]));a.className='btn';a.href=C.googleCalendarURL(e);a.textContent='Googleカレンダー';a.target='_blank';a.rel='noopener noreferrer';actions.append(b,a);div.append(label,h,p,actions);$('calendarList').append(div);}
   $('clearSaved').addEventListener('click',()=>{$('clearConfirm').hidden=false;});$('cancelClear').addEventListener('click',()=>{$('clearConfirm').hidden=true;});
-  $('confirmClear').addEventListener('click',()=>{try{localStorage.removeItem(key);}catch{storageAvailable=false;}form.reset();$('idecoMonthly').value='';$('period').value='before';$('clearConfirm').hidden=true;show(0);text('saveStatus',storageAvailable?'保存した入力を消去しました。':'保存領域へアクセスできません。画面の入力だけを初期化しました。');});
+  $('confirmClear').addEventListener('click',()=>{try{localStorage.removeItem(key);}catch{storageAvailable=false;}L.clearShare(store);form.reset();$('idecoMonthly').value='';$('period').value='before';$('clearConfirm').hidden=true;show(0);text('saveStatus',storageAvailable?'保存した入力を消去しました。':'保存領域へアクセスできません。画面の入力だけを初期化しました。');});
   window.NaviUI={C,P,$,text,yen,man,svgEl,chartBox,read,key,saveHistory,renderHistory,toolsIndex:6,onShow:null};
-  window.addEventListener('storage',e=>{if(['furusatoNavi.log',historyKey].includes(e.key))render();});
+  window.addEventListener('storage',e=>{if([L.KEYS.log,historyKey].includes(e.key))render();});
   window.addEventListener('focus',()=>{if(view===2)render();});
   restore();show(Math.max(0,hashes.indexOf(location.hash)),false);
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('./sw.js').catch(()=>text('saveStatus','オフライン用の準備ができませんでした。オンラインで利用できます。'));
