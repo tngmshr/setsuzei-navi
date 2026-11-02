@@ -769,11 +769,12 @@ window.addEventListener('DOMContentLoaded', () => {
     }));
   }
   function progressNodes(result) {
-    const p=C.furusatoProgress(L.readFurusatoLog(store),new Date().getFullYear(),P.year===new Date().getFullYear()?result.donation.withIdeco:null);
+    // 上限の目安は P.year 年分の計算なので、同じ年の寄付と比べる（年が明けた1〜3月に前年分を確かめる場合も同じ）。
+    const p=C.furusatoProgress(L.readFurusatoLog(store),P.year,result.donation.withIdeco);
     const a=document.createElement('a');a.href='../furusato-navi/';a.textContent='ふるさと納税ナビ';
     if(!p.count)return ['寄付した合計は寄付サイトの履歴で確かめ、上の上限の目安と比べてください。寄付の手順は',a,'で確認できます。'];
     const money=v=>v===null?'計算できません':v.toLocaleString('ja-JP')+'円';
-    return [`今年の寄付 ${money(p.total)}／上限の目安 ${money(p.limit)}／残り ${money(p.remaining)}（目安）。`,...(p.exceeded?['上限の目安を超えています（超えた分は自己負担が増えます）。']:[]),a];
+    return [`${P.year}年の寄付 ${money(p.total)}／上限の目安 ${money(p.limit)}／残り ${money(p.remaining)}（目安）。`,...(p.exceeded?['上限の目安を超えています（超えた分は自己負担が増えます）。']:[]),a];
   }
   // 得する金額のまとめ。手数料は計算ツールで入れた値があれば使う。
   function renderGain(result,i){
