@@ -13,23 +13,23 @@ function memory(initial={}){
 const broken={getItem(){throw Error('denied');},setItem(){throw Error('denied');},removeItem(){throw Error('denied');}};
 
 // ふるさと納税ナビ（index.html の addLog / saveLog）が実際に保存する形。
-const furusatoSaved={limit:60000,items:[
+const furusatoSaved={limits:{2025:40000,2026:60000},items:[
   {id:'mh1a2b3c',city:'〇〇県△△町',amount:20000,date:'2026-03-01',one:false},
   {id:'mh1a2b3d',city:'□□市',amount:15000,date:'2026-11-02',one:true},
   {id:'mh1a2b3e',city:'××村',amount:30000,date:'2025-12-20',one:false}
 ]};
 
-test('ふるさと納税ナビの保存形式 {limit, items} を読み、今年分を集計する',()=>{
+test('ふるさと納税ナビの保存形式 {limits, items} を読み、今年分を集計する',()=>{
   const s=memory({[L.KEYS.log]:JSON.stringify(furusatoSaved)});
   const log=L.readFurusatoLog(s);
-  assert.equal(log.limit,60000);assert.equal(log.items.length,3);
+  assert.deepEqual(log.limits,{2025:40000,2026:60000});assert.equal(log.items.length,3);
   assert.deepEqual(C.furusatoProgress(log,2026,50000),{count:2,total:35000,limit:50000,remaining:15000,exceeded:false});
   assert.deepEqual(C.furusatoProgress(log,2025,null),{count:1,total:30000,limit:null,remaining:null,exceeded:false});
 });
 test('配列だけの古い形式も受け付ける',()=>{
   const s=memory({[L.KEYS.log]:JSON.stringify(furusatoSaved.items)});
   const log=L.readFurusatoLog(s);
-  assert.equal(log.limit,null);assert.equal(log.items.length,3);
+  assert.deepEqual(log.limits,{});assert.equal(log.items.length,3);
   assert.equal(C.furusatoProgress(log,2026,0).total,35000);
 });
 test('記録なし・空・壊れた JSON・想定外の形・保存領域なしでも落ちず、記録なしとして扱う',()=>{
@@ -38,14 +38,14 @@ test('記録なし・空・壊れた JSON・想定外の形・保存領域なし
     memory({[L.KEYS.log]:'{"items":null,"limit":"60000"}'}),broken,null,undefined];
   for(const s of cases){
     const log=L.readFurusatoLog(s);
-    assert.deepEqual(log,{limit:null,items:[]});
+    assert.deepEqual(log,{limits:{},items:[]});
     assert.deepEqual(C.furusatoProgress(log,2026,50000),{count:0,total:0,limit:50000,remaining:50000,exceeded:false});
   }
 });
 test('記録の中の壊れた行は集計しない',()=>{
   const s=memory({[L.KEYS.log]:JSON.stringify({limit:-1,items:[null,{},{date:'2026-02-30',amount:100},{date:'2026-01-01',amount:'1000'},{city:'A',amount:5000,date:'2026-05-05'}]})});
   const log=L.readFurusatoLog(s);
-  assert.equal(log.limit,null);
+  assert.deepEqual(log.limits,{});
   assert.deepEqual(C.furusatoProgress(log,2026,4000),{count:1,total:5000,limit:4000,remaining:0,exceeded:true});
 });
 test('localStorage の参照自体が例外になる環境では null を返す',()=>{
@@ -99,4 +99,12 @@ test('前年分を出す時期：制度の値が今年のもので1〜3月のと
   assert.equal(L.previousYear(new Date(2027,0,15),2026),null);   // 制度の値がまだ前年版なら、その年の分をそのまま比べる
   assert.equal(L.previousYear(new Date('不正'),2027),null);
   assert.equal(L.previousYear(new Date(2027,0,15),'2027'),null);
+});
+
+test('以前の形式（年の区別のない limit）も読め、上限の目安には使わない',()=>{
+  const s=memory({[L.KEYS.log]:JSON.stringify({limit:60000,items:[{city:'A町',amount:1000,date:'2026-01-01'}]})});
+  const log=L.readFurusatoLog(s);
+  assert.deepEqual(log.limits,{});assert.equal(C.furusatoProgress(log,2026,50000).total,1000);
+  const bad=memory({[L.KEYS.log]:'{"limits":{"2026":"x","__proto__":1,"26":5},"items":[]}'});
+  assert.deepEqual(L.readFurusatoLog(bad).limits,{});
 });
