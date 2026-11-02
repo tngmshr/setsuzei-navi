@@ -967,7 +967,10 @@ window.addEventListener('DOMContentLoaded', () => {
   }
   $('rcYears').addEventListener('input',deductChart);deductChart();
 
-  window.addEventListener('popstate',()=>show(Math.max(0,hashes.indexOf(location.hash)),false));
+  // #tool-… はツール画面の中の位置。知らない # を診断のトップ扱いにしない。
+  const viewOf=h=>h.startsWith('#tool-')?6:Math.max(0,hashes.indexOf(h));
+  function showHash(){const n=viewOf(location.hash);if(view!==n||n!==6)show(n,false);const el=n===6&&location.hash.length>6&&$(location.hash.slice(1));if(el)setTimeout(()=>el.scrollIntoView({block:'start',behavior:'instant'}),0);}
+  window.addEventListener('popstate',showHash);
   const names={salary:'国税庁：給与所得控除',salaryTable:'国税庁：令和8年分給与所得の表',basic:'国税庁：令和8年分基礎控除等の表',tax:'国税庁：所得税率と復興特別所得税',spouse:'国税庁：配偶者控除',dependent:'国税庁：扶養控除',incomeAdjustment:'国税庁：所得金額調整控除',resident:'総務省：個人住民税（内閣府掲載）',donation:'国税庁：ふるさと納税の計算式',soumuDonation:'総務省：ふるさと納税（本文取得未確認）',insurance:'国税庁：生命保険料控除',ideco:'厚生労働省：現行iDeCo',idecoReform:'厚生労働省：2026年12月の拠出限度額',idecoAge:'厚生労働省：改正後の加入条件',idecoUnit:'iDeCo公式：掛金と加入の手順',nisa:'金融庁：NISAの制度',nisaAbout:'金融庁：NISAの概要',capitalGains:'国税庁：株式等の譲渡所得の税率',idecoOfficial:'iDeCo公式サイト',dcLimit:'厚生労働省：企業型DCの拠出限度額',dcReform:'厚生労働省：確定拠出年金の制度改正',dcSelect:'厚生労働省：確定拠出年金の法令解釈',retirement:'国税庁：退職所得',dcLumpAdjust:'国税庁：老齢一時金の控除の調整',idecoReceive:'iDeCo公式：受け取り方',idecoRetire:'iDeCo公式：転職・退職したとき',kurisage:'日本年金機構：繰下げ受給',kuriage:'日本年金機構：繰上げ受給',teikibin:'日本年金機構：ねんきん定期便',kougaku:'厚生労働省：高額療養費制度',shobyo:'協会けんぽ：傷病手当金',izoku:'日本年金機構：遺族年金',shogai:'日本年金機構：障害基礎年金',tsumitateSim:'金融庁：つみたてシミュレーター',jflec:'金融経済教育推進機構（J-FLEC）'};
   for(const [k,url] of Object.entries(P.sources)){const li=document.createElement('li'),a=document.createElement('a');a.href=url;a.textContent=names[k]||k;a.target='_blank';a.rel='noopener noreferrer';li.append(a);$('sourceList').append(li);}
   const events=C.calendar();
@@ -979,7 +982,7 @@ window.addEventListener('DOMContentLoaded', () => {
   window.NaviUI={C,P,$,text,yen,man,svgEl,chartBox,read,key,saveHistory,renderHistory,toolsIndex:6,onShow:null};
   window.addEventListener('storage',e=>{if([L.KEYS.log,historyKey].includes(e.key))render();});
   window.addEventListener('focus',()=>{if(view===2)render();});
-  restore();show(Math.max(0,hashes.indexOf(location.hash)),false);
+  restore();showHash();
   if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('./sw.js').catch(()=>text('saveStatus','オフライン用の準備ができませんでした。オンラインで利用できます。'));
 });
 </script>

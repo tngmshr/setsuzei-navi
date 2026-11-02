@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='setsuzei-navi-v18';
+const CACHE='setsuzei-navi-v19';
 const ROOT = new URL('./', self.location).href;
 const ASSETS = ['img/entry-start.svg','img/entry-tools.svg','img/entry-guide.svg','img/entry-asset.svg','img/hero-tools.svg','img/hero-guide.svg','./','index.html','params.js','calc.js','link.js','tools.js','manifest.webmanifest','icons/icon.svg','icons/icon-192.png','icons/icon-512.png'].map(path=>new URL(path,ROOT).href);
 self.addEventListener('install', event => {
