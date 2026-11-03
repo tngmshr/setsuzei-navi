@@ -33,7 +33,7 @@
     return {limits, items};
   }
   const readFurusatoLog = store => normalizeLog(readJSON(store, KEYS.log));
-  // ふるさと納税ナビが受け取る形。相手側は year が今年で、donationLimit が0以上の整数のときだけ使う。
+  // ふるさと納税ナビが受け取る形。相手側は year が今年か、寄付の記録で表示している年（1〜3月の前年分）で、donationLimit が0以上の整数（整数だけの文字列も可）のときだけ使う。
   function shareRecord(result, year, now = new Date()) {
     const d = result && result.valid ? result.donation : null;
     if (!d || !Number.isInteger(year) || !Number.isSafeInteger(d.withIdeco) || d.withIdeco < 0 || !Number.isSafeInteger(d.baseline) || d.baseline < 0) return null;
