@@ -1,10 +1,14 @@
 ﻿# 節税・資産形成ナビ v1
 
+## アプリを使う
+
+[節税・資産形成ナビを開く](https://tngmshr.github.io/setsuzei-navi/)（[制度の解説](https://tngmshr.github.io/setsuzei-navi/#guide)）
+
 初心者の会社員がスマートフォンで使う、節税と資産形成の整理用Webアプリです。2026年所得・2027年度住民税の簡易モデルに固定しています。個別の税務・投資助言は行いません。
 
 ## 起動
 
-`index.html` をブラウザで開きます。依存ライブラリ、ビルド、アカウント登録は不要です。PWA・オフライン機能はHTTPS配信またはlocalhostでのみ利用できます。GitHub Pagesへの公開操作は行っていません。
+`index.html` をブラウザで開きます。依存ライブラリ、ビルド、アカウント登録は不要です。PWA・オフライン機能はHTTPS配信またはlocalhostでのみ利用できます。公開版は https://tngmshr.github.io/setsuzei-navi/ です。
 
 ## ファイル
 
