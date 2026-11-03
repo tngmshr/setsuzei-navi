@@ -827,7 +827,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const notice=[];
     if (i.reserve < P.rules.reserveMonths) notice.push(`生活防衛資金が${P.rules.reserveMonths}か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。`);
     if (result.tentative) notice.push(`iDeCoの上限は「最大」の目安です（${reasons[result.before.status] || reasons[result.after.status] || '勤務先で確認すると確定します'}）。下の金額は、その最大の上限の範囲で仮に計算しています。`);
-    if (result.donation.baseline===null) notice.push('公的な資料で確かめられていない制度の値があるため、寄付上限は計算できません。');
+    if (result.donation.reason==='unverified') notice.push('公的な資料で確かめられていない制度の値があるため、寄付上限は計算できません。');
+    if (result.donation.reason==='residentOnly') notice.push('所得税はかからず住民税だけがかかる見込みのため、ふるさと納税の上限は出していません（0円という意味ではありません）。寄付の前に自治体や寄付サイトで確かめてください。');
     if (i.insurance==='yes' || i.medical==='yes') notice.push('保険料控除・医療費控除は計算に未反映です。適用すると寄付上限が下がる場合があります。');
     text('resultNotice',notice.join(' '));
     $('orderList').replaceChildren(...result.recommendations.map(item=>{

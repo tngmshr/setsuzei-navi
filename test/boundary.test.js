@@ -146,3 +146,20 @@ test('index.html が読み込む同じサイト内のファイルは sw.js の A
   for(const u of new Set(local))assert.ok(assets.includes(u),u);
   for(const a of assets)if(a!=='./')assert.ok(fs.existsSync(path.join(__dirname,'..',a)),a);
 });
+test('所得税0円で住民税だけかかる人：寄付上限を0円とも金額とも出さず、理由を返す',()=>{
+  // 年収150万円・独身：所得税の課税所得0円、住民税の課税所得はある（基礎控除の額が違うため）。
+  const r=C.calculate({salary:1500000});
+  assert.equal(r.base.incomeTax.rate,0); assert.ok(r.base.resident>0);
+  assert.equal(r.donation.baseline,null); assert.equal(r.donation.reason,'residentOnly');
+  // iDeCo（仮定の月1万円）を差し引くと住民税もかからなくなるので、iDeCo後は0円（控除の効果なし）。
+  assert.equal(r.withIdeco.resident,0); assert.equal(r.donation.withIdeco,0);
+  assert.equal(C.calculate({salary:1500000,idecoMonthly:0}).donation.withIdeco,null);
+  const f=r.recommendations.find(x=>x.id==='furusato');
+  assert.equal(f.label,'ready'); assert.match(f.reason,/住民税だけ/);
+  // 住民税もかからなければ、これまでどおり0円（控除の効果なし）。
+  const z=C.calculate({salary:0});
+  assert.equal(z.donation.baseline,0); assert.equal(z.donation.reason,null);
+  assert.equal(C.donationLimit({resident:8000,income:760000,incomeTax:{rate:0}}),null);
+  // 所得税がかかる人は従来どおり金額を出す。
+  assert.equal(C.calculate({salary:5000000}).donation.reason,null);
+});

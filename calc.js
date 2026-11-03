@@ -138,7 +138,10 @@
   function donationLimit(scenario, p = P) {
     if (scenario.resident === null) return null;
     // 特例上限の逆算。所得税の税率境界・非課税判定等は簡易モデルのため別途注記。
-    if (scenario.resident <= 0 || scenario.incomeTax.rate === 0) return 0;
+    // 住民税所得割がかからなければ、寄付しても税額控除の効果はない。
+    if (scenario.resident <= 0) return 0;
+    // 所得税がかからず住民税だけかかる人は、特例分の割合を一次情報で確かめられていないため、上限を出さない（0円とも言わない）。
+    if (scenario.incomeTax.rate === 0) return null;
     return Math.max(0, Math.floor(Math.min(
       p.donation.ownCost + scenario.resident * p.donation.specialCap / (1 - p.resident.rate - scenario.incomeTax.rate * (1 + p.tax.surtax)),
       scenario.income * p.donation.incomeLimit
@@ -174,7 +177,10 @@
     list.push(item('nencho','now','年末調整で控除の漏れを防ぐ',`勤務先に書類を出すだけで使える控除から。あなたの場合：${docs.join('、')}。`));
     const d = result.donation.baseline;
     if (d === 0) list.push(item('furusato','na','ふるさと納税','所得税・住民税がほとんどかからない見込みのため、寄付しても控除の効果がありません。'));
-    else if (d === null) list.push(item('furusato','ready','ふるさと納税','上限が計算できない条件です。寄付の前に上限を確かめてください。'));
+    else if (d === null) list.push(item('furusato','ready','ふるさと納税',
+      result.donation.reason === 'residentOnly'
+        ? '所得税はかからず住民税だけがかかる見込みです。この場合の上限はこのアプリでは出していません。寄付の前に、お住まいの自治体や寄付サイトで上限を確かめてください。'
+        : '上限が計算できない条件です。寄付の前に上限を確かめてください。'));
     else list.push(item('furusato', low ? 'ready' : 'now', 'ふるさと納税（毎年並行して）',
       low ? '寄付は先に払い、税金が減るのは翌年です。手元の現金に余裕ができてから始めます。'
         : `投資のお金とは別枠で考えます。上限の範囲なら、自己負担は年間合計で${yenText(p.donation.ownCost)}が目安です。`,
@@ -239,12 +245,14 @@
     if (low) monthly = 0;
     const base = taxScenario(i, 0, p), withIdeco = monthly === null ? null : taxScenario(i, monthly, p);
     const baseline = donationLimit(base, p), withIdecoLimit = withIdeco ? donationLimit(withIdeco, p) : null;
+    // 上限を出せない理由：unverified＝制度の値が未確認、residentOnly＝所得税0円で住民税だけかかる。
+    const donationReason = baseline !== null ? null : base.resident === null ? 'unverified' : 'residentOnly';
     // 入居年・契約条件・申告方法がないため、住宅控除後の実効上限は推測しない。
     const withMortgage = i.mortgage === 'yes' && (i.mortgageAnnual === null || i.mortgageAnnual > 0) ? null : withIdecoLimit;
     const simpleSaving = monthly === null ? null : base.incomeTax.taxable === 0 && base.taxableResident === 0 ? 0 : Math.round(monthly * 12 * (base.incomeTax.rate * (1 + p.tax.surtax) + p.resident.rate));
     const differenceSaving = !withIdeco || base.resident === null || withIdeco.resident === null ? null : Math.round(base.incomeTax.total - withIdeco.incomeTax.total + base.resident - withIdeco.resident);
     const out = {...n, valid:true, before, after, monthly, tentative, base, withIdeco,
-      donation:{baseline,withIdeco:withIdecoLimit,withMortgage}, simpleSaving, differenceSaving,
+      donation:{baseline,withIdeco:withIdecoLimit,withMortgage,reason:donationReason}, simpleSaving, differenceSaving,
       nisaMonthly:low ? 0 : monthly === null ? null : Math.max(0,i.budget - monthly),
       yearsTo60:Math.max(0,p.idecoEligibility.firstWithdrawalAge-i.age), priorities:priorities(i,base.incomeTax.rate,p)};
     out.recommendations = recommend(i, out, p);

@@ -63,8 +63,9 @@ for(const [salary,incomes,basic,taxables,rates,taxes,residents] of cases)
     const diff=dependent?150000:50000,t=residents[k];
     const adj=t<=2000000?Math.min(diff,t)*.05:Math.max(50000,diff-(t-2000000))*.05;
     assert.equal(r.base.adjustmentResident,adj);assert.equal(r.base.resident,t*.1-adj);
-    assert.equal(r.donation.baseline,rates[k]===0?0:Math.floor(2000+(t*.1-adj)*.2/(.9-rates[k]*1.021)));
-    assert.ok(r.donation.withIdeco<=r.donation.baseline);
+    // 所得税0%で住民税だけかかる場合は、上限を出さない（null）。
+    assert.equal(r.donation.baseline,rates[k]===0?(r.base.resident>0?null:0):Math.floor(2000+(t*.1-adj)*.2/(.9-rates[k]*1.021)));
+    if(r.donation.baseline!==null)assert.ok(r.donation.withIdeco<=r.donation.baseline);
    }
   });
  }
