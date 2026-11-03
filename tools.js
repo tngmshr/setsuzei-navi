@@ -4,7 +4,14 @@ window.addEventListener('DOMContentLoaded', () => {
   const U = window.NaviUI; if (!U) return;
   const {C, P, $, text, yen, man, svgEl, chartBox} = U;
   const key = 'setsuzeiNavi.tools.v1', inputs = [...document.querySelectorAll('[data-tool]')];
-  const num = id => { const v = $(id).value; return v === '' ? null : Number(v); };
+  // 空欄は null。入力欄の min〜max を外れた値・数値でない値は NaN にし、bad() で「入力を確認」にする（桁あふれやマイナスの表示を防ぐ）。
+  const num = id => {
+    const e = $(id), v = e.value; if (v === '') return null;
+    const n = Number(v), lo = e.min === '' ? -Infinity : Number(e.min), hi = e.max === '' ? Infinity : Number(e.max);
+    return Number.isFinite(n) && n >= lo && n <= hi ? n : NaN;
+  };
+  const bad = ids => { let any = false; for (const id of ids) { const ng = Number.isNaN(num(id)); if (ng) $(id).setAttribute('aria-invalid', 'true'); else $(id).removeAttribute('aria-invalid'); any ||= ng; } return any; };
+  const rangeMsg = '入力を確認（欄の範囲外の値があります）';
   const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt !== undefined) e.textContent = txt; return e; };
   const kpi = (id, list) => $(id).replaceChildren(...list.map(([label, value]) => { const d = el('div'); d.append(el('span', '', label), el('b', '', value)); return d; }));
   const en = v => v.toLocaleString('ja-JP') + '円';
@@ -31,6 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const r = C.calculate(U.read()), notice = $('rpNotice');
     if (!r.valid) { notice.hidden = false; notice.replaceChildren('先に診断の入力（年収・年齢・会社の年金など）を入れてください。', el('br'), Object.assign(el('a', '', '診断の入力へ'), {href:'#input'})); $('rpList').replaceChildren(); $('rpNotes').replaceChildren(); return; }
     notice.hidden = true;
+    if (bad(['rpLock', 'rpFee', 'rpCap'])) { $('rpList').replaceChildren(el('li', '', rangeMsg)); $('rpNotes').replaceChildren(); return; }
     const res = C.retirementPriority(r.input, r.base.incomeTax.rate, {lockable:num('rpLock') || 0, idecoFee:num('rpFee') || 0, matchingCap:num('rpCap') || 0, needBefore60:$('rpBefore60').checked});
     $('rpList').replaceChildren(...res.items.map(item => {
       const li = el('li'), head = el('div', 'head');
@@ -59,6 +67,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const main = C.calculate(U.read()), age = num('cfAge') ?? (main.valid ? main.input.age : 40), m = id => (num(id) ?? 0)*10000;
     const end = Math.round(num('cfEnd') ?? 90), retireAge = num('cfRetire') ?? 65, pensionAge = num('cfPensionAge') ?? 65;
     $('cfAge').placeholder = main.valid ? String(main.input.age) : '例 40';
+    if (bad(['cfAge', 'cfEnd', 'cfRetire', 'cfPensionAge', 'cfIncome', 'cfExpense', 'cfRetireExpense', 'cfSavings', 'cfIncomeGrowth', 'cfExpenseGrowth', 'cfRate', 'cfLump', 'cfPension'])) { kpi('cfKpi', [[rangeMsg, '—']]); $('cfChart').textContent = ''; $('cfTable').tBodies[0].replaceChildren(); return; }
     if (!(age >= 18 && age < end && end <= 100) || !(retireAge >= 40) || !(pensionAge >= 60)) { kpi('cfKpi', [['入力を確認', '—']]); $('cfChart').textContent = ''; $('cfTable').tBodies[0].replaceChildren(); return; }
     const ev = events.map(e => ({age:Number(e.age), name:e.name || (e.kind === 'in' ? '収入' : '出費'), amount:(Number(e.amount) || 0)*10000*(e.kind === 'in' ? -1 : 1)})).filter(e => e.age >= age && e.amount);
     if (m('cfLump')) ev.push({age:retireAge, name:'退職金', amount:-m('cfLump')});
@@ -88,6 +97,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 目標から逆算
   function goal() {
+    if (bad(['glTarget', 'glYears', 'glRate'])) { kpi('glKpi', [[rangeMsg, '—']]); $('glTable').tBodies[0].replaceChildren(); return; }
     const target = (num('glTarget') ?? 0)*10000, years = num('glYears'), rate = (num('glRate') ?? 0)/100;
     if (!(target > 0) || !(years >= 1 && years <= 50) || !(rate >= 0 && rate <= 0.1)) { kpi('glKpi', [['入力を確認', '—']]); $('glTable').tBodies[0].replaceChildren(); return; }
     const mo = C.requiredMonthly(target, rate, years), principal = mo*12*years;
@@ -98,6 +108,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ねんきん定期便
   function pension() {
+    if (bad(['pnAnnual', 'pnCompare'])) { kpi('pnKpi', [[rangeMsg, '—']]); $('pnChart').textContent = ''; return; }
     const annual = (num('pnAnnual') ?? 0)*10000, cmp = Math.round(num('pnCompare') ?? 70);
     if (!(annual > 0) || !(cmp >= 60 && cmp <= 75)) { kpi('pnKpi', [['入力を確認', '—']]); $('pnChart').textContent = ''; return; }
     const list = C.pensionByAge(annual), c = list.find(r => r.age === cmp), base = list.find(r => r.age === P.pension.base);
@@ -124,7 +135,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // 必要保障額
   function protect() {
-    const m = id => (num(id) ?? 0)*10000, g = C.protectionGap({living:m('pgLiving'), years:num('pgYears') ?? 0, education:m('pgEducation'), other:m('pgOther'), survivor:m('pgSurvivor'), savings:m('pgSavings'), cover:m('pgCover')});
+    if (bad(['pgLiving', 'pgYears', 'pgEducation', 'pgOther', 'pgSurvivor', 'pgSavings', 'pgCover'])) { kpi('pgKpi', [[rangeMsg, '—']]); $('pgChart').textContent = ''; return; }
+    const m = id => (num(id) ?? 0)*10000, years = num('pgYears') ?? 0, v = {living:m('pgLiving'), years, education:m('pgEducation'), other:m('pgOther'), survivor:m('pgSurvivor'), savings:m('pgSavings'), cover:m('pgCover')};
+    // マイナスや数値でない値が入ると、必要額がマイナスになるなど意味のない数字が出るので止める。
+    if (!Object.values(v).every(x => Number.isFinite(x) && x >= 0)) { kpi('pgKpi', [['入力を確認（0以上の数値）', '—']]); $('pgChart').textContent = ''; return; }
+    const g = C.protectionGap(v);
     kpi('pgKpi', [['必要なお金', manYen(g.need)], ['用意できるお金', manYen(g.have)], [g.gap ? '足りない額（必要保障額）' : '上回っている額', manYen(g.gap || g.surplus)]]);
     const W = 340, H = 110, L = 92, R = 10, max = Math.max(1, g.need, g.have), x = v => (W - L - R)*v/max;
     const {svg, showTip} = chartBox('pgChart', W, H, `必要なお金${manYen(g.need)}、用意できるお金${manYen(g.have)}、足りない額${manYen(g.gap)}`);
@@ -139,6 +154,7 @@ window.addEventListener('DOMContentLoaded', () => {
   // 平均余命：診断の年齢を使う。「答えない」は男女とも出す。
   function life() {
     const main = C.calculate(U.read()), age = num('lfAge') ?? (main.valid ? main.input.age : null), sex = $('lfSex').value;
+    bad(['lfAge']);
     $('lfAge').placeholder = main.valid ? String(main.input.age) : '例 40';
     const list = (sex === 'none' ? ['male', 'female'] : [sex]).map(s => [s, C.lifeSpan(s, age ?? -1)]);
     if (!(age >= 18 && age <= 100) || list.some(([, r]) => !r)) { kpi('lfKpi', [['入力を確認', '—']]); $('lfUse').hidden = true; return; }
@@ -150,6 +166,7 @@ window.addEventListener('DOMContentLoaded', () => {
   $('lfUse').addEventListener('click', () => { $('cfEnd').value = $('lfUse').dataset.end; save(); all(); text('lfNote', `キャッシュフロー表の終わりを${$('cfEnd').value}歳にしました。`); });
   // 受け取りの税金：同じ年と、間隔を空けた場合。
   function receive() {
+    if (bad(['rvDc', 'rvDcYears', 'rvLump', 'rvWorkYears'])) { kpi('rvKpi', [[rangeMsg, '—']]); $('rvNote').replaceChildren(); return; }
     const m = id => (num(id) ?? 0)*10000, dcYears = num('rvDcYears') ?? 0, workYears = num('rvWorkYears') ?? 0, dc = m('rvDc'), lump = m('rvLump');
     if (!(dcYears > 0 && workYears > 0 && dc >= 0 && lump >= 0 && dc + lump > 0)) { kpi('rvKpi', [['入力を確認', '—']]); $('rvNote').replaceChildren(); return; }
     const r = C.lumpSumPlan({dc, dcYears, lump, workYears}), k = v => yen(Math.round(v/1000)*1000);
@@ -164,6 +181,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function medical() {
     const main = C.calculate(U.read());
     if (!main.valid) { kpi('mdKpi', [['まず診断の入力をしてください', '—']]); text('mdNote', ''); return; }
+    if (bad(['mdTotal', 'mdOtc'])) { kpi('mdKpi', [[rangeMsg, '—']]); text('mdNote', ''); return; }
     const total = num('mdTotal') ?? 0, otc = num('mdOtc') ?? 0;
     if (!(total >= 0 && otc >= 0)) { kpi('mdKpi', [['入力を確認', '—']]); return; }
     const r = C.medicalChoice(total, otc, C.salaryIncome(main.input.salary), main.base.incomeTax.rate);

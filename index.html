@@ -49,9 +49,9 @@ svg .t{font-size:11.5px;fill:var(--ink);font-family:inherit}svg .t.s{font-size:1
 .mini{border:1px solid var(--line);border-radius:12px;padding:12px;background:#fbfcfa;min-width:0}.mini h4{margin:0 0 4px;font-size:.98rem;display:flex;gap:6px;align-items:center}.mini p{font-size:.87rem;margin:0 0 4px}.mi{font-size:1.1rem}
 .cf caption{caption-side:top;text-align:left;font-size:.8rem;color:var(--muted);padding-bottom:4px}.cf td:nth-child(n+3){text-align:right}.cf .plus{color:var(--green)}.cf .minus{color:#a24a1d;font-weight:700}.cf .hl td{background:#fbf1de}.cf small{display:block;font-size:.72rem}
 .g3{grid-template-columns:repeat(auto-fit,minmax(min(100%,max(7.5em,calc((100% - 24px)/3))),1fr))}
-.kpi{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 8px}.gain{border:2px solid var(--green)}.gain .kpi b{color:var(--green)}.gain-list{padding-left:1.2em;margin:6px 0;font-size:.9rem;line-height:1.7}.kpi span{font-size:.78rem;color:var(--muted);display:block}.kpi b{font-size:1.2rem;color:var(--ink)}
+.kpi{display:flex;flex-wrap:wrap;gap:6px 18px;margin:4px 0 8px}.gain{border:2px solid var(--green)}.gain .kpi b{color:var(--green)}.gain-list{padding-left:1.2em;margin:6px 0;font-size:.9rem;line-height:1.7}.kpi span{font-size:.78rem;color:var(--muted);display:block}.kpi b{font-size:1.2rem;color:var(--ink);overflow-wrap:anywhere}
 .legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.8rem;color:var(--muted);margin:6px 0 2px}.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
-.chart{position:relative;margin:4px 0 8px}.chart svg{width:100%;height:auto;display:block;overflow:visible}.chart .ax{font-size:10px;fill:var(--muted)}.chart .lb{font-size:10.5px;fill:var(--ink);font-weight:700}.chart .hit{fill:transparent;cursor:crosshair}
+.chart{position:relative;margin:4px 0 8px}.chart:empty{display:none}.chart svg{width:100%;height:auto;display:block;overflow:visible}.chart .ax{font-size:10px;fill:var(--muted)}.chart .lb{font-size:10.5px;fill:var(--ink);font-weight:700}.chart .hit{fill:transparent;cursor:crosshair}
 .tip{position:absolute;pointer-events:none;background:var(--ink);color:#fff;font-size:.76rem;line-height:1.45;padding:4px 8px;border-radius:6px;white-space:nowrap;transform:translate(-50%,-100%);opacity:0;transition:opacity .12s;z-index:2}.tip.on{opacity:1}
 .assume{background:var(--warn);color:var(--amber);border-radius:10px;padding:8px 12px;font-size:.84rem;margin:6px 0 0}
 .coef{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0}@media(max-width:560px){.coef{grid-template-columns:1fr}}.coef .mini b.v{float:right;color:var(--green);font-size:1rem}.coef .mini .ex{font-size:.84rem;color:var(--ink);background:var(--soft);border-radius:8px;padding:6px 8px;margin-top:6px}
@@ -99,8 +99,8 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="card"><fieldset><legend><span class="section-num">01 基本のこと</span>収入と家族</legend><div class="grid">
 <div class="field"><label for="salary">年収（額面・目安）</label><div class="unit"><input id="salary" name="salary" type="number" min="0" max="10000" step="0.1" placeholder="500" inputmode="decimal"><span>万円</span></div><span class="help">税金や保険料が引かれる前。賞与も含む。</span></div>
 <div class="field"><label for="age">年齢</label><div class="unit"><input id="age" name="age" type="number" min="18" max="100" step="1" placeholder="35" inputmode="numeric"><span>歳</span></div></div>
-<div class="field wide"><label for="spouse">配偶者</label><select id="spouse" name="spouse"><option value="">未入力（なし扱い）</option><option value="none">なし</option><option value="dependent">扶養内</option><option value="dual">共働き</option></select><span class="help">扶養内は配偶者の所得の目安が年62万円以下・70歳未満と仮定。共働きの配偶者特別控除は計算に含みません。</span></div>
-<div class="field wide"><p><strong>扶養する子の人数</strong></p><p class="small">12月31日時点。本人が扶養控除を申告し、子の所得の目安が年62万円以下と仮定します。</p><div class="grid">
+<div class="field wide"><label for="spouse">配偶者</label><select id="spouse" name="spouse"><option value="">未入力（なし扱い）</option><option value="none">なし</option><option value="dependent">扶養内</option><option value="dual">共働き</option></select><span class="help">扶養内は配偶者の所得の目安が年<span data-p="dependentIncome.incomeLimit" data-f="man"></span>以下・70歳未満と仮定。共働きの配偶者特別控除は計算に含みません。</span></div>
+<div class="field wide"><p><strong>扶養する子の人数</strong></p><p class="small">12月31日時点。本人が扶養控除を申告し、子の所得の目安が年<span data-p="dependentIncome.incomeLimit" data-f="man"></span>以下と仮定します。</p><div class="grid">
 <div><label for="under16">16歳未満</label><input id="under16" name="under16" type="number" min="0" max="20" step="1" placeholder="0" inputmode="numeric"></div>
 <div><label for="teen">16〜18歳</label><input id="teen" name="teen" type="number" min="0" max="20" step="1" placeholder="0" inputmode="numeric"></div>
 <div><label for="student">19〜22歳</label><input id="student" name="student" type="number" min="0" max="20" step="1" placeholder="0" inputmode="numeric"></div></div><span class="help">16歳未満の子には扶養控除（所得から引く額）はありません。</span></div>
@@ -113,14 +113,14 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="field"><label for="dcMatching">会社のDCにマッチング拠出の制度がある</label><select id="dcMatching" name="dcMatching"><option value="">未入力（不明）</option><option value="no">ない</option><option value="yes">ある</option><option value="unknown">分からない</option></select><span class="help">制度があっても使っていなければiDeCoと比べて選べます。</span></div>
 <div class="field"><label for="dcSelect">選択制DC（給与の一部を掛金にするか選ぶ）</label><select id="dcSelect" name="dcSelect"><option value="">未入力（不明）</option><option value="no">ちがう</option><option value="yes">選択制DC</option><option value="unknown">分からない</option></select></div>
 <div class="field"><label for="benefits">老齢基礎年金・iDeCoの老齢給付金を受給</label><select id="benefits" name="benefits"><option value="">未入力（なし扱い）</option><option value="no">受給していない</option><option value="yes">受給している</option><option value="unknown">分からない</option></select></div>
-<div class="field"><label for="history">60歳以上：厚生年金加入、iDeCo加入歴・移換等の要件を確認済み</label><select id="history" name="history"><option value="">未確認</option><option value="yes">確認済み</option><option value="no">要件を満たさない</option><option value="unknown">分からない</option></select><span class="help">改正前は原則65歳未満の公的年金被保険者等。改正後の60歳以上も誰でも加入できるわけではありません。</span></div></div></details>
+<div class="field"><label for="history">60歳以上：厚生年金加入、iDeCo加入歴・移換等の要件を確認済み</label><select id="history" name="history"><option value="">未確認</option><option value="yes">確認済み</option><option value="no">要件を満たさない</option><option value="unknown">分からない</option></select><span class="help">改正前は原則<span data-p="idecoBefore.ageExclusive" data-f="age"></span>未満の公的年金被保険者等。改正後の60歳以上も誰でも加入できるわけではありません。</span></div></div></details>
 </fieldset></div>
 <div class="card"><fieldset><legend><span class="section-num">03 家計の余裕</span>備えと積立</legend><div class="grid">
 <div class="field"><label for="reserve">生活防衛資金</label><div class="unit"><input id="reserve" name="reserve" type="number" min="0" max="120" step="0.1" placeholder="3" inputmode="decimal"><span>か月</span></div><span class="help">すぐに使える現金で、生活費の何か月分を賄えるか。</span></div>
 <div class="field"><label for="budget">毎月の積立予算<br>（目安）</label><div class="unit"><input id="budget" name="budget" type="number" min="0" max="10000000" step="1" placeholder="30000" inputmode="numeric"><span>円</span></div><span class="help">生活費と近い将来の出費を除いた余裕資金。</span></div></div>
 </fieldset></div>
 <div class="card"><details><summary>分かれば入力：保険料とその他の控除</summary><div>
-<div class="field"><label for="social">社会保険料（年額の目安）</label><div class="unit"><input id="social" name="social" type="number" min="0" max="100000000" step="1" placeholder="空欄可" inputmode="numeric"><span>円</span></div><span class="help">源泉徴収票の社会保険料等。空欄なら年収の15%と仮定します。iDeCo掛金は除いて入力してください。</span></div>
+<div class="field"><label for="social">社会保険料（年額の目安）</label><div class="unit"><input id="social" name="social" type="number" min="0" max="100000000" step="1" placeholder="空欄可" inputmode="numeric"><span>円</span></div><span class="help">源泉徴収票の社会保険料等。空欄なら年収の<span data-p="assumptions.socialRate" data-f="pct"></span>と仮定します。iDeCo掛金は除いて入力してください。</span></div>
 <div class="field"><label for="mortgage">住宅ローン控除</label><select id="mortgage" name="mortgage"><option value="">未入力（なし扱い）</option><option value="no">なし</option><option value="yes">あり</option></select></div>
 <div class="field"><label for="mortgageAnnual">住宅ローン控除（年額の目安）</label><div class="unit"><input id="mortgageAnnual" name="mortgageAnnual" type="number" min="0" max="10000000" step="1" inputmode="numeric" placeholder="空欄可"><span>円</span></div><span class="help">入居年・契約条件・申告方法で併用結果が変わります。適用後の寄付上限は確認が必要です。</span></div>
 <div class="field"><label for="insurance">支払った生命保険料がある</label><select id="insurance" name="insurance"><option value="">未入力（なし扱い）</option><option value="no">なし</option><option value="yes">あり</option></select></div>
@@ -144,13 +144,13 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="card gain" id="gainCard"><h2>得する金額のまとめ</h2><p class="small">iDeCo（またはマッチング拠出）で税金が減る額の目安です。下の「試すiDeCo掛金」を変えると、ここも変わります。</p><div class="kpi" id="gainKpi"></div><ul class="gain-list" id="gainList"></ul><p class="footnote">今の税率と掛金が続くとした単純計算です。受け取るときにも税金の対象になります（退職所得控除などが使えます）。金額は将来を約束するものではありません。</p></div>
 <div class="card"><h2>iDeCoの上限と節税</h2><p class="small">iDeCo（イデコ）＝自分で積み立てる老後の年金。</p>
 <div class="compare"><div><span>2026年11月拠出分まで・月額上限</span><b id="beforeLimit"></b></div><div><span>2026年12月拠出分から・月額上限</span><b id="afterLimit"></b></div></div><p id="limitReason" class="help"></p>
-<p class="footnote">新上限は2027年1月引き落とし分から。加入条件・勤務先制度を確認してください。</p>
+<p class="footnote">新上限は<span data-p="idecoAfter.firstDebit" data-f="ym"></span>引き落とし分から。加入条件・勤務先制度を確認してください。</p>
 <hr class="divider"><label for="period"><strong>比較に使う上限</strong></label><select id="period"><option value="before">改正前の上限</option><option value="after">改正後の上限</option></select>
-<div class="field" style="margin-top:16px"><label for="idecoMonthly">試すiDeCo掛金（月額の目安）</label><div class="unit"><input id="idecoMonthly" type="number" min="0" max="200000" step="1000" placeholder="10000" inputmode="numeric"><span>円</span></div><span class="help">説明用の仮定は月の目安10,000円。最低は目安5,000円、目安1,000円単位。上限と積立予算の範囲で試算します。</span></div>
+<div class="field" style="margin-top:16px"><label for="idecoMonthly">試すiDeCo掛金（月額の目安）</label><div class="unit"><input id="idecoMonthly" type="number" min="0" max="200000" step="1000" placeholder="10000" inputmode="numeric"><span>円</span></div><span class="help">説明用の仮定は月の目安<span data-p="assumptions.idecoMonthly" data-f="yen"></span>。最低は月<span data-p="idecoContribution.minimum" data-f="yen"></span>、<span data-p="idecoContribution.unit" data-f="yen"></span>単位。上限と積立予算の範囲で試算します。</span></div>
 <p>計算に使った月額<span id="usedMonthly" class="money"></span></p><p>年間の節税額（簡易式）<span id="saving" class="money"></span></p><p class="small" id="savingDetail"></p>
 <p class="note warning" id="lockNotice"></p><p class="footnote">12か月同じ掛金を納付する比較例。2026年中に新上限で12か月払えるという意味ではありません。受取時も課税の対象です。退職所得控除等が使える場合があります。加入・運用手数料は含みません。</p>
 </div>
-<div class="card"><h2>ふるさと納税の上限</h2><p class="small">必要な手続きをした場合の寄付上限の目安。税金の前払いで、自己負担は年間合計の目安2,000円です。</p>
+<div class="card"><h2>ふるさと納税の上限</h2><p class="small">必要な手続きをした場合の寄付上限の目安。税金の前払いで、自己負担は年間合計の目安<span data-p="donation.ownCost" data-f="yen"></span>です。</p>
 <div class="compare"><div><span>iDeCo・住宅ローン控除を入れる前</span><b id="donationBase"></b></div><div><span>iDeCoの試算掛金を入れた後</span><b id="donationIdeco"></b></div><div><span>さらに住宅ローン控除を考慮</span><b id="donationMortgage"></b></div></div><div id="donationProgress" class="note"></div>
 <p class="footnote">iDeCoの掛金で課税所得が下がると、寄付上限も下がることがあります。住宅ローン控除との併用では実質負担が増える場合があります。住宅控除額を所得割から単純に引く計算はしません。</p>
 <p class="note warning">税率の境目・低所得での非課税判定・他の控除は簡略化しています。寄付額で税率をまたぐ場合もあるため、上限ぎりぎりの寄付の判断には使わず、自治体等で最終確認してください。</p>
@@ -158,7 +158,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 </div>
 <div class="card"><h2>NISAと積立の配分</h2><p>NISA（ニーサ）＝運用して得た利益に税金がかからない制度。</p><p id="nisaLimits"></p><p id="allocation" class="note"></p><p class="footnote">試したiDeCo掛金を予算から引いた残額の表示です。個別の投資助言や推奨配分ではありません。NISAは売却して引き出せますが、受渡しまで日数がかかり、元本割れもあります。運用益の予測は行いません。</p></div>
 <div class="card" id="insuranceCard" hidden><h2>生命保険料控除の確認</h2><p id="insuranceNote"></p><p class="small">控除とは、税金を計算する所得から差し引くこと。控除上限と戻る税額は同じではありません。契約区分・実際の支払額を証明書で確認してください。この控除は上の試算に未反映です。</p></div>
-<div class="card"><details id="assumptions"><summary>使った仮定・計算式・出典を見る</summary><div><p class="small">制度確認日：2026年10月31日。2026年所得・2027年度住民税に固定した簡易モデルです。</p><dl id="assumptionList"></dl><hr class="divider"><p class="small">寄付上限の目安＝自己負担額＋調整控除後の住民税所得割×20%÷（90%−所得税率×1.021）。所得税率は所得税の課税所得から求める簡易計算です。</p><p class="small">iDeCoの簡易節税額の目安＝月額×12×（所得税率×1.021＋住民税率10%）。税率をまたぐ場合や税額控除がある場合、実際の節税額は異なります。</p><ul id="sourceList" class="source-list"></ul><p id="unverified" class="note warning"></p></div></details></div>
+<div class="card"><details id="assumptions"><summary>使った仮定・計算式・出典を見る</summary><div><p class="small">制度確認日：<span data-p="checked" data-f="date"></span>。2026年所得・2027年度住民税に固定した簡易モデルです。</p><dl id="assumptionList"></dl><hr class="divider"><p class="small">寄付上限の目安＝自己負担額＋調整控除後の住民税所得割×<span data-p="donation.specialCap" data-f="pct"></span>÷（90%−所得税率×1.021）。所得税率は所得税の課税所得から求める簡易計算です。</p><p class="small">iDeCoの簡易節税額の目安＝月額×12×（所得税率×1.021＋住民税率<span data-p="resident.rate" data-f="pct"></span>）。税率をまたぐ場合や税額控除がある場合、実際の節税額は異なります。</p><ul id="sourceList" class="source-list"></ul><p id="unverified" class="note warning"></p></div></details></div>
 </section>
 <section class="screen" id="calendarScreen" hidden aria-labelledby="calendarTitle"><p class="eyebrow">忘れず、ひとつずつ。</p><h1 id="calendarTitle" tabindex="-1">年間の手続きカレンダー</h1><p class="lead">2026年の年末から翌年の確認まで。日付は一般的な予定です。正式な期限を確認してください。</p><p class="note">カレンダーには制度名と予定日だけを入れます。年収などの入力値は含めません。Google カレンダーはリンク先で内容を確認して登録できます。</p><div class="card"><div class="actions"><button class="btn primary" id="downloadAll" type="button">全予定を .ics で保存</button></div><div id="calendarList"></div></div><p class="small">.ics は端末のカレンダーに読み込む予定ファイルです。すべて終日の予定。11月・12月上旬・6月の予定日は確認用の仮置きです。重複登録に注意してください。</p></section>
 <section class="screen" id="guideScreen" hidden aria-labelledby="guideTitle">
@@ -218,7 +218,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <h3>メリット</h3><ul><li>上限の範囲なら、実質の負担は年<span data-p="donation.ownCost" data-f="yen"></span>の目安で、お礼の品を受け取れます。</li><li>寄付金の使い道を選べる自治体もあります。</li></ul>
 <h3>注意点・デメリット</h3><ul><li>先にお金を払い、税金が減るのは後（住民税は翌年）です。</li><li>上限を超えた分は自己負担になります。</li><li>iDeCo・住宅ローン控除・医療費控除があると、上限が下がることがあります。</li><li>ワンストップ特例を申請しても、確定申告をすると特例は無効になります。その場合は寄付も申告に含めます。</li></ul>
 <h3>向いている人・向かない人</h3><p><b>向いている：</b>所得税・住民税を払っている会社員。<br><b>向かない：</b>税金がほとんどかからない人、手元の現金に余裕がない人。</p>
-<h3>よくある誤解</h3><ul><li>「税金が安くなる」→ 税金の前払いに近く、税額自体はほぼ変わりません。お得なのはお礼の品の分です。</li><li>「寄付1回ごとに2,000円」→ 自己負担は年間の合計です。</li></ul>
+<h3>よくある誤解</h3><ul><li>「税金が安くなる」→ 税金の前払いに近く、税額自体はほぼ変わりません。お得なのはお礼の品の分です。</li><li>「寄付1回ごとに<span data-p="donation.ownCost" data-f="yen"></span>」→ 自己負担は年間の合計です。</li></ul>
 <p class="official">公式ページ：<a data-src="donation" target="_blank" rel="noopener noreferrer">国税庁：ふるさと納税の計算</a> ／ <a data-src="soumuDonation" target="_blank" rel="noopener noreferrer">総務省：ふるさと納税の控除</a></p>
 <p class="actions"><a class="btn" href="../furusato-navi/" target="_blank" rel="noopener noreferrer">寄付と申請の手順を見る</a></p>
 </div></details>
@@ -663,7 +663,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="kpi" id="lfKpi"></div>
 <p class="actions"><button type="button" class="btn" id="lfUse">キャッシュフロー表の終わりをこの年齢にする</button></p>
 <p class="small" id="lfNote"></p>
-<p class="small">厚生労働省「令和7年簡易生命表」の全国の平均です。健康状態や生活によって一人ひとりは大きく違い、寿命を予測するものではありません。（<a data-src="lifeTable" target="_blank" rel="noopener noreferrer">厚生労働省：簡易生命表</a>、確認2026年10月31日）</p>
+<p class="small">厚生労働省「令和7年簡易生命表」の全国の平均です。健康状態や生活によって一人ひとりは大きく違い、寿命を予測するものではありません。（<a data-src="lifeTable" target="_blank" rel="noopener noreferrer">厚生労働省：簡易生命表</a>、確認<span data-p="checked" data-f="date"></span>）</p>
 </div>
 
 <div class="card tool" id="tool-receive">
@@ -675,7 +675,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="field"><label for="rvWorkYears">勤続年数</label><div class="unit"><input id="rvWorkYears" data-tool type="number" min="0" max="60" step="0.1" inputmode="decimal" value="30"><span>年</span></div></div></div>
 <div class="kpi" id="rvKpi"></div>
 <ul class="small" id="rvNote"></ul>
-<p class="small">税金の目安＝所得税（復興特別所得税を含む）＋住民税の概算です。同じ年に受け取る場合は、加入期間が勤続期間の中に収まっているとして、長い方の年数で控除を計算しています。年金で受け取る場合は公的年金等控除の対象になり、公的年金と合算して税金が決まります。（<a data-src="retirement" target="_blank" rel="noopener noreferrer">国税庁：退職金を受け取ったとき</a>／<a data-src="dcOrder" target="_blank" rel="noopener noreferrer">国税庁：退職所得の源泉徴収</a>、確認2026年10月31日）</p>
+<p class="small">税金の目安＝所得税（復興特別所得税を含む）＋住民税の概算です。同じ年に受け取る場合は、加入期間が勤続期間の中に収まっているとして、長い方の年数で控除を計算しています。年金で受け取る場合は公的年金等控除の対象になり、公的年金と合算して税金が決まります。（<a data-src="retirement" target="_blank" rel="noopener noreferrer">国税庁：退職金を受け取ったとき</a>／<a data-src="dcOrder" target="_blank" rel="noopener noreferrer">国税庁：退職所得の源泉徴収</a>、確認<span data-p="checked" data-f="date"></span>）</p>
 <p class="actions"><button type="button" class="btn" data-guide="asset-receive">受け取り方と退職所得控除の解説へ</button></p>
 </div>
 
@@ -686,7 +686,7 @@ body{background:radial-gradient(circle at 0 0,#173129 0,transparent 420px),radia
 <div class="field"><label for="mdOtc">うち市販薬</label><div class="unit"><input id="mdOtc" data-tool type="number" min="0" max="100000000" inputmode="numeric" value="0"><span>円</span></div></div></div>
 <div class="kpi" id="mdKpi"></div>
 <p class="small" id="mdNote"></p>
-<p class="small">医療費は家族の分を合わせられ、保険金などで補てんされた額は引きます。セルフメディケーション税制の対象は、パッケージに目印のある市販薬などで、健康診断や予防接種などを受けていることが条件です。（<a data-src="medical" target="_blank" rel="noopener noreferrer">国税庁：医療費控除</a>／<a data-src="selfMed" target="_blank" rel="noopener noreferrer">国税庁：セルフメディケーション税制</a>、確認2026年10月31日）</p>
+<p class="small">医療費は家族の分を合わせられ、保険金などで補てんされた額は引きます。セルフメディケーション税制の対象は、パッケージに目印のある市販薬などで、健康診断や予防接種などを受けていることが条件です。（<a data-src="medical" target="_blank" rel="noopener noreferrer">国税庁：医療費控除</a>／<a data-src="selfMed" target="_blank" rel="noopener noreferrer">国税庁：セルフメディケーション税制</a>、確認<span data-p="checked" data-f="date"></span>）</p>
 </div>
 
 <div class="card tool" id="tool-data">
@@ -734,8 +734,10 @@ window.addEventListener('DOMContentLoaded', () => {
     catch {storageAvailable = false; text('saveStatus','この環境では保存できません。今回の画面内だけで計算します。');}
   }
   function restore() {
+    let raw;
+    // プライベートモードなどで保存領域そのものが使えないときは、壊れたデータとは別の案内にする。
+    try {raw = localStorage.getItem(key);} catch {storageAvailable = false; text('saveStatus','この環境では保存できません。今回の画面内だけで計算します。'); return;}
     try {
-      const raw = localStorage.getItem(key);
       if (!raw) return;
       const data = JSON.parse(raw);
       if (!data || typeof data !== 'object' || Array.isArray(data)) throw Error();
@@ -783,7 +785,7 @@ window.addEventListener('DOMContentLoaded', () => {
   function renderGain(result,i){
     const kp=(label,value)=>{const d=document.createElement('div'),sp=document.createElement('span'),b=document.createElement('b');sp.textContent=label;b.textContent=value;d.append(sp,b);return d;};
     const li=(html)=>{const l=document.createElement('li');l.append(...html);return l;};
-    let fee=null;try{const t=JSON.parse(localStorage.getItem('setsuzeiNavi.tools.v1')||'null');const f=Number(t?.rpFee);if(t?.rpFee!==''&&f>0)fee=f;}catch{}
+    let fee=null;try{const t=JSON.parse(localStorage.getItem('setsuzeiNavi.tools.v1')||'null');const f=Number(t?.rpFee);if(typeof t?.rpFee==='string'&&t.rpFee.trim()!==''&&Number.isFinite(f)&&f>0&&f<=100000)fee=f;}catch{}
     const y=result.simpleSaving, years=i.age<60?result.yearsTo60:0, items=[];
     if(y===null){$('gainKpi').replaceChildren(kp('年間の節税額','計算できません'));}
     else{
@@ -797,7 +799,7 @@ window.addEventListener('DOMContentLoaded', () => {
     if(fee===null){const a=document.createElement('a');a.href='#tool-priority';a.dataset.toolLink='tool-priority';a.textContent='計算ツールで手数料を入れる';items.push(li(['iDeCoは口座の手数料が自己負担です（マッチング拠出は会社負担が多い）。',a,'と、差し引いた額も出ます。']));}
     else items.push(li([`手数料は計算ツールで入れた 月${fee.toLocaleString('ja-JP')}円 を使っています。`]));
     items.push(li(['NISA：増えた分に税金がかからない制度です。どれだけ得かは運用の結果で変わるため、金額は出していません。']));
-    items.push(li(['ふるさと納税：税金の前払いで、節税ではありません。自己負担2,000円で返礼品を受け取れる上限の目安は、下の「ふるさと納税の上限」にあります。']));
+    items.push(li([`ふるさと納税：税金の前払いで、節税ではありません。自己負担${P.donation.ownCost.toLocaleString('ja-JP')}円で返礼品を受け取れる上限の目安は、下の「ふるさと納税の上限」にあります。`]));
     items.push(li(progressNodes(result)));
     $('gainList').replaceChildren(...items);
   }
@@ -806,7 +808,7 @@ window.addEventListener('DOMContentLoaded', () => {
     fields.forEach(el=>el.removeAttribute('aria-invalid'));
     $('idecoMonthly').removeAttribute('aria-invalid');
     if (!result.valid) {
-      const msg = result.unsupported ? '年収の目安が2,000万円を超える場合は対象外です。' : '入力を確認してください：'+result.errors.map(k=>labels[k]).join('、')+'。0以上の範囲内の数値を入力してください。';
+      const msg = result.unsupported ? `年収の目安が${(P.rules.maxSalary/10000).toLocaleString('ja-JP')}万円を超える場合は対象外です。` : '入力を確認してください：'+result.errors.map(k=>labels[k]).join('、')+'。0以上の範囲内の数値を入力してください。';
       text('inputError',msg);
       for (const id of result.errors || []) $(id)?.setAttribute('aria-invalid','true');
       if (view === 1 || view === 2) {
@@ -823,7 +825,7 @@ window.addEventListener('DOMContentLoaded', () => {
     L.writeShare(store,result,P.year,new Date());
     $('donationProgress').replaceChildren(...progressNodes(result));renderHistory();
     const notice=[];
-    if (i.reserve < 3) notice.push('生活防衛資金が3か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。');
+    if (i.reserve < P.rules.reserveMonths) notice.push(`生活防衛資金が${P.rules.reserveMonths}か月分未満です。NISAとiDeCoは貯まってから。掛金の試算は目安0円にしています。`);
     if (result.tentative) notice.push(`iDeCoの上限は「最大」の目安です（${reasons[result.before.status] || reasons[result.after.status] || '勤務先で確認すると確定します'}）。下の金額は、その最大の上限の範囲で仮に計算しています。`);
     if (result.donation.baseline===null) notice.push('公的な資料で確かめられていない制度の値があるため、寄付上限は計算できません。');
     if (i.insurance==='yes' || i.medical==='yes') notice.push('保険料控除・医療費控除は計算に未反映です。適用すると寄付上限が下がる場合があります。');
@@ -842,8 +844,8 @@ window.addEventListener('DOMContentLoaded', () => {
     text('lockNotice',`原則60歳まで引き出せません。${i.age<60 ? `60歳まであと${result.yearsTo60}年。` : '60歳以上の受取開始時期は加入期間により異なります。'} 加入が遅い場合は受取開始も遅くなります。${result.base.incomeTax.rate<=.05 ? '所得税率5%以下では節税効果が小さめです。' : ''} ${result.before.status}／改正後：${result.after.status}。`);
     text('donationBase',yen(result.donation.baseline));text('donationIdeco',yen(result.donation.withIdeco));
     text('donationMortgage',i.mortgage==='no' ? yen(result.donation.withMortgage)+'（住宅控除なし）' : result.donation.withMortgage===null ? '計算できません（住宅ローン控除の額は入居年や契約で変わるため、このアプリでは出していません）' : yen(result.donation.withMortgage));
-    text('nisaLimits',`年間投資枠：${yen(P.nisa.annual)}。生涯の非課税保有限度額：${yen(P.nisa.lifetime)}（取得額）。`);
-    text('allocation',i.reserve<3 ? `毎月の予算 ${yen(i.budget)}は、まず現金の備えへ。NISA・iDeCoは貯まってから。` : result.monthly===null ? 'iDeCoの上限が計算できないため、配分は出していません。' : `毎月の予算 ${yen(i.budget)}のうち、試したiDeCo ${yen(result.monthly)}。NISA等に回せる残額は ${yen(result.nisaMonthly)}。`);
+    text('nisaLimits',`年間投資枠：${(P.nisa.annual/10000).toLocaleString('ja-JP')}万円。生涯の非課税保有限度額：${(P.nisa.lifetime/10000).toLocaleString('ja-JP')}万円（取得額）。`);
+    text('allocation',i.reserve<P.rules.reserveMonths ? `毎月の予算 ${yen(i.budget)}は、まず現金の備えへ。NISA・iDeCoは貯まってから。` : result.monthly===null ? 'iDeCoの上限が計算できないため、配分は出していません。' : `毎月の予算 ${yen(i.budget)}のうち、試したiDeCo ${yen(result.monthly)}。NISA等に回せる残額は ${yen(result.nisaMonthly)}。`);
     $('insuranceCard').hidden = i.insurance!=='yes';
     const children=i.under16+i.teen+i.student;
     text('insuranceNote',`所得税の新一般生命保険料控除の上限は${yen(children>0?P.insurance.newGeneralUnder23:P.insurance.newGeneral)}。${children>0?'23歳未満の扶養親族がいる場合の特例です。':''}生命保険料控除の全区分合計上限は${yen(P.insurance.total)}です。`);
@@ -853,7 +855,7 @@ window.addEventListener('DOMContentLoaded', () => {
     for(const [k,label] of Object.entries(labels)){
       let value=moneyKeys.includes(k) ? yen(i[k]) : ['age'].includes(k) ? i[k]+'歳' : ['under16','teen','student'].includes(k) ? i[k]+'人' : k==='reserve'?i[k]+'か月分':words[i[k]]||String(i[k]);
       if(result.assumed.includes(k)) value+='（未入力の仮定）';
-      if(k==='social' && result.assumed.includes(k))value+='：年収の15%';
+      if(k==='social' && result.assumed.includes(k))value+=`：年収の${Math.round(P.assumptions.socialRate*1000)/10}%`;
       if(['dc','db'].includes(k) && i[k]===null)value='未入力（0円として「最大」を計算）';
       pair(label,value);
     }
@@ -899,7 +901,7 @@ window.addEventListener('DOMContentLoaded', () => {
   $('receiveTable').tBodies[0].innerHTML=P.dcReceive.ages.map(([y,a])=>'<tr><td>'+(y?y+'年以上':'1か月以上')+'</td><td>'+a+'歳</td></tr>').join('');
   function retireCalc(){
     const years=Number($('rcYears').value), amount=Number($('rcAmount').value)*10000;
-    if(!(years>0) || !(amount>=0)){['rcDeduction','rcIncome','rcTax'].forEach(id=>text(id,'—'));return;}
+    if(!(years>0&&years<=60) || !(amount>=0&&amount<=1e9)){['rcDeduction','rcIncome','rcTax'].forEach(id=>text(id,'—'));return;}
     const r=C.retirementIncome(amount,years,$('rcDisability').checked), tax=C.incomeTax(r.income).total+Math.floor(r.income*P.resident.rate);
     text('rcDeduction',yen(r.deduction));text('rcIncome',yen(r.income));
     text('rcTax',yen(Math.round(tax/1000)*1000)+(r.short?'（勤続'+P.retirement.shortYears+'年以下：これより多くなることがあります）':''));
@@ -913,7 +915,7 @@ window.addEventListener('DOMContentLoaded', () => {
     box.onpointerleave=()=>tip.classList.remove('on');return {svg,showTip};}
   function accCalc(){
     const mo=Number($('acMonthly').value)*10000, yrs=Math.round(Number($('acYears').value)), rate=Number($('acRate').value)/100;
-    if(!(mo>=0)||!(yrs>=1&&yrs<=50)||!(rate>=0&&rate<=0.1)){['acPrincipal','acValue','acGain'].forEach(id=>text(id,'—'));$('accChart').textContent='';$('coefList').textContent='';return;}
+    if(!(mo>=0&&mo<=1e6)||!(yrs>=1&&yrs<=50)||!(rate>=0&&rate<=0.1)){['acPrincipal','acValue','acGain'].forEach(id=>text(id,'—'));$('accChart').textContent='';$('coefList').textContent='';return;}
     const d=C.accumulate(mo,rate,yrs), last=d[d.length-1];
     text('acPrincipal',man(last.principal));text('acValue','約'+man(last.value));text('acGain','約'+man(last.value-last.principal));
     const W=340,H=190,L=44,R=8,T=12,B=24,max=Math.max(1,...d.map(p=>p.value)),x=i=>L+(W-L-R)*i/yrs,y=v=>T+(H-T-B)*(1-v/max);

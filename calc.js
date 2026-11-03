@@ -54,14 +54,23 @@
     mortgage:['no','yes'], matching:['no','yes','unknown'], benefits:['no','yes','unknown'],
     history:['yes','no','unknown'], insurance:['no','yes'], medical:['no','yes'],
     dcMatching:['no','yes','unknown'], dcSelect:['no','yes','unknown'] };
-  function normalize(raw = {}, p = P) {
+  // 数値として受け付けるのは数値と、数字だけの文字列（前後の空白は可）。空白だけ・true/false・配列・16進表記などは数値にしない。
+  // 保存データや書き出しファイルから読み直した値でも、Number(' ')＝0 のような思わぬ解釈をしないため。
+  function toNumber(value) {
+    if (typeof value === 'number') return value;
+    if (typeof value !== 'string') return NaN;
+    const t = value.trim();
+    return /^[+-]?(\d+\.?\d*|\.\d+)(e[+-]?\d+)?$/i.test(t) ? Number(t) : NaN;
+  }
+  function normalize(raw, p = P) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) raw = {};
     const input = {}, assumed = [], errors = [];
     for (const [key, bounds] of Object.entries(numberFields)) {
-      if (raw[key] === '' || raw[key] === null || raw[key] === undefined) {
+      if (raw[key] === '' || raw[key] === null || raw[key] === undefined || (typeof raw[key] === 'string' && raw[key].trim() === '')) {
         input[key] = p.assumptions[key] ?? null;
         assumed.push(key);
       } else {
-        const v = Number(raw[key]);
+        const v = toNumber(raw[key]);
         if (!Number.isFinite(v) || v < bounds[0] || v > bounds[1] || (bounds[2] && !Number.isInteger(v))) {
           errors.push(key); input[key] = null;
         } else input[key] = v;
@@ -74,7 +83,8 @@
       else { errors.push(key); input[key] = null; }
     }
     if (input.social === null && !errors.includes('social')) input.social = Math.round(input.salary * p.assumptions.socialRate);
-    if (input.social > input.salary) errors.push('social');
+    // 年収が不正のときは、社会保険料との比較をしない（年収だけを直せばよいことが伝わるように）。
+    if (input.salary !== null && input.social !== null && input.social > input.salary) errors.push('social');
     if (input.mortgage === 'no') input.mortgageAnnual = 0;
     return { input, assumed, errors:[...new Set(errors)] };
   }
@@ -134,13 +144,14 @@
       scenario.income * p.donation.incomeLimit
     )));
   }
-  function priorities(input, rate) {
-    const emergency = { title:'生活防衛資金を確保する', reason:'急な出費に備えるお金。生活費の3か月分未満なら、積立より先に現金を確保します。' };
+  function priorities(input, rate, p = P) {
+    const months = p.rules.reserveMonths;
+    const emergency = { title:'生活防衛資金を確保する', reason:`急な出費に備えるお金。生活費の${months}か月分未満なら、積立より先に現金を確保します。` };
     const list = [{ title:'11月：年末調整で控除の漏れを防ぐ', reason:'書類を出すだけで使える控除から。保険料・iDeCoの証明書と扶養の申告を確認します。' }];
-    if (input.reserve < 3) list.unshift({...emergency,title:'最優先：'+emergency.title}); else list.push(emergency);
+    if (input.reserve < months) list.unshift({...emergency,title:'最優先：'+emergency.title}); else list.push(emergency);
     list.push({title:'ふるさと納税は毎年並行して確認',reason:'税金の前払いです。投資の積立額とは別に、寄付する現金を準備します。'});
-    list.push({title:'NISA：'+(input.reserve < 3 ? '防衛資金が貯まってから' : '資産形成はまずここから検討'),reason:'利益に税金がかからない制度。売却して引き出せますが、価格変動で元本割れすることがあります。'});
-    list.push({title:'iDeCo：'+(input.reserve < 3 ? '防衛資金が貯まってから' : '老後まで使わないお金で検討'),reason:'掛金を所得から差し引ける年金。原則60歳まで引き出せません。'+(rate <= 0.05 ? '所得税率5%以下では節税効果が小さめです。' : '手数料や受取時の税金も比較します。')});
+    list.push({title:'NISA：'+(input.reserve < months ? '防衛資金が貯まってから' : '資産形成はまずここから検討'),reason:'利益に税金がかからない制度。売却して引き出せますが、価格変動で元本割れすることがあります。'});
+    list.push({title:'iDeCo：'+(input.reserve < months ? '防衛資金が貯まってから' : '老後まで使わないお金で検討'),reason:'掛金を所得から差し引ける年金。原則60歳まで引き出せません。'+(rate <= 0.05 ? '所得税率5%以下では節税効果が小さめです。' : '手数料や受取時の税金も比較します。')});
     if (input.insurance === 'yes') list.push({title:'保険料控除を確認',reason:'加入中の保険の証明書を使います。控除のための新規契約は必要ありません。'});
     if (input.medical === 'yes') list.push({title:'医療費控除を確認',reason:'その年に支払った医療費と補てん額を集計。確定申告するとワンストップ特例は無効になります。'});
     if (input.mortgage === 'yes') list.push({title:'住宅ローン控除を確認',reason:'初年度は原則確定申告。所得税・住民税の控除枠とふるさと納税の併用を確認します。'});
@@ -209,12 +220,13 @@
     if (input.mortgage === 'yes') list.push(item('mortgage','now','住宅ローン控除','初年度は確定申告、2年目以降は年末調整で。ふるさと納税の上限が変わることがあります。',[],'nencho'));
     return list;
   }
-  function calculate(raw = {}, p = P) {
+  function calculate(raw, p = P) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) raw = {};
     const n = normalize(raw, p);
     if (raw.period !== undefined && !['before','after'].includes(raw.period)) n.errors.push('period');
     if (n.errors.length) return {...n, valid:false};
     const i = n.input;
-    if (i.salary > 20000000) return {...n, valid:false, unsupported:true};
+    if (i.salary > p.rules.maxSalary) return {...n, valid:false, unsupported:true};
     const before = idecoLimit(i, false, p), after = idecoLimit(i, true, p);
     const scenarioLimit = raw.period === 'after' ? after : before;
     const requested = floor(i.idecoMonthly, p.idecoContribution.unit);
@@ -223,7 +235,8 @@
     const usableLimit = tentative ? scenarioLimit.upper : scenarioLimit.amount;
     let monthly = usableLimit === null || usableLimit === undefined ? null : Math.min(usableLimit, requested, floor(i.budget, p.idecoContribution.unit));
     if (monthly !== null && monthly < p.idecoContribution.minimum) monthly = 0;
-    if (i.reserve < 3) monthly = 0;
+    const low = i.reserve < p.rules.reserveMonths;
+    if (low) monthly = 0;
     const base = taxScenario(i, 0, p), withIdeco = monthly === null ? null : taxScenario(i, monthly, p);
     const baseline = donationLimit(base, p), withIdecoLimit = withIdeco ? donationLimit(withIdeco, p) : null;
     // 入居年・契約条件・申告方法がないため、住宅控除後の実効上限は推測しない。
@@ -232,8 +245,8 @@
     const differenceSaving = !withIdeco || base.resident === null || withIdeco.resident === null ? null : Math.round(base.incomeTax.total - withIdeco.incomeTax.total + base.resident - withIdeco.resident);
     const out = {...n, valid:true, before, after, monthly, tentative, base, withIdeco,
       donation:{baseline,withIdeco:withIdecoLimit,withMortgage}, simpleSaving, differenceSaving,
-      nisaMonthly:i.reserve < 3 ? 0 : monthly === null ? null : Math.max(0,i.budget - monthly),
-      yearsTo60:Math.max(0,60-i.age), priorities:priorities(i,base.incomeTax.rate)};
+      nisaMonthly:low ? 0 : monthly === null ? null : Math.max(0,i.budget - monthly),
+      yearsTo60:Math.max(0,p.idecoEligibility.firstWithdrawalAge-i.age), priorities:priorities(i,base.incomeTax.rate,p)};
     out.recommendations = recommend(i, out, p);
     return out;
   }
@@ -313,7 +326,7 @@
     const company = (hasDC ? input.dc || 0 : 0) + (hasDB ? input.db || 0 : 0);
     let matchMax = hasDC && input.dcMatching === 'yes' ? floor(Math.max(0, p.dc.after - company), 1000) : 0;
     if (matchMax && opts.matchingCap > 0) matchMax = Math.min(matchMax, opts.matchingCap);
-    const lock = Math.max(0, opts.lockable || 0), low = input.reserve < p.rules.reserveMonths, years = Math.max(0, 60 - input.age);
+    const lock = Math.max(0, opts.lockable || 0), low = input.reserve < p.rules.reserveMonths, years = Math.max(0, p.idecoEligibility.firstWithdrawalAge - input.age);
     const startAge = (p.dcReceive.ages.find(([y]) => years >= y) || p.dcReceive.ages[p.dcReceive.ages.length - 1])[1];
     const taxLow = rate !== null && rate <= 0.05, fee = opts.idecoFee > 0 ? opts.idecoFee : null;
     const saving = m => cut === null ? null : Math.round(m*12*cut);
